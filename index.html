@@ -39,6 +39,11 @@ ul{list-style:none;}
 /* ═══════════ ANIMATIONS ═══════════ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes lightning{0%,88%,100%{opacity:1;transform:scale(1)}92%{opacity:.4;transform:scale(1.3) rotate(-8deg)}96%{opacity:1;transform:scale(1.1)}}
+@keyframes goldPulse{0%,100%{box-shadow:0 0 0 1px rgba(212,175,55,.3),0 0 18px rgba(212,175,55,.15)}50%{box-shadow:0 0 0 1px rgba(212,175,55,.7),0 0 38px rgba(212,175,55,.35)}}
+@keyframes skShine{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@keyframes payspin{to{transform:rotate(360deg)}}
 @keyframes gridFloat{0%{background-position:0 0}100%{background-position:54px 54px}}
 @keyframes neonPulse{0%,100%{box-shadow:0 0 0 1px var(--blue-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--blue),0 0 36px rgba(212,175,55,.4)}}
 @keyframes redPulse{0%,100%{box-shadow:0 0 0 1px var(--red-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--red),0 0 36px rgba(212,175,55,.4)}}
@@ -88,6 +93,9 @@ ul{list-style:none;}
 #nav.scrolled{background:rgba(5,6,10,.95);box-shadow:0 4px 30px rgba(0,0,0,.6);}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,32px);gap:.5rem;}
 .logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0;cursor:pointer;background:none;border:none;padding:0;}
+.logo-img{max-height:44px;height:44px;width:auto;max-width:160px;object-fit:contain;border-radius:10px;transition:transform .25s,filter .25s,box-shadow .25s;display:block;}
+.logo:hover .logo-img{transform:scale(1.06);filter:brightness(1.1) drop-shadow(0 0 10px rgba(212,175,55,.4));}
+.logo:active .logo-img{transform:scale(.97);}
 .logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 0 18px rgba(212,175,55,.4);flex-shrink:0;}
 .logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25),transparent 70%);background-size:200% 100%;animation:shimmerLine 3.5s linear infinite;}
 .logo-mark span{font-family:var(--ff-d);font-weight:700;font-size:1.1rem;color:#0D0D0D;position:relative;z-index:1;}
@@ -230,6 +238,112 @@ footer{border-top:1px solid var(--line);background:var(--void);padding:clamp(40p
 .cp-mgr-name{font-size:.95rem;font-weight:600;color:var(--txt);}
 .cp-mgr-role{font-size:.76rem;color:var(--txt3);}
 
+/* ─── ECOSYSTEM CARDS (neon) ─── */
+.eco-cards{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.6rem;}
+.eco-card{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.3rem;border-radius:var(--r-l);background:var(--panel2);border:1px solid var(--line2);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.eco-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .25s;}
+.eco-card-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;background:var(--panel);border:1px solid var(--line2);transition:border-color .25s,box-shadow .25s;}
+.eco-card-body{flex:1;min-width:0;}
+.eco-card-name{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--txt);margin-bottom:.15rem;}
+.eco-card-sub{font-size:.76rem;color:var(--txt3);}
+.eco-card-arrow{font-size:1.3rem;color:var(--txt3);transition:transform .25s,color .25s;}
+.eco-card:hover{transform:translateY(-3px);}
+.eco-card:hover .eco-card-arrow{transform:translateX(4px);}
+/* AKU Media — Electric Blue */
+.eco-blue::before{background:linear-gradient(90deg,transparent,#2F48FD,transparent);}
+.eco-blue:hover{border-color:rgba(47,72,253,.6);box-shadow:0 0 30px rgba(47,72,253,.22),inset 0 0 20px rgba(47,72,253,.05);}
+.eco-blue:hover .eco-card-ic{border-color:rgba(47,72,253,.6);box-shadow:0 0 16px rgba(47,72,253,.4);}
+.eco-blue:hover .eco-card-name{color:#7e8eff;}
+.eco-blue:hover .eco-card-arrow{color:#2F48FD;}
+/* AKU Automation — Cyber-Red */
+.eco-red::before{background:linear-gradient(90deg,transparent,#DB2022,transparent);}
+.eco-red:hover{border-color:rgba(219,32,34,.6);box-shadow:0 0 30px rgba(219,32,34,.22),inset 0 0 20px rgba(219,32,34,.05);}
+.eco-red:hover .eco-card-ic{border-color:rgba(219,32,34,.6);box-shadow:0 0 16px rgba(219,32,34,.4);}
+.eco-red:hover .eco-card-name{color:#ff7a7c;}
+.eco-red:hover .eco-card-arrow{color:#DB2022;}
+
+/* ─── PINNED / TOP CARDS ─── */
+.job.pinned{border-color:rgba(212,175,55,.45)!important;animation:goldPulse 3s ease-in-out infinite;}
+.job.pinned::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.badge-top{border-color:rgba(212,175,55,.5);color:var(--gold-br);background:rgba(212,175,55,.12);}
+.badge-top .bolt{display:inline-block;animation:lightning 2.2s ease-in-out infinite;}
+.badge-max{border-color:rgba(124,58,237,.45);color:#c4b5fd;background:rgba(124,58,237,.1);}
+/* ─── SKELETON ─── */
+.sk-card{padding:1.4rem;border-radius:var(--r-l);background:var(--panel);border:1px solid var(--line);margin-bottom:0;}
+.sk{background:linear-gradient(90deg,var(--panel2) 25%,var(--line2) 50%,var(--panel2) 75%);background-size:200% 100%;animation:skShine 1.3s linear infinite;border-radius:6px;}
+.sk-row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;}
+/* ─── ONBOARDING ─── */
+.prog{display:flex;align-items:center;padding:1.2rem 1.4rem 0;}
+.pdot{width:26px;height:26px;border-radius:50%;background:var(--panel2);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--txt2);transition:all .3s;flex-shrink:0;}
+.pdot.active{background:var(--gold);border-color:var(--gold);color:#0D0D0D;}
+.pdot.done{background:rgba(212,175,55,.2);border-color:var(--gold);color:var(--gold);}
+.pline{flex:1;height:2px;background:var(--line2);transition:background .4s;min-width:20px;}
+.pline.done{background:var(--gold);}
+.mstep{padding:1.2rem 1.4rem 1.8rem;animation:fadeIn .25s ease;}
+.sh{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--txt);margin-bottom:.4rem;}
+.ss{font-size:.84rem;color:var(--txt2);margin-bottom:1.4rem;line-height:1.55;}
+.roles{display:grid;grid-template-columns:1fr;gap:.8rem;}
+.role{padding:1.4rem 1rem;border-radius:var(--r-l);text-align:center;background:var(--panel2);border:2px solid transparent;cursor:pointer;transition:all .22s;}
+.role:hover{border-color:rgba(212,175,55,.35);transform:translateY(-2px);}
+.role.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(212,175,55,.03));box-shadow:0 0 22px rgba(212,175,55,.15);}
+.role-ic{font-size:2rem;margin-bottom:.7rem;}
+.role-t{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:.3rem;}
+.role-d{font-size:.76rem;color:var(--txt2);line-height:1.5;}
+.fg{margin-bottom:1rem;}
+.fl{display:block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);margin-bottom:.4rem;}
+.fi{width:100%;padding:.8rem .9rem;min-height:46px;border-radius:var(--r-m);background:var(--panel2);border:1px solid var(--line2);color:var(--txt);transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;}
+.fi:focus{border-color:rgba(212,175,55,.5);box-shadow:0 0 0 3px rgba(212,175,55,.08);}
+.fi::placeholder{color:var(--txt3);}
+textarea.fi{min-height:80px;resize:vertical;}
+.tagw{display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem .7rem;background:var(--panel2);border:1px solid var(--line2);border-radius:var(--r-m);min-height:46px;cursor:text;}
+.tagw:focus-within{border-color:rgba(212,175,55,.5);}
+.tag{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .6rem;border-radius:20px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:var(--gold);font-size:.74rem;}
+.tag-x{color:var(--gold-dim);cursor:pointer;font-size:.9rem;line-height:1;}
+.tag-x:hover{color:#ff6b6d;}
+.tag-i{border:none;background:none;color:var(--txt);font-size:.84rem;outline:none;flex:1;min-width:80px;}
+.snav{display:flex;gap:.6rem;margin-top:1.4rem;}
+.cz{position:relative;height:50px;overflow:hidden;}
+.cp{position:absolute;width:7px;height:7px;border-radius:2px;animation:confettiFall 3s ease-in both;}
+.suc-ic{font-size:3rem;text-align:center;margin-bottom:.8rem;}
+.suc-t{font-family:var(--ff-d);font-size:1.3rem;font-weight:700;color:var(--txt);text-align:center;margin-bottom:.5rem;}
+.suc-s{font-size:.86rem;color:var(--txt2);text-align:center;line-height:1.6;margin-bottom:1.4rem;}
+/* ─── TIERS ─── */
+.tier{padding:1rem;border-radius:var(--r-m);background:var(--panel2);border:2px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:.7rem;display:flex;gap:.8rem;align-items:flex-start;}
+.tier:hover{border-color:rgba(212,175,55,.3);}
+.tier.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,175,55,.1),transparent);}
+.tier-rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--line2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;}
+.tier.active .tier-rad{border-color:var(--gold);}
+.tier.active .tier-rad::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--gold);}
+.tier-b{flex:1;}
+.tier-n{font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:.2rem;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;}
+.tier-p{font-size:.78rem;font-weight:600;color:var(--gold);}
+.tier-d{font-size:.74rem;color:var(--txt2);margin-top:.2rem;line-height:1.45;}
+/* ─── CHECKOUT ─── */
+.pay-m{display:flex;align-items:center;gap:.9rem;padding:1rem;border-radius:var(--r-m);background:var(--panel2);border:1px solid var(--line2);cursor:pointer;transition:all .2s;margin-bottom:.8rem;}
+.pay-m:hover{border-color:var(--gold);transform:translateY(-2px);}
+.pay-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.pay-ic.stars{background:linear-gradient(135deg,#ffb800,#ffd54a);}
+.pay-ic.crypto{background:linear-gradient(135deg,#26A17B,#1a8a6a);}
+.pay-b{flex:1;}
+.pay-n{font-size:.88rem;font-weight:700;color:var(--txt);}
+.pay-d{font-size:.74rem;color:var(--txt2);}
+.pl{text-align:center;padding:2rem 0;}
+.pl-spin{width:54px;height:54px;margin:0 auto 1rem;border:3px solid rgba(212,175,55,.2);border-top-color:var(--gold);border-radius:50%;animation:payspin .8s linear infinite;}
+.qr{width:170px;height:170px;margin:0 auto 1rem;background:#fff;border-radius:14px;padding:10px;}
+.qr-g{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);}
+.qr-c{background:#000;}.qr-c.off{background:#fff;}
+.caddr{display:flex;gap:.5rem;align-items:center;padding:.7rem .9rem;background:var(--panel2);border:1px solid var(--line2);border-radius:var(--r-m);margin-bottom:1rem;}
+.caddr-t{flex:1;font-size:.74rem;font-family:monospace;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.caddr-c{flex-shrink:0;padding:.4rem .8rem;border-radius:8px;background:var(--gold);color:#0D0D0D;font-size:.72rem;font-weight:700;}
+.ctimer{font-family:var(--ff-d);font-size:1.8rem;font-weight:700;color:var(--gold);text-align:center;margin-bottom:.3rem;}
+.ctl{font-size:.72rem;color:var(--txt2);text-align:center;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.2rem;}
+/* ─── APPLY LIMIT WIDGET ─── */
+.limit-w{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
+.limit-dots{display:flex;gap:.4rem;}
+.ldot{width:11px;height:11px;border-radius:50%;background:var(--panel2);border:1px solid var(--line2);transition:all .3s;}
+.ldot.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 7px rgba(212,175,55,.5);}
+.limit-txt{font-size:.74rem;color:var(--txt2);}
+
 .foot-cols{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.4rem;}
 .foot-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
 .foot-about{font-size:.84rem;color:var(--txt2);line-height:1.7;max-width:18rem;}
@@ -306,10 +420,10 @@ body.no-scroll{overflow:hidden;}
 <!-- NAVBAR -->
 <nav id="nav">
   <div class="nav-in">
-    <button class="logo" id="logoHome" aria-label="На главную">
-      <div class="logo-mark"><span>A</span></div>
+    <a class="logo" id="logoHome" href="#" aria-label="На главную">
+      <img class="logo-img" src="logo.png" alt="AKU Jobs"/>
       <span class="logo-txt">AKU<b>Jobs</b></span>
-    </button>
+    </a>
     <ul class="nav-links">
       <li><a href="#jobs">Вакансии</a></li>
       <li><a href="#pricing">PRO-подписка</a></li>
@@ -473,6 +587,26 @@ body.no-scroll{overflow:hidden;}
           </a>
         </div>
       </div>
+
+      <!-- ECOSYSTEM CARDS -->
+      <div class="eco-cards">
+        <a class="eco-card eco-blue" href="https://akumedia.github.io/AKU-Media/" target="_blank" rel="noopener">
+          <div class="eco-card-ic">🎬</div>
+          <div class="eco-card-body">
+            <div class="eco-card-name">AKU Media</div>
+            <div class="eco-card-sub">Видеопроизводство · Reels · TikTok</div>
+          </div>
+          <div class="eco-card-arrow">→</div>
+        </a>
+        <a class="eco-card eco-red" href="https://akuautomation.github.io/AKUAutomation/" target="_blank" rel="noopener">
+          <div class="eco-card-ic">🤖</div>
+          <div class="eco-card-body">
+            <div class="eco-card-name">AKU Automation</div>
+            <div class="eco-card-sub">AI-ассистенты · Telegram-боты</div>
+          </div>
+          <div class="eco-card-arrow">→</div>
+        </a>
+      </div>
     </div>
 
     <div class="foot-cols">
@@ -484,7 +618,7 @@ body.no-scroll{overflow:hidden;}
       <div><div class="fc-t">Telegram</div><ul class="fc-l"><li><a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">Бот</a></li><li><a href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">Канал</a></li><li><a href="https://t.me/akumediamgr" target="_blank" rel="noopener">Менеджер</a></li></ul></div>
     </div>
     <div class="foot-bottom">
-      <span>© 2025 AKU Jobs. Все права защищены.</span>
+      <span>© 2026 AKU Jobs. Все права защищены.</span>
       <span>Powered by AKU Ecosystem ⚡</span>
     </div>
   </div>
@@ -531,6 +665,102 @@ body.no-scroll{overflow:hidden;}
   </div>
 </div>
 
+<!-- MODAL: ONBOARDING -->
+<div class="ov" id="obModal" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <div class="mhead"><span class="mtitle" id="obTitle">Регистрация</span><button class="mclose" id="obClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="prog">
+      <div class="pdot active" id="obd1">1</div><div class="pline" id="obl1"></div>
+      <div class="pdot" id="obd2">2</div><div class="pline" id="obl2"></div>
+      <div class="pdot" id="obd3">3</div>
+    </div>
+    <div class="mstep" id="obs1">
+      <div class="sh">Кто вы на платформе?</div>
+      <div class="ss">Выберите роль — изменить можно в профиле</div>
+      <div class="roles">
+        <div class="role" data-role="freelancer" id="roleFr"><div class="role-ic">⚡</div><div class="role-t">Я Исполнитель</div><div class="role-d">Ищу заказы и проекты</div></div>
+        <div class="role" data-role="client" id="roleCl"><div class="role-ic">💼</div><div class="role-t">Я Заказчик</div><div class="role-d">Ищу специалистов</div></div>
+      </div>
+      <button class="btn btn-blue" style="width:100%;margin-top:1.4rem;" id="obNext1" disabled>Продолжить →</button>
+    </div>
+    <div class="mstep" id="obs2" style="display:none;">
+      <div class="sh" id="obs2h">Заполните профиль</div>
+      <div class="ss">Чем больше информации — тем выше шанс найти нужное</div>
+      <div class="fg"><label class="fl">Email</label><input type="email" class="fi" id="obEmail" placeholder="your@email.com"/></div>
+      <div id="obFr">
+        <div class="fg"><label class="fl">Навыки (Enter после каждого)</label><div class="tagw" id="obTagw" tabindex="0"><input type="text" class="tag-i" id="obTagi" placeholder="Figma, React..."/></div></div>
+        <div class="fg"><label class="fl">Ставка ($/час)</label><input type="number" class="fi" id="obRate" placeholder="30"/></div>
+      </div>
+      <div id="obCl" style="display:none;">
+        <div class="fg"><label class="fl">Студия / агентство</label><input type="text" class="fi" id="obCo" placeholder="AKU Studio"/></div>
+        <div class="fg"><label class="fl">Описание проектов</label><textarea class="fi" id="obCoDesc" placeholder="Какие задачи планируете решать?"></textarea></div>
+      </div>
+      <div class="snav"><button class="btn btn-ghost" id="obBack2">← Назад</button><button class="btn btn-blue" style="flex:1;" id="obNext2">Завершить →</button></div>
+    </div>
+    <div class="mstep" id="obs3" style="display:none;">
+      <div class="cz" id="obConf"></div>
+      <div class="suc-ic">🎉</div>
+      <div class="suc-t" id="obSucT">Регистрация завершена!</div>
+      <div class="suc-s" id="obSucS">Добро пожаловать в AKU Jobs.</div>
+      <button class="btn btn-blue" style="width:100%;" id="obFinish">Начать работу</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: POST JOB -->
+<div class="ov" id="postModal" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <div class="mhead"><span class="mtitle">Разместить вакансию</span><button class="mclose" id="postClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mbody">
+      <div class="fg"><label class="fl">Заголовок</label><input type="text" class="fi" id="pjTitle" placeholder="UI/UX дизайнер для приложения"/></div>
+      <div class="fg"><label class="fl">Категория</label>
+        <select class="fi" id="pjCat"><option>🎨 Дизайн</option><option>💻 Разработка</option><option>📣 Маркетинг</option><option>🤖 AI / Автоматизация</option></select>
+      </div>
+      <div class="fg"><label class="fl">Бюджет</label><input type="text" class="fi" id="pjBudget" placeholder="50 000 ₽"/></div>
+      <div class="fl">Тариф размещения</div>
+      <div class="tier active" data-tier="basic" id="tBasic"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">Базовый</div><div class="tier-p">Бесплатно</div><div class="tier-d">Обычное размещение на 7 дней</div></div></div>
+      <div class="tier" data-tier="top" id="tTop"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">TOP / Pinned <span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span></div><div class="tier-p">99 ⭐ Stars · $5 USDT</div><div class="tier-d">Закреп вверху, золотая рамка, свечение и молния</div></div></div>
+      <div class="tier" data-tier="max" id="tMax"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">AKU Максимум <span class="badge badge-max">MAX</span></div><div class="tier-p">299 ⭐ Stars · $15 USDT</div><div class="tier-d">Всё из TOP + авто-рассылка в Telegram-канал</div></div></div>
+      <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="pjSubmit">Опубликовать</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PAYMENT METHOD -->
+<div class="ov" id="payModal" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <div class="mhead"><span class="mtitle" id="payTitle">Выбор способа платежа</span><button class="mclose" id="payClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mbody">
+      <div class="ss" id="paySub" style="margin-bottom:1.2rem;">Выберите удобный способ оплаты</div>
+      <div class="pay-m" id="payStars"><div class="pay-ic stars">⭐</div><div class="pay-b"><div class="pay-n">Telegram Stars</div><div class="pay-d" id="payStarsD">Оплата звёздами</div></div><div style="color:var(--txt3);">→</div></div>
+      <div class="pay-m" id="payCrypto"><div class="pay-ic crypto">₮</div><div class="pay-b"><div class="pay-n">Крипта USDT / TON</div><div class="pay-d" id="payCryptoD">Оплата криптовалютой</div></div><div style="color:var(--txt3);">→</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: STARS LOADER -->
+<div class="ov" id="starsModal" role="dialog" aria-modal="true">
+  <div class="mbox" style="max-width:400px;">
+    <div class="mhead"><span class="mtitle">Telegram Stars</span><button class="mclose" id="starsClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mbody"><div class="pl" id="starsBody"></div></div>
+  </div>
+</div>
+
+<!-- MODAL: CRYPTO -->
+<div class="ov" id="cryptoModal" role="dialog" aria-modal="true">
+  <div class="mbox" style="max-width:400px;">
+    <div class="mhead"><span class="mtitle">Оплата криптой</span><button class="mclose" id="cryptoClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mbody">
+      <div class="badge badge-cat" style="display:block;width:fit-content;margin:0 auto 1rem;">🔵 Сеть TON · USDT</div>
+      <div class="qr"><div class="qr-g" id="qrG"></div></div>
+      <div class="caddr"><div class="caddr-t" id="cAddr">UQAkuJobsHub7x9pQrT2vN8wKz4mD</div><button class="caddr-c" id="cCopy">Копир.</button></div>
+      <div class="ctimer" id="cTimer">15:00</div>
+      <div class="ctl">До истечения счёта</div>
+      <button class="btn btn-blue" style="width:100%;" id="cPaid">Я оплатил(а)</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -553,12 +783,14 @@ const demoJobs = [
 ];
 
 /* ─── STATE ─── */
-const S = { jobs:[], filtered:[], filter:'all', user:null, isPro:false, viewed:new Set() };
+const S = { jobs:[], filtered:[], filter:'all', user:null, isPro:false, viewed:new Set(), applies:5, maxApplies:5, role:null, tags:[], tier:'basic', payCtx:null, cryptoT:null };
 
 /* persist viewed + user */
 try{ const v=localStorage.getItem('aku_viewed'); if(v)S.viewed=new Set(JSON.parse(v)); }catch(e){}
 try{ const u=localStorage.getItem('aku_user'); if(u)S.user=JSON.parse(u); }catch(e){}
 try{ S.isPro=localStorage.getItem('aku_pro')==='1'; }catch(e){}
+try{ const a=localStorage.getItem('aku_applies'); if(a!==null)S.applies=Math.max(0,Math.min(5,+a)); }catch(e){}
+function saveApplies(){ try{ localStorage.setItem('aku_applies',String(S.applies)); }catch(e){} }
 
 function saveViewed(){ try{ localStorage.setItem('aku_viewed',JSON.stringify([...S.viewed])); }catch(e){} }
 
@@ -584,7 +816,8 @@ function initNav(){
 }
 
 /* ─── LOGO = HOME / REFRESH ─── */
-$('logoHome')?.addEventListener('click',()=>{
+$('logoHome')?.addEventListener('click',(e)=>{
+  e.preventDefault();
   window.scrollTo({top:0,behavior:'smooth'});
   // лёгкий "refresh" контента
   applyFilter('all');
@@ -608,7 +841,7 @@ function renderJobs(){
   list.innerHTML='';
   S.filtered.forEach((j,i)=>{
     const card=document.createElement('article');
-    card.className='job'+(j.premium?' premium':'')+(S.viewed.has(j.id)?' viewed':'');
+    card.className='job'+(j.premium?' premium':'')+((j.tier==='top'||j.tier==='max')?' pinned':'')+(S.viewed.has(j.id)?' viewed':'');
     card.dataset.id=j.id;
     card.style.animationDelay=(i*45)+'ms';
     card.innerHTML=cardInner(j);
@@ -617,7 +850,10 @@ function renderJobs(){
 }
 
 function cardInner(j){
-  const premBadge=j.premium?'<span class="badge badge-prem">⭐ Premium</span>':'';
+  let tierBadge='';
+  if(j.tier==='top') tierBadge='<span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span>';
+  else if(j.tier==='max') tierBadge='<span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span><span class="badge badge-max">MAX</span>';
+  const premBadge=(j.premium?'<span class="badge badge-prem">⭐ Premium</span>':'')+tierBadge;
   let action;
   if(j.premium && !S.isPro){
     action=`
@@ -660,12 +896,7 @@ $('jobsList')?.addEventListener('click',e=>{
   const id=card.dataset.id, job=S.jobs.find(j=>j.id===id);
 
   if(e.target.closest('.jUnlock')){ openPro(); return; }
-  if(e.target.closest('.jApply')){
-    markViewed(id);
-    if(!S.user){ openLogin(); return; }
-    toast('✅ Отклик отправлен!','blue');
-    return;
-  }
+  if(e.target.closest('.jApply')){ markViewed(id); applyJob(); return; }
   // simple view → mark viewed
   markViewed(id);
 });
@@ -692,6 +923,7 @@ window.onTelegramAuth=function(user){
   close('loginModal');
   refreshAuthUI();
   toast('✅ Вход выполнен через Telegram','blue');
+  setTimeout(openOnboard,400);
 };
 function simLogin(){ window.onTelegramAuth({ id:99000000+Math.floor(Math.random()*9999), first_name:'Demo', username:'demo_user', photo_url:null }); }
 
@@ -702,6 +934,7 @@ function refreshAuthUI(){
     const ava=S.user.photo?`<img src="${esc(S.user.photo)}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`:initial;
     act.innerHTML=`<div class="nav-ava" id="navAva" title="${esc(S.user.name)}">${ava}</div><button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>`;
     initNav();
+    $('navAva')?.addEventListener('click',openOnboard);
   }
 }
 
@@ -716,7 +949,7 @@ function buyPro(){
     toast('👑 PRO активирован! Премиум-заказы открыты.','blue');
   },1400);
 }
-$('proPayTg')?.addEventListener('click',buyPro);
+$('proPayTg')?.addEventListener('click',()=>{ close('proModal'); S.payCtx={kind:'pro'}; openPay('PRO-подписка','$19 / 450 ★'); });
 $('pricePro')?.addEventListener('click',openPro);
 $('sideProBtn')?.addEventListener('click',openPro);
 $('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом плане','blue'));
@@ -729,14 +962,102 @@ $('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом
 /* ─── CTA ─── */
 $('heroFind')?.addEventListener('click',()=>{ if(S.user)$('jobs').scrollIntoView({behavior:'smooth'}); else openLogin(); });
 $('heroJobs')?.addEventListener('click',()=>$('jobs').scrollIntoView({behavior:'smooth'}));
-$('postBtn')?.addEventListener('click',()=>{ window.open('https://t.me/akumediamgr','_blank'); });
+$('postBtn')?.addEventListener('click',openPost);
+
+
+/* ─── SKELETON (1.2s) ─── */
+function showSkeletons(n=6){
+  const list=$('jobsList'); list.innerHTML='';
+  for(let i=0;i<n;i++){ const d=document.createElement('div'); d.className='sk-card';
+    d.innerHTML='<div class="sk" style="width:64px;height:14px;margin-bottom:10px;"></div><div class="sk" style="width:85%;height:15px;margin-bottom:8px;"></div><div class="sk" style="width:55%;height:11px;margin-bottom:12px;"></div><div class="sk" style="width:100%;height:11px;margin-bottom:4px;"></div><div class="sk" style="width:70%;height:11px;"></div><div class="sk-row"><div class="sk" style="width:80px;height:14px;border-radius:5px;"></div><div class="sk" style="width:96px;height:32px;border-radius:8px;"></div></div>';
+    list.appendChild(d);
+  }
+}
+
+/* ─── APPLY LIMIT (5 dots) ─── */
+function applyJob(){
+  if(!S.user){ openLogin(); return; }
+  if(S.isPro){ toast('✅ Отклик отправлен (PRO · безлимит)','blue'); return; }
+  if(S.applies<=0){ open('proModal'); return; }
+  S.applies--; saveApplies();
+  toast('✅ Отклик отправлен! Осталось: '+S.applies,'blue');
+}
+
+/* ─── ONBOARDING ─── */
+function openOnboard(){ S.role=null; S.tags=[]; obStep(1); $('obNext1').disabled=true; document.querySelectorAll('.role').forEach(r=>r.classList.remove('active')); open('obModal'); }
+function obStep(n){
+  [1,2,3].forEach(i=>{ const el=$('obs'+i); if(el)el.style.display=i===n?'block':'none'; });
+  $('obTitle').textContent={1:'Ваша роль',2:'Профиль',3:'Готово!'}[n];
+  for(let i=1;i<=3;i++){ const d=$('obd'+i); d.classList.remove('active','done'); if(i<n)d.classList.add('done'); else if(i===n)d.classList.add('active'); }
+  for(let i=1;i<=2;i++){ $('obl'+i).classList.toggle('done',i<n); }
+}
+$('roleFr')?.addEventListener('click',()=>selRole('freelancer','roleFr'));
+$('roleCl')?.addEventListener('click',()=>selRole('client','roleCl'));
+function selRole(r,id){ S.role=r; document.querySelectorAll('.role').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); $('obNext1').disabled=false; }
+$('obNext1')?.addEventListener('click',()=>{ if(!S.role)return; const fr=$('obFr'),cl=$('obCl'); if(S.role==='freelancer'){fr.style.display='block';cl.style.display='none';$('obs2h').textContent='Профиль исполнителя';}else{fr.style.display='none';cl.style.display='block';$('obs2h').textContent='Профиль заказчика';} obStep(2); });
+$('obBack2')?.addEventListener('click',()=>obStep(1));
+$('obNext2')?.addEventListener('click',()=>{ if(S.user)S.user.role=S.role; $('obSucT').textContent=S.role==='client'?'Профиль заказчика создан!':'Профиль исполнителя создан!'; $('obSucS').textContent=S.role==='client'?'Начните находить лучших специалистов.':'Теперь вы можете откликаться на заказы.'; confetti('obConf'); obStep(3); });
+$('obFinish')?.addEventListener('click',()=>{ close('obModal'); $('jobs').scrollIntoView({behavior:'smooth'}); });
+$('obClose')?.addEventListener('click',()=>close('obModal'));
+/* skill tags */
+const obTagi=$('obTagi'),obTagw=$('obTagw');
+function renderTags(){ if(!obTagw)return; obTagw.querySelectorAll('.tag').forEach(t=>t.remove()); S.tags.forEach((t,i)=>{ const p=document.createElement('span'); p.className='tag'; p.innerHTML=esc(t)+'<button class="tag-x" data-i="'+i+'" type="button">×</button>'; obTagw.insertBefore(p,obTagi); }); }
+obTagi?.addEventListener('keydown',e=>{ const v=obTagi.value.trim(); if((e.key==='Enter'||e.key===',')&&v){ e.preventDefault(); if(!S.tags.includes(v)&&S.tags.length<15){S.tags.push(v);renderTags();} obTagi.value=''; } if(e.key==='Backspace'&&!obTagi.value&&S.tags.length){S.tags.pop();renderTags();} });
+obTagw?.addEventListener('click',e=>{ const b=e.target.closest('.tag-x'); if(b){S.tags.splice(+b.dataset.i,1);renderTags();} obTagi?.focus(); });
+
+/* ─── CONFETTI ─── */
+function confetti(zid){ const z=$(zid); if(!z)return; z.innerHTML=''; const cols=['#D4AF37','#f0ce60','#22c55e','#2F48FD','#DB2022','#fff']; for(let i=0;i<24;i++){ const p=document.createElement('div'); p.className='cp'; p.style.cssText='left:'+(Math.random()*100)+'%;top:'+(Math.random()*30)+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-delay:'+(Math.random()*.8).toFixed(2)+'s;animation-duration:'+(2+Math.random()*1.5).toFixed(2)+'s;transform:rotate('+Math.floor(Math.random()*360)+'deg)'; z.appendChild(p); } }
+
+/* ─── POST JOB ─── */
+function openPost(){ if(!S.user){ toast('⚠️ Сначала войдите','red'); openLogin(); return; } S.tier='basic'; selTier('basic','tBasic'); open('postModal'); }
+document.querySelectorAll('.tier').forEach(t=>t.addEventListener('click',()=>selTier(t.dataset.tier,t.id)));
+function selTier(t,id){ S.tier=t; document.querySelectorAll('.tier').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); }
+$('postClose')?.addEventListener('click',()=>close('postModal'));
+$('pjSubmit')?.addEventListener('click',()=>{
+  const title=$('pjTitle').value.trim(); if(!title){ toast('⚠️ Введите заголовок','red'); return; }
+  const job={ id:'u'+Date.now(), cat:$('pjCat').value, catKey:catKeyOf($('pjCat').value), co:S.user.username?'@'+S.user.username:'@you', title, desc:'Новый заказ от '+(S.user.name||'клиента')+'.', price:$('pjBudget').value.trim()||'Договорная', premium:false, tier:S.tier };
+  if(S.tier==='basic'){ publishJob(job); close('postModal'); }
+  else { close('postModal'); S.payCtx={kind:'job',job,tier:S.tier}; openPay(S.tier==='top'?'TOP-размещение':'AKU Максимум', S.tier==='top'?'99 ⭐ / $5':'299 ⭐ / $15'); }
+});
+function catKeyOf(c){ return {'🎨 Дизайн':'design','💻 Разработка':'dev','📣 Маркетинг':'marketing','🤖 AI / Автоматизация':'ai'}[c]||'all'; }
+function publishJob(job){
+  demoJobs.unshift(job); S.jobs=demoJobs.slice(); applyFilter('all');
+  $('jobs').scrollIntoView({behavior:'smooth'});
+  ['pjTitle','pjBudget'].forEach(id=>$(id).value='');
+  toast(job.tier==='max'?'🚀 Опубликовано в ТОП + рассылка в канал!':job.tier==='top'?'⚡ Опубликовано в ТОП!':'🎉 Вакансия опубликована!','blue');
+}
+
+/* ─── CHECKOUT ─── */
+function openPay(title,price){ $('payTitle').textContent='Оплата: '+title; $('paySub').textContent='Сумма: '+price; $('payStarsD').textContent=price.split('/')[0].trim()+' звёздами'; $('payCryptoD').textContent=(price.split('/')[1]||'USDT').trim()+' криптой'; open('payModal'); }
+$('payClose')?.addEventListener('click',()=>close('payModal'));
+$('payStars')?.addEventListener('click',()=>{ close('payModal'); payStars(); });
+$('payCrypto')?.addEventListener('click',()=>{ close('payModal'); payCrypto(); });
+function payStars(){
+  open('starsModal');
+  $('starsBody').innerHTML='<div style="font-size:2.6rem;">⭐</div><div style="margin-top:.8rem;color:var(--txt2);">Открываем Telegram Pay...</div>';
+  setTimeout(()=>{ $('starsBody').innerHTML='<div class="pl-spin"></div><div style="color:var(--txt2);">Обработка платежа...</div>'; },1100);
+  setTimeout(()=>{ $('starsBody').innerHTML='<div style="font-size:2.8rem;">✅</div><div style="margin-top:.8rem;color:#7ee0a3;font-weight:600;">Успешно оплачено!</div>'; setTimeout(()=>{ close('starsModal'); finalizePay(); },1300); },2300);
+}
+function payCrypto(){ buildQR(); open('cryptoModal'); startTimer(15*60); }
+function buildQR(){ const g=$('qrG'); g.innerHTML=''; for(let r=0;r<11;r++)for(let c=0;c<11;c++){ const cell=document.createElement('div'); const f=(r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3); const on=f?(r===0||r===2||c===0||c===2||(r===1&&c===1)):((r*7+c*3+((r*c)%5))%2===0); cell.className='qr-c'+(on?'':' off'); g.appendChild(cell); } }
+function startTimer(sec){ clearInterval(S.cryptoT); const el=$('cTimer'); el.style.color='var(--gold)'; (function tick(){ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; })(); S.cryptoT=setInterval(()=>{ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; },1000); }
+$('cCopy')?.addEventListener('click',()=>{ const a=$('cAddr').textContent; navigator.clipboard?.writeText(a).then(()=>toast('📋 Адрес скопирован','blue')).catch(()=>toast('📋 '+a)); });
+$('cPaid')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); toast('⏳ Проверяем поступление...'); setTimeout(()=>finalizePay(),1200); });
+$('cryptoClose')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); });
+$('starsClose')?.addEventListener('click',()=>close('starsModal'));
+function finalizePay(){
+  const ctx=S.payCtx; if(!ctx)return;
+  if(ctx.kind==='pro'){ S.isPro=true; S.applies=S.maxApplies; saveApplies(); try{localStorage.setItem('aku_pro','1');}catch(e){} renderJobs(); refreshAuthUI(); toast('👑 PRO активирован!','blue'); }
+  else if(ctx.kind==='job'){ publishJob(ctx.job); }
+  S.payCtx=null;
+}
 
 /* ─── INIT ─── */
 document.addEventListener('DOMContentLoaded',()=>{
   initNav();
   refreshAuthUI();
-  S.jobs=demoJobs.slice();
-  applyFilter('all');
+  showSkeletons();
+  setTimeout(()=>{ S.jobs=demoJobs.slice(); applyFilter('all'); }, 1200);
   // metrics on view
   if('IntersectionObserver' in window){
     const obs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateMetrics(); o.disconnect(); } }); },{threshold:.3});
