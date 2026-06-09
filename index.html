@@ -332,6 +332,7 @@ textarea.fi{min-height:80px;resize:vertical;}
 .pay-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
 .pay-ic.stars{background:linear-gradient(135deg,#ffb800,#ffd54a);}
 .pay-ic.crypto{background:linear-gradient(135deg,#26A17B,#1a8a6a);}
+.pay-ic.rub{background:linear-gradient(135deg,#8b3df0,#6f2bd0);}
 .pay-b{flex:1;}
 .pay-n{font-size:.88rem;font-weight:700;color:var(--txt);}
 .pay-d{font-size:.74rem;color:var(--txt2);}
@@ -406,6 +407,14 @@ textarea.fi{min-height:80px;resize:vertical;}
 .dtab{flex:1;padding:.6rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txt2);transition:all .2s;}
 .dtab.active{background:var(--gold);color:#0D0D0D;}
 .dpane{animation:fadeIn .2s ease;}
+
+/* ─── DONATION QUICK AMOUNTS ─── */
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
+.dpane#dpaneCrypto .qa-grid{grid-template-columns:repeat(2,1fr);}
+.qa{padding:.7rem;border-radius:var(--r-m);background:var(--panel2);border:1.5px solid var(--line2);color:var(--txt);font-weight:600;font-size:.88rem;transition:all .18s;}
+.qa:hover{border-color:rgba(212,175,55,.4);}
+.qa.active{border-color:var(--gold);background:rgba(212,175,55,.1);color:var(--gold-br);}
+.dhint{font-size:.72rem;color:var(--txt3);margin-top:.4rem;}
 
 .foot-cols{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.4rem;}
 .foot-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
@@ -741,11 +750,9 @@ body.no-scroll{overflow:hidden;}
         <div class="price-usd">$9<span class="per"> / мес</span></div>
         <div class="price-stars">450 ★ / мес</div>
       </div>
-      <button class="btn btn-tg btn-lg" style="width:100%;margin-bottom:.7rem;" id="proPayTg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-        Оформить через Telegram
-      </button>
-      <button class="btn btn-ghost" style="width:100%;" id="proLater">Позже</button>
+      <button class="btn btn-blue btn-lg" style="width:100%;margin-bottom:.6rem;" id="proPayTg">Купить PRO — $9 / мес</button>
+      <button class="btn btn-ghost" style="width:100%;margin-bottom:.6rem;" id="proTrial">Попробовать за 99 ₽</button>
+      <button class="btn btn-ghost" style="width:100%;border:none;color:var(--txt3);" id="proLater">Позже</button>
     </div>
   </div>
 </div>
@@ -844,7 +851,8 @@ body.no-scroll{overflow:hidden;}
     <div class="mbody">
       <div class="ss" id="paySub" style="margin-bottom:1.2rem;">Выберите удобный способ оплаты</div>
       <div class="pay-m" id="payStars"><div class="pay-ic stars">⭐</div><div class="pay-b"><div class="pay-n">Telegram Stars</div><div class="pay-d" id="payStarsD">Оплата звёздами</div></div><div style="color:var(--txt3);">→</div></div>
-      <div class="pay-m" id="payCrypto"><div class="pay-ic crypto">₮</div><div class="pay-b"><div class="pay-n">Крипта USDT / TON</div><div class="pay-d" id="payCryptoD">Оплата криптовалютой</div></div><div style="color:var(--txt3);">→</div></div>
+      <div class="pay-m" id="payCrypto"><div class="pay-ic crypto">₮</div><div class="pay-b"><div class="pay-n">CryptoPay (USDT / TON)</div><div class="pay-d" id="payCryptoD">Оплата криптовалютой</div></div><div style="color:var(--txt3);">→</div></div>
+      <div class="pay-m" id="payRub"><div class="pay-ic rub">₽</div><div class="pay-b"><div class="pay-n">Банковская карта (₽)</div><div class="pay-d" id="payRubD">Оплата картой через YooMoney</div></div><div style="color:var(--txt3);">→</div></div>
     </div>
   </div>
 </div>
@@ -872,29 +880,54 @@ body.no-scroll{overflow:hidden;}
   </div>
 </div>
 
-<!-- MODAL: DONATION -->
-<div class="ov" id="donateModal" role="dialog" aria-modal="true">
+<!-- MODAL: DONATION (3 tabs) -->
+<div class="ov" id="donationModal" role="dialog" aria-modal="true">
   <div class="mbox">
-    <div class="mhead"><span class="mtitle">❤ Поддержать проект</span><button class="mclose" id="donateClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mhead"><span class="mtitle">❤ Поддержать проект</span><button class="mclose" id="donationClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
     <div class="mbody">
       <div class="ss" style="margin-bottom:1.2rem;">Ваша поддержка помогает развивать платформу и держать её чистой от спама.</div>
       <div class="dtabs">
-        <button class="dtab active" data-dtab="crypto">Крипта (USDT/TON)</button>
-        <button class="dtab" data-dtab="card">Карта (Рубли)</button>
+        <button class="dtab active" data-dtab="stars">Stars (★)</button>
+        <button class="dtab" data-dtab="crypto">Крипта</button>
+        <button class="dtab" data-dtab="card">Карта (₽)</button>
       </div>
-      <div class="dpane" id="dpaneCrypto">
-        <div class="fl">Кошелёк USDT (TON)</div>
+
+      <!-- Tab 1: Telegram Stars -->
+      <div class="dpane" id="dpaneStars">
+        <div class="fl">Выберите сумму</div>
+        <div class="qa-grid" id="dStarQuick">
+          <button class="qa" data-stars="50">50 ★</button>
+          <button class="qa active" data-stars="100">100 ★</button>
+          <button class="qa" data-stars="500">500 ★</button>
+        </div>
+        <div class="fl" style="margin-top:1rem;">Или своя сумма (★)</div>
+        <input type="number" class="fi" placeholder="100" id="dStarAmt" value="100" min="1"/>
+        <button class="btn btn-tg" style="width:100%;margin-top:1.2rem;" id="dStarPay">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+          Задонатить через Telegram
+        </button>
+      </div>
+
+      <!-- Tab 2: Crypto -->
+      <div class="dpane" id="dpaneCrypto" style="display:none;">
+        <div class="fl">Актив</div>
+        <div class="qa-grid" id="dAssetSel">
+          <button class="qa active" data-asset="USDT">USDT (TON)</button>
+          <button class="qa" data-asset="TON">TON</button>
+        </div>
+        <div class="fl" style="margin-top:1rem;">Кошелёк <span id="dAssetLbl">USDT (TON)</span></div>
         <div class="caddr"><div class="caddr-t" id="dAddr">UQAkuJobsHub7x9pQrT2vN8wKz4mD</div><button class="caddr-c" id="dCopy">Копир.</button></div>
-        <div class="fl" style="margin-top:1rem;">Сумма (USDT)</div>
+        <div class="fl" style="margin-top:1rem;">Сумма</div>
         <input type="number" class="fi" placeholder="10" id="dCryptoAmt"/>
-        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCryptoPay">Отправить донат</button>
+        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCryptoBot">Оплатить через CryptoBot</button>
       </div>
+
+      <!-- Tab 3: Ruble Card -->
       <div class="dpane" id="dpaneCard" style="display:none;">
-        <div class="fl">Сумма (₽)</div>
-        <input type="number" class="fi" placeholder="500" id="dCardAmt"/>
-        <div class="fl" style="margin-top:1rem;">Номер карты</div>
-        <input type="text" class="fi" placeholder="0000 0000 0000 0000" id="dCardNum" maxlength="19"/>
-        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCardPay">Поддержать рублями</button>
+        <div class="fl">Сумма (₽, минимум 100)</div>
+        <input type="number" class="fi" placeholder="500" id="dCardAmt" min="100" value="500"/>
+        <div class="dhint" id="dCardHint">Минимальная сумма доната — 100 ₽</div>
+        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCardPay">Перейти к оплате</button>
       </div>
     </div>
   </div>
@@ -1124,7 +1157,8 @@ function buyPro(){
     toast('👑 PRO активирован! Премиум-заказы открыты.','blue');
   },1400);
 }
-$('proPayTg')?.addEventListener('click',()=>{ close('proModal'); S.payCtx={kind:'pro'}; openPay('PRO-подписка','$19 / 450 ★'); });
+$('proPayTg')?.addEventListener('click',()=>{ close('proModal'); S.payCtx={kind:'pro',plan:'monthly'}; openPay('PRO-подписка','$9 / 450 ★'); });
+$('proTrial')?.addEventListener('click',()=>{ close('proModal'); S.payCtx={kind:'pro',plan:'trial'}; openPay('PRO пробный период','99 ₽ / 450 ★'); });
 $('pricePro')?.addEventListener('click',openPro);
 $('sideProBtn')?.addEventListener('click',openPro);
 $('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом плане','blue'));
@@ -1205,10 +1239,20 @@ function publishJob(job){
 }
 
 /* ─── CHECKOUT ─── */
-function openPay(title,price){ $('payTitle').textContent='Оплата: '+title; $('paySub').textContent='Сумма: '+price; $('payStarsD').textContent=price.split('/')[0].trim()+' звёздами'; $('payCryptoD').textContent=(price.split('/')[1]||'USDT').trim()+' криптой'; open('payModal'); }
+function openPay(title,price){ $('payTitle').textContent='Оплата: '+title; $('paySub').textContent='Сумма: '+price+' · выберите провайдера'; $('payStarsD').textContent=price.split('/')[0].trim()+' звёздами'; $('payCryptoD').textContent=(price.split('/')[1]||'USDT').trim()+' криптой'; open('payModal'); }
 $('payClose')?.addEventListener('click',()=>close('payModal'));
 $('payStars')?.addEventListener('click',()=>{ close('payModal'); payStars(); });
 $('payCrypto')?.addEventListener('click',()=>{ close('payModal'); payCrypto(); });
+$('payRub')?.addEventListener('click',()=>{ close('payModal'); payRub(); });
+function payRub(){
+  // PRO/тариф через рублёвую карту → YooMoney
+  const ctx=S.payCtx||{}; const sum = ctx.kind==='pro' ? 990 : (ctx.tier==='max'?1490:490);
+  const params=new URLSearchParams({receiver:'410011XXXXXXXXX','quickpay-form':'shop',targets:'AKU Jobs Hub — '+(ctx.kind==='pro'?'PRO':'Размещение'),paymentType:'AC',sum:sum,label:'aku_'+(ctx.kind||'pay')+'_'+Date.now()});
+  window.open('https://yoomoney.ru/quickpay/confirm.xml?'+params.toString(),'_blank');
+  toast('₽ Переходим к оплате '+sum+' ₽ через YooMoney...','blue');
+  // имитация успешной оплаты после возврата
+  setTimeout(()=>finalizePay(),1400);
+}
 function payStars(){
   open('starsModal');
   $('starsBody').innerHTML='<div style="font-size:2.6rem;">⭐</div><div style="margin-top:.8rem;color:var(--txt2);">Открываем Telegram Pay...</div>';
@@ -1230,20 +1274,82 @@ function finalizePay(){
 }
 
 
-/* ─── DONATION MODAL ─── */
-function openDonate(){ open('donateModal'); }
-$('navDonate')?.addEventListener('click',openDonate);
-$('donateClose')?.addEventListener('click',()=>close('donateModal'));
-document.querySelectorAll('.dtab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.dtab').forEach(x=>x.classList.remove('active'));
+/* ─── DONATION MODAL (3 tabs: Stars / Crypto / Card) ─── */
+const BOT_INVOICE='https://t.me/AKUJobsHub_bot?start=donate';
+const WALLETS={USDT:'UQAkuJobsHub7x9pQrT2vN8wKz4mD',TON:'UQTon_AkuJobsHub_9pQ4mDz7x2vNwKr'};
+function openDonation(){ open('donationModal'); }
+$('navDonate')?.addEventListener('click',openDonation);
+$('donationClose')?.addEventListener('click',()=>close('donationModal'));
+// tab switch
+document.querySelectorAll('#donationModal .dtab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('#donationModal .dtab').forEach(x=>x.classList.remove('active'));
   t.classList.add('active');
-  const which=t.dataset.dtab;
-  $('dpaneCrypto').style.display = which==='crypto'?'block':'none';
-  $('dpaneCard').style.display   = which==='card'?'block':'none';
+  const w=t.dataset.dtab;
+  $('dpaneStars').style.display  = w==='stars'?'block':'none';
+  $('dpaneCrypto').style.display = w==='crypto'?'block':'none';
+  $('dpaneCard').style.display   = w==='card'?'block':'none';
 }));
-$('dCopy')?.addEventListener('click',()=>{ const a=$('dAddr').textContent; navigator.clipboard?.writeText(a).then(()=>toast('📋 Адрес скопирован','blue')).catch(()=>toast('📋 '+a)); });
-$('dCryptoPay')?.addEventListener('click',()=>{ const amt=$('dCryptoAmt').value||'?'; close('donateModal'); toast('❤ Спасибо за поддержку '+amt+' USDT!','blue'); });
-$('dCardPay')?.addEventListener('click',()=>{ const amt=$('dCardAmt').value||'?'; close('donateModal'); toast('❤ Спасибо за донат '+amt+' ₽!','blue'); });
+// Tab 1: Stars quick-select
+document.querySelectorAll('#dStarQuick .qa').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#dStarQuick .qa').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  $('dStarAmt').value=b.dataset.stars;
+}));
+$('dStarAmt')?.addEventListener('input',()=>document.querySelectorAll('#dStarQuick .qa').forEach(x=>x.classList.remove('active')));
+$('dStarPay')?.addEventListener('click',()=>{
+  const amt=parseInt($('dStarAmt').value,10)||100;
+  const link=BOT_INVOICE+'_'+amt;
+  // В Telegram Web App: Telegram.WebApp.openTelegramLink(link)
+  if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.openTelegramLink){
+    window.Telegram.WebApp.openTelegramLink(link);
+  } else {
+    window.open(link,'_blank');
+  }
+  close('donationModal');
+  toast('⭐ Открываем донат на '+amt+' Stars в Telegram...','blue');
+});
+// Tab 2: Crypto asset picker + copy + CryptoBot
+let dAsset='USDT';
+document.querySelectorAll('#dAssetSel .qa').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#dAssetSel .qa').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  dAsset=b.dataset.asset;
+  $('dAssetLbl').textContent=b.textContent;
+  $('dAddr').textContent=WALLETS[dAsset];
+}));
+$('dCopy')?.addEventListener('click',()=>{ const a=$('dAddr').textContent; navigator.clipboard?.writeText(a).then(()=>{ const btn=$('dCopy'); btn.textContent='✓ Скопировано'; setTimeout(()=>btn.textContent='Копир.',1500); toast('📋 Адрес '+dAsset+' скопирован','blue'); }).catch(()=>toast('📋 '+a)); });
+$('dCryptoBot')?.addEventListener('click',()=>{
+  const amt=parseFloat($('dCryptoAmt').value)||0;
+  // Подготовка внешнего редиректа на CryptoBot (симуляция)
+  const url='https://t.me/CryptoBot?start=AKUJobsHub_donate_'+dAsset+(amt?('_'+amt):'');
+  window.open(url,'_blank');
+  close('donationModal');
+  toast('₮ Переходим в CryptoBot для оплаты '+dAsset+'...','blue');
+});
+// Tab 3: Ruble Card → YooMoney redirect
+$('dCardAmt')?.addEventListener('input',()=>{
+  const v=parseInt($('dCardAmt').value,10)||0;
+  $('dCardHint').textContent = v<100 ? '⚠️ Минимум 100 ₽' : 'Перейдёте на защищённую страницу оплаты YooMoney';
+  $('dCardHint').style.color = v<100 ? '#ff6b6d' : 'var(--txt3)';
+});
+$('dCardPay')?.addEventListener('click',()=>{
+  const amt=parseInt($('dCardAmt').value,10)||0;
+  if(amt<100){ toast('⚠️ Минимальная сумма — 100 ₽','red'); $('dCardAmt').focus(); return; }
+  // Динамическая генерация ссылки на платёжный шлюз YooMoney (симуляция)
+  const params=new URLSearchParams({
+    receiver:'410011XXXXXXXXX',
+    'quickpay-form':'donate',
+    targets:'Донат AKU Jobs Hub',
+    paymentType:'AC',
+    sum:amt,
+    label:'aku_donate_'+Date.now()
+  });
+  const url='https://yoomoney.ru/quickpay/confirm.xml?'+params.toString();
+  window.open(url,'_blank');
+  close('donationModal');
+  toast('₽ Переходим к оплате '+amt+' ₽ через YooMoney...','blue');
+});
+
 
 /* ─── TRUST STATS COUNTER ─── */
 function animateTrust(){
