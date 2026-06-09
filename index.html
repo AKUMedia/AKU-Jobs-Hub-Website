@@ -371,6 +371,42 @@ textarea.fi{min-height:80px;resize:vertical;}
 .tgc-go{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2AABEE,#229ED9);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;transition:transform .25s,box-shadow .25s;}
 .tg-channel-card:hover .tgc-go{transform:scale(1.1);box-shadow:0 0 16px rgba(42,171,238,.5);}
 
+/* ─── FEED LOCK (guest teaser) ─── */
+.feed-lock{grid-column:1/-1;position:relative;margin-top:.5rem;border-radius:var(--r-l);overflow:hidden;border:1px solid var(--line);}
+.feed-lock-blur{display:grid;grid-template-columns:1fr;gap:1rem;padding:1.2rem;filter:blur(7px);opacity:.5;pointer-events:none;}
+.feed-lock-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:1.5rem;background:linear-gradient(180deg,rgba(15,17,21,.4),rgba(15,17,21,.85));}
+.fl-ic{font-size:2.2rem;}
+.fl-t{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--gold-br);}
+.fl-s{font-size:.84rem;color:var(--txt2);max-width:22rem;margin-bottom:.6rem;}
+@media(min-width:768px){.feed-lock-blur{grid-template-columns:1fr 1fr;}}
+
+/* ─── COMPLIANCE CHECKBOX ─── */
+.ob-agree{display:flex;align-items:flex-start;gap:.6rem;margin-top:1.2rem;cursor:pointer;user-select:none;}
+.ob-agree input{position:absolute;opacity:0;width:0;height:0;}
+.ob-agree-box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line2);flex-shrink:0;margin-top:1px;transition:all .2s;display:flex;align-items:center;justify-content:center;background:var(--panel2);}
+.ob-agree input:checked + .ob-agree-box{background:var(--gold);border-color:var(--gold);}
+.ob-agree input:checked + .ob-agree-box::after{content:'✓';color:#0D0D0D;font-size:.85rem;font-weight:700;}
+.ob-agree-txt{font-size:.8rem;color:var(--txt2);line-height:1.5;}
+
+/* ─── TRUST BLOCK ─── */
+.trust-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+.trust-card{padding:1.8rem 1.5rem;border-radius:var(--r-xl);background:var(--panel);border:1px solid var(--line);transition:border-color .25s,transform .25s;}
+.trust-card:hover{border-color:rgba(212,175,55,.4);transform:translateY(-4px);}
+.trust-ic{font-size:2rem;margin-bottom:1rem;}
+.trust-h{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--txt);margin-bottom:.6rem;}
+.trust-d{font-size:.88rem;color:var(--txt2);line-height:1.65;}
+.trust-stats{display:flex;gap:1.6rem;margin-top:.4rem;}
+.trust-stats>div{display:flex;flex-direction:column;}
+.ts-num{font-family:var(--ff-d);font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1;}
+.ts-lbl{font-size:.72rem;color:var(--txt3);margin-top:.3rem;}
+@media(min-width:768px){.trust-grid{grid-template-columns:repeat(3,1fr);}}
+
+/* ─── DONATION MODAL ─── */
+.dtabs{display:flex;gap:.5rem;margin-bottom:1.4rem;background:var(--panel2);padding:.3rem;border-radius:var(--r-m);}
+.dtab{flex:1;padding:.6rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txt2);transition:all .2s;}
+.dtab.active{background:var(--gold);color:#0D0D0D;}
+.dpane{animation:fadeIn .2s ease;}
+
 .foot-cols{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.4rem;}
 .foot-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
 .foot-logo-img{height:34px;width:auto;max-width:40px;object-fit:contain;border-radius:9px;box-shadow:0 0 12px rgba(212,175,55,.25);}
@@ -458,6 +494,7 @@ body.no-scroll{overflow:hidden;}
       <li><a href="#contacts">Контакты</a></li>
     </ul>
     <div class="nav-act">
+      <button class="btn btn-ghost btn-sm desktop-login" id="navDonate" style="border-color:rgba(212,175,55,.4);color:var(--gold);">❤ Донат</button>
       <button class="btn btn-tg btn-sm desktop-login" id="navLogin">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
         Войти через Telegram
@@ -594,6 +631,37 @@ body.no-scroll{overflow:hidden;}
 </section>
 
 <!-- FOOTER -->
+<!-- TRUST / AUTHORITY -->
+<section id="trust" class="section section-dark">
+  <div class="wrap">
+    <div class="tc" style="margin-bottom:2.4rem;">
+      <div class="s-eyebrow" style="justify-content:center;">Почему AKU Jobs Hub</div>
+      <h2 class="s-title">Доверие, проверенное рынком</h2>
+      <p class="s-sub" style="margin:0 auto;">Мы — часть экосистемы AKU, которая закрывает реальные боли фриланс-рынка СНГ.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-ic">🏆</div>
+        <div class="trust-h">Опыт на рынке</div>
+        <div class="trust-d">Экосистема AKU развивается с 2021 года: AKU Media, AKU Automation и теперь Jobs Hub — единая инфраструктура для бизнеса и специалистов.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-ic">🎯</div>
+        <div class="trust-h">Какую боль закрываем</div>
+        <div class="trust-d">Прямой контакт заказчика и исполнителя без посредников, жёсткая модерация против спама и «биржевого мусора», только живые B2B-заказы.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-ic">📊</div>
+        <div class="trust-h">Статистика доверия</div>
+        <div class="trust-stats">
+          <div><span class="ts-num" id="tsViews">0</span><span class="ts-lbl">просмотров сегодня</span></div>
+          <div><span class="ts-num" id="tsHire">0</span><span class="ts-lbl">% найма за неделю</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer id="contacts">
   <div class="wrap">
     <div class="contacts-panel">
@@ -719,7 +787,12 @@ body.no-scroll{overflow:hidden;}
         <div class="role" data-role="freelancer" id="roleFr"><div class="role-ic">⚡</div><div class="role-t">Я Исполнитель</div><div class="role-d">Ищу заказы и проекты</div></div>
         <div class="role" data-role="client" id="roleCl"><div class="role-ic">💼</div><div class="role-t">Я Заказчик</div><div class="role-d">Ищу специалистов</div></div>
       </div>
-      <button class="btn btn-blue" style="width:100%;margin-top:1.4rem;" id="obNext1" disabled>Продолжить →</button>
+      <label class="ob-agree" id="obAgreeLbl">
+        <input type="checkbox" id="obAgree"/>
+        <span class="ob-agree-box"></span>
+        <span class="ob-agree-txt">Я принимаю условия пользовательского соглашения и даю согласие на авторизацию через мой Telegram-аккаунт</span>
+      </label>
+      <button class="btn btn-blue" style="width:100%;margin-top:1rem;" id="obNext1" disabled>Продолжить →</button>
     </div>
     <div class="mstep" id="obs2" style="display:none;">
       <div class="sh" id="obs2h">Заполните профиль</div>
@@ -795,6 +868,34 @@ body.no-scroll{overflow:hidden;}
       <div class="ctimer" id="cTimer">15:00</div>
       <div class="ctl">До истечения счёта</div>
       <button class="btn btn-blue" style="width:100%;" id="cPaid">Я оплатил(а)</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: DONATION -->
+<div class="ov" id="donateModal" role="dialog" aria-modal="true">
+  <div class="mbox">
+    <div class="mhead"><span class="mtitle">❤ Поддержать проект</span><button class="mclose" id="donateClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
+    <div class="mbody">
+      <div class="ss" style="margin-bottom:1.2rem;">Ваша поддержка помогает развивать платформу и держать её чистой от спама.</div>
+      <div class="dtabs">
+        <button class="dtab active" data-dtab="crypto">Крипта (USDT/TON)</button>
+        <button class="dtab" data-dtab="card">Карта (Рубли)</button>
+      </div>
+      <div class="dpane" id="dpaneCrypto">
+        <div class="fl">Кошелёк USDT (TON)</div>
+        <div class="caddr"><div class="caddr-t" id="dAddr">UQAkuJobsHub7x9pQrT2vN8wKz4mD</div><button class="caddr-c" id="dCopy">Копир.</button></div>
+        <div class="fl" style="margin-top:1rem;">Сумма (USDT)</div>
+        <input type="number" class="fi" placeholder="10" id="dCryptoAmt"/>
+        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCryptoPay">Отправить донат</button>
+      </div>
+      <div class="dpane" id="dpaneCard" style="display:none;">
+        <div class="fl">Сумма (₽)</div>
+        <input type="number" class="fi" placeholder="500" id="dCardAmt"/>
+        <div class="fl" style="margin-top:1rem;">Номер карты</div>
+        <input type="text" class="fi" placeholder="0000 0000 0000 0000" id="dCardNum" maxlength="19"/>
+        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCardPay">Поддержать рублями</button>
+      </div>
     </div>
   </div>
 </div>
@@ -886,9 +987,16 @@ function applyFilter(f){
 
 function renderJobs(){
   const list=$('jobsList');
-  if(!S.filtered.length){ list.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--txt3);">📭 Заказов в этой категории пока нет</div>'; return; }
+  // Гость видит только 2-3 премиальных "вкусных" заказа + locked-тизер
+  const guest = !S.user;
+  let items = S.filtered.slice();
+  if(guest){
+    // показываем самые дорогие/премиальные первыми, лимит 3
+    items = items.slice().sort((a,b)=>(b.premium?1:0)-(a.premium?1:0)).slice(0,3);
+  }
+  if(!items.length){ list.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--txt3);">📭 Заказов в этой категории пока нет</div>'; return; }
   list.innerHTML='';
-  S.filtered.forEach((j,i)=>{
+  items.forEach((j,i)=>{
     const card=document.createElement('article');
     card.className='job'+(j.premium?' premium':'')+((j.tier==='top'||j.tier==='max')?' pinned':'')+(S.viewed.has(j.id)?' viewed':'');
     card.dataset.id=j.id;
@@ -896,6 +1004,23 @@ function renderJobs(){
     card.innerHTML=cardInner(j);
     list.appendChild(card);
   });
+  // Блюр-тизер для неавторизованных
+  if(guest){
+    const tease=document.createElement('div');
+    tease.className='feed-lock';
+    tease.innerHTML='<div class="feed-lock-blur">'+
+        '<article class="job premium" style="pointer-events:none;"><div class="j-badges"><span class="badge badge-prem">⭐ Premium</span><span class="badge badge-cat">💻 Разработка</span></div><div class="j-title">Senior-разработчик · долгосрочный проект</div><div class="j-co">@aku_client</div><div class="j-price">$5 000 / мес</div></article>'+
+        '<article class="job premium" style="pointer-events:none;"><div class="j-badges"><span class="badge badge-prem">⭐ Premium</span><span class="badge badge-cat">🤖 AI</span></div><div class="j-title">AI-архитектор · Enterprise</div><div class="j-co">@neurallab</div><div class="j-price">$8 000 / мес</div></article>'+
+      '</div>'+
+      '<div class="feed-lock-cta">'+
+        '<div class="fl-ic">🔒</div>'+
+        '<div class="fl-t">Открыто ещё '+(S.jobs.length-items.length)+'+ вакансий</div>'+
+        '<div class="fl-s">Войдите, чтобы открыть всю ленту заказов и откликаться</div>'+
+        '<button class="btn btn-tg" id="feedLockBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg> Войти через Telegram, чтобы открыть все вакансии</button>'+
+      '</div>';
+    list.appendChild(tease);
+    $('feedLockBtn')?.addEventListener('click',openLogin);
+  }
 }
 
 function cardInner(j){
@@ -971,7 +1096,8 @@ window.onTelegramAuth=function(user){
   try{ localStorage.setItem('aku_user',JSON.stringify(S.user)); }catch(e){}
   close('loginModal');
   refreshAuthUI();
-  toast('✅ Вход выполнен через Telegram','blue');
+  applyFilter(S.filter||'all'); // разблокируем полную ленту
+  toast('✅ Вход выполнен — лента открыта!','blue');
   setTimeout(openOnboard,400);
 };
 function simLogin(){ window.onTelegramAuth({ id:99000000+Math.floor(Math.random()*9999), first_name:'Demo', username:'demo_user', photo_url:null }); }
@@ -1033,7 +1159,7 @@ function applyJob(){
 }
 
 /* ─── ONBOARDING ─── */
-function openOnboard(){ S.role=null; S.tags=[]; obStep(1); $('obNext1').disabled=true; document.querySelectorAll('.role').forEach(r=>r.classList.remove('active')); open('obModal'); }
+function openOnboard(){ S.role=null; S.tags=[]; obStep(1); $('obNext1').disabled=true; const a=$('obAgree'); if(a)a.checked=false; document.querySelectorAll('.role').forEach(r=>r.classList.remove('active')); open('obModal'); }
 function obStep(n){
   [1,2,3].forEach(i=>{ const el=$('obs'+i); if(el)el.style.display=i===n?'block':'none'; });
   $('obTitle').textContent={1:'Ваша роль',2:'Профиль',3:'Готово!'}[n];
@@ -1042,7 +1168,9 @@ function obStep(n){
 }
 $('roleFr')?.addEventListener('click',()=>selRole('freelancer','roleFr'));
 $('roleCl')?.addEventListener('click',()=>selRole('client','roleCl'));
-function selRole(r,id){ S.role=r; document.querySelectorAll('.role').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); $('obNext1').disabled=false; }
+function obCheckGate(){ const ok=S.role && $('obAgree')?.checked; $('obNext1').disabled=!ok; }
+function selRole(r,id){ S.role=r; document.querySelectorAll('.role').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); obCheckGate(); }
+$('obAgree')?.addEventListener('change',obCheckGate);
 $('obNext1')?.addEventListener('click',()=>{ if(!S.role)return; const fr=$('obFr'),cl=$('obCl'); if(S.role==='freelancer'){fr.style.display='block';cl.style.display='none';$('obs2h').textContent='Профиль исполнителя';}else{fr.style.display='none';cl.style.display='block';$('obs2h').textContent='Профиль заказчика';} obStep(2); });
 $('obBack2')?.addEventListener('click',()=>obStep(1));
 $('obNext2')?.addEventListener('click',()=>{ if(S.user)S.user.role=S.role; $('obSucT').textContent=S.role==='client'?'Профиль заказчика создан!':'Профиль исполнителя создан!'; $('obSucS').textContent=S.role==='client'?'Начните находить лучших специалистов.':'Теперь вы можете откликаться на заказы.'; confetti('obConf'); obStep(3); });
@@ -1101,6 +1229,32 @@ function finalizePay(){
   S.payCtx=null;
 }
 
+
+/* ─── DONATION MODAL ─── */
+function openDonate(){ open('donateModal'); }
+$('navDonate')?.addEventListener('click',openDonate);
+$('donateClose')?.addEventListener('click',()=>close('donateModal'));
+document.querySelectorAll('.dtab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.dtab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const which=t.dataset.dtab;
+  $('dpaneCrypto').style.display = which==='crypto'?'block':'none';
+  $('dpaneCard').style.display   = which==='card'?'block':'none';
+}));
+$('dCopy')?.addEventListener('click',()=>{ const a=$('dAddr').textContent; navigator.clipboard?.writeText(a).then(()=>toast('📋 Адрес скопирован','blue')).catch(()=>toast('📋 '+a)); });
+$('dCryptoPay')?.addEventListener('click',()=>{ const amt=$('dCryptoAmt').value||'?'; close('donateModal'); toast('❤ Спасибо за поддержку '+amt+' USDT!','blue'); });
+$('dCardPay')?.addEventListener('click',()=>{ const amt=$('dCardAmt').value||'?'; close('donateModal'); toast('❤ Спасибо за донат '+amt+' ₽!','blue'); });
+
+/* ─── TRUST STATS COUNTER ─── */
+function animateTrust(){
+  [['tsViews',1240,''],['tsHire',82,'%']].forEach(([id,target,sfx])=>{
+    const el=$(id); if(!el)return;
+    const DUR=2600,t0=performance.now();
+    function fr(now){ const p=Math.min((now-t0)/DUR,1); const e=1-Math.pow(1-p,3); el.textContent=Math.round(e*target)+(p>=1?sfx:''); if(p<1)requestAnimationFrame(fr); }
+    requestAnimationFrame(fr);
+  });
+}
+
 /* ─── INIT ─── */
 document.addEventListener('DOMContentLoaded',()=>{
   // Встроенные логотипы: подменяем src на data-URI (self-contained, без 404)
@@ -1119,7 +1273,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   if('IntersectionObserver' in window){
     const obs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateMetrics(); o.disconnect(); } }); },{threshold:.3});
     const m=document.querySelector('.metrics'); if(m)obs.observe(m); else animateMetrics();
-  } else animateMetrics();
+    const tobs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateTrust(); o.disconnect(); } }); },{threshold:.3});
+    const tw=document.querySelector('.trust-stats'); if(tw)tobs.observe(tw);
+  } else { animateMetrics(); animateTrust(); }
 });
 </script>
 </body>
