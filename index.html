@@ -872,9 +872,10 @@ body.no-scroll{overflow:hidden;}
     <div class="mbody">
       <div class="badge badge-cat" style="display:block;width:fit-content;margin:0 auto 1rem;">🔵 Сеть TON · USDT</div>
       <div class="qr"><div class="qr-g" id="qrG"></div></div>
-      <div class="caddr"><div class="caddr-t" id="cAddr">UQAkuJobsHub7x9pQrT2vN8wKz4mD</div><button class="caddr-c" id="cCopy">Копир.</button></div>
+      <div class="caddr"><div class="caddr-t" id="cAddr">UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ</div><button class="caddr-c" id="cCopy">Копир.</button></div>
       <div class="ctimer" id="cTimer">15:00</div>
       <div class="ctl">До истечения счёта</div>
+      <a class="btn btn-tg" style="width:100%;margin-bottom:.6rem;" href="https://t.me/send?start=IVDt34fEvcmP" target="_blank" rel="noopener">Оплатить через CryptoBot</a>
       <button class="btn btn-blue" style="width:100%;" id="cPaid">Я оплатил(а)</button>
     </div>
   </div>
@@ -912,11 +913,11 @@ body.no-scroll{overflow:hidden;}
       <div class="dpane" id="dpaneCrypto" style="display:none;">
         <div class="fl">Актив</div>
         <div class="qa-grid" id="dAssetSel">
-          <button class="qa active" data-asset="USDT">USDT (TON)</button>
-          <button class="qa" data-asset="TON">TON</button>
+          <button class="qa active" data-asset="TON">TON</button>
+          <button class="qa" data-asset="USDT">USDT (TRC-20)</button>
         </div>
-        <div class="fl" style="margin-top:1rem;">Кошелёк <span id="dAssetLbl">USDT (TON)</span></div>
-        <div class="caddr"><div class="caddr-t" id="dAddr">UQAkuJobsHub7x9pQrT2vN8wKz4mD</div><button class="caddr-c" id="dCopy">Копир.</button></div>
+        <div class="fl" style="margin-top:1rem;">Кошелёк <span id="dAssetLbl">TON</span></div>
+        <div class="caddr"><div class="caddr-t" id="dAddr">UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ</div><button class="caddr-c" id="dCopy">Копир.</button></div>
         <div class="fl" style="margin-top:1rem;">Сумма</div>
         <input type="number" class="fi" placeholder="10" id="dCryptoAmt"/>
         <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCryptoBot">Оплатить через CryptoBot</button>
@@ -1241,17 +1242,25 @@ function publishJob(job){
 /* ─── CHECKOUT ─── */
 function openPay(title,price){ $('payTitle').textContent='Оплата: '+title; $('paySub').textContent='Сумма: '+price+' · выберите провайдера'; $('payStarsD').textContent=price.split('/')[0].trim()+' звёздами'; $('payCryptoD').textContent=(price.split('/')[1]||'USDT').trim()+' криптой'; open('payModal'); }
 $('payClose')?.addEventListener('click',()=>close('payModal'));
-$('payStars')?.addEventListener('click',()=>{ close('payModal'); payStars(); });
+$('payStars')?.addEventListener('click',()=>{ close('payModal'); payStarsManager(); });
 $('payCrypto')?.addEventListener('click',()=>{ close('payModal'); payCrypto(); });
 $('payRub')?.addEventListener('click',()=>{ close('payModal'); payRub(); });
 function payRub(){
-  // PRO/тариф через рублёвую карту → YooMoney
-  const ctx=S.payCtx||{}; const sum = ctx.kind==='pro' ? 990 : (ctx.tier==='max'?1490:490);
-  const params=new URLSearchParams({receiver:'410011XXXXXXXXX','quickpay-form':'shop',targets:'AKU Jobs Hub — '+(ctx.kind==='pro'?'PRO':'Размещение'),paymentType:'AC',sum:sum,label:'aku_'+(ctx.kind||'pay')+'_'+Date.now()});
-  window.open('https://yoomoney.ru/quickpay/confirm.xml?'+params.toString(),'_blank');
-  toast('₽ Переходим к оплате '+sum+' ₽ через YooMoney...','blue');
-  // имитация успешной оплаты после возврата
+  const ctx=S.payCtx||{}; const sum = ctx.kind==='pro' ? (ctx.plan==='trial'?99:990) : (ctx.tier==='max'?1490:490);
+  // Реальная ссылка ЮMoney
+  window.open(YOOMONEY_URL,'_blank');
+  toast('₽ Переходим к оплате '+sum+' ₽ через ЮMoney...','blue');
   setTimeout(()=>finalizePay(),1400);
+}
+function payStarsManager(){
+  // Счёт на Stars выставляет менеджер Илья в ЛС
+  open('starsModal');
+  $('starsBody').innerHTML='<div style="font-size:2.8rem;">⭐</div>'+
+    '<div style="margin-top:.9rem;color:var(--txt);font-weight:600;">Оплата через Telegram Stars</div>'+
+    '<div style="margin-top:.5rem;color:var(--txt2);font-size:.86rem;line-height:1.5;">Менеджер <b style="color:var(--gold-br);">Илья</b> выставит счёт на <b>450 ★</b> прямо в личных сообщениях Telegram.</div>'+
+    '<a class="btn btn-tg" style="margin-top:1.2rem;width:100%;" href="'+MANAGER_URL+'" target="_blank" rel="noopener">'+
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>'+
+      'Написать Илье (@akumediamgr)</a>';
 }
 function payStars(){
   open('starsModal');
@@ -1262,7 +1271,7 @@ function payStars(){
 function payCrypto(){ buildQR(); open('cryptoModal'); startTimer(15*60); }
 function buildQR(){ const g=$('qrG'); g.innerHTML=''; for(let r=0;r<11;r++)for(let c=0;c<11;c++){ const cell=document.createElement('div'); const f=(r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3); const on=f?(r===0||r===2||c===0||c===2||(r===1&&c===1)):((r*7+c*3+((r*c)%5))%2===0); cell.className='qr-c'+(on?'':' off'); g.appendChild(cell); } }
 function startTimer(sec){ clearInterval(S.cryptoT); const el=$('cTimer'); el.style.color='var(--gold)'; (function tick(){ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; })(); S.cryptoT=setInterval(()=>{ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; },1000); }
-$('cCopy')?.addEventListener('click',()=>{ const a=$('cAddr').textContent; navigator.clipboard?.writeText(a).then(()=>toast('📋 Адрес скопирован','blue')).catch(()=>toast('📋 '+a)); });
+$('cCopy')?.addEventListener('click',()=>{ const a=$('cAddr').textContent; navigator.clipboard?.writeText(a).then(()=>{ const b=$('cCopy'); b.textContent='✓'; setTimeout(()=>b.textContent='Копир.',1500); toast('📋 Адрес TON скопирован','blue'); }).catch(()=>toast('📋 '+a)); });
 $('cPaid')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); toast('⏳ Проверяем поступление...'); setTimeout(()=>finalizePay(),1200); });
 $('cryptoClose')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); });
 $('starsClose')?.addEventListener('click',()=>close('starsModal'));
@@ -1275,8 +1284,10 @@ function finalizePay(){
 
 
 /* ─── DONATION MODAL (3 tabs: Stars / Crypto / Card) ─── */
-const BOT_INVOICE='https://t.me/AKUJobsHub_bot?start=donate';
-const WALLETS={USDT:'UQAkuJobsHub7x9pQrT2vN8wKz4mD',TON:'UQTon_AkuJobsHub_9pQ4mDz7x2vNwKr'};
+const WALLETS={TON:'UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ',USDT:'TN79X3tJr36kzFM9Q37rJNQ8KMsnuPhmUu'};
+const CRYPTOBOT_URL='https://t.me/send?start=IVDt34fEvcmP';
+const YOOMONEY_URL='https://yoomoney.ru/to/4100118055761665';
+const MANAGER_URL='https://t.me/akumediamgr';
 function openDonation(){ open('donationModal'); }
 $('navDonate')?.addEventListener('click',openDonation);
 $('donationClose')?.addEventListener('click',()=>close('donationModal'));
@@ -1298,18 +1309,12 @@ document.querySelectorAll('#dStarQuick .qa').forEach(b=>b.addEventListener('clic
 $('dStarAmt')?.addEventListener('input',()=>document.querySelectorAll('#dStarQuick .qa').forEach(x=>x.classList.remove('active')));
 $('dStarPay')?.addEventListener('click',()=>{
   const amt=parseInt($('dStarAmt').value,10)||100;
-  const link=BOT_INVOICE+'_'+amt;
-  // В Telegram Web App: Telegram.WebApp.openTelegramLink(link)
-  if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.openTelegramLink){
-    window.Telegram.WebApp.openTelegramLink(link);
-  } else {
-    window.open(link,'_blank');
-  }
   close('donationModal');
-  toast('⭐ Открываем донат на '+amt+' Stars в Telegram...','blue');
+  toast('⭐ Менеджер Илья выставит счёт на '+amt+' ★ в личных сообщениях','blue');
+  window.open(MANAGER_URL,'_blank');
 });
 // Tab 2: Crypto asset picker + copy + CryptoBot
-let dAsset='USDT';
+let dAsset='TON';
 document.querySelectorAll('#dAssetSel .qa').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('#dAssetSel .qa').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
@@ -1319,12 +1324,10 @@ document.querySelectorAll('#dAssetSel .qa').forEach(b=>b.addEventListener('click
 }));
 $('dCopy')?.addEventListener('click',()=>{ const a=$('dAddr').textContent; navigator.clipboard?.writeText(a).then(()=>{ const btn=$('dCopy'); btn.textContent='✓ Скопировано'; setTimeout(()=>btn.textContent='Копир.',1500); toast('📋 Адрес '+dAsset+' скопирован','blue'); }).catch(()=>toast('📋 '+a)); });
 $('dCryptoBot')?.addEventListener('click',()=>{
-  const amt=parseFloat($('dCryptoAmt').value)||0;
-  // Подготовка внешнего редиректа на CryptoBot (симуляция)
-  const url='https://t.me/CryptoBot?start=AKUJobsHub_donate_'+dAsset+(amt?('_'+amt):'');
-  window.open(url,'_blank');
+  // Реальный счёт CryptoBot
+  window.open(CRYPTOBOT_URL,'_blank');
   close('donationModal');
-  toast('₮ Переходим в CryptoBot для оплаты '+dAsset+'...','blue');
+  toast('₮ Открываем счёт CryptoBot для оплаты...','blue');
 });
 // Tab 3: Ruble Card → YooMoney redirect
 $('dCardAmt')?.addEventListener('input',()=>{
@@ -1335,19 +1338,10 @@ $('dCardAmt')?.addEventListener('input',()=>{
 $('dCardPay')?.addEventListener('click',()=>{
   const amt=parseInt($('dCardAmt').value,10)||0;
   if(amt<100){ toast('⚠️ Минимальная сумма — 100 ₽','red'); $('dCardAmt').focus(); return; }
-  // Динамическая генерация ссылки на платёжный шлюз YooMoney (симуляция)
-  const params=new URLSearchParams({
-    receiver:'410011XXXXXXXXX',
-    'quickpay-form':'donate',
-    targets:'Донат AKU Jobs Hub',
-    paymentType:'AC',
-    sum:amt,
-    label:'aku_donate_'+Date.now()
-  });
-  const url='https://yoomoney.ru/quickpay/confirm.xml?'+params.toString();
-  window.open(url,'_blank');
+  // Реальная ссылка ЮMoney
+  window.open(YOOMONEY_URL,'_blank');
   close('donationModal');
-  toast('₽ Переходим к оплате '+amt+' ₽ через YooMoney...','blue');
+  toast('₽ Переходим к оплате '+amt+' ₽ через ЮMoney...','blue');
 });
 
 
