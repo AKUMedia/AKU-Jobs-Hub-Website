@@ -39,11 +39,6 @@ ul{list-style:none;}
 /* ═══════════ ANIMATIONS ═══════════ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes lightning{0%,88%,100%{opacity:1;transform:scale(1)}92%{opacity:.4;transform:scale(1.3) rotate(-8deg)}96%{opacity:1;transform:scale(1.1)}}
-@keyframes goldPulse{0%,100%{box-shadow:0 0 0 1px rgba(212,175,55,.3),0 0 18px rgba(212,175,55,.15)}50%{box-shadow:0 0 0 1px rgba(212,175,55,.7),0 0 38px rgba(212,175,55,.35)}}
-@keyframes skShine{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
-@keyframes payspin{to{transform:rotate(360deg)}}
 @keyframes gridFloat{0%{background-position:0 0}100%{background-position:54px 54px}}
 @keyframes neonPulse{0%,100%{box-shadow:0 0 0 1px var(--blue-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--blue),0 0 36px rgba(212,175,55,.4)}}
 @keyframes redPulse{0%,100%{box-shadow:0 0 0 1px var(--red-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--red),0 0 36px rgba(212,175,55,.4)}}
@@ -93,12 +88,6 @@ ul{list-style:none;}
 #nav.scrolled{background:rgba(5,6,10,.95);box-shadow:0 4px 30px rgba(0,0,0,.6);}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,32px);gap:.5rem;}
 .logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0;cursor:pointer;background:none;border:none;padding:0;}
-.logo-img{height:42px;max-height:42px;width:auto;max-width:48px;object-fit:contain;border-radius:11px;transition:transform .25s,filter .25s;display:block;box-shadow:0 0 16px rgba(212,175,55,.25);}
-.logo:hover .logo-img{transform:scale(1.08) rotate(-2deg);filter:brightness(1.12) drop-shadow(0 0 12px rgba(212,175,55,.5));}
-.logo:active .logo-img{transform:scale(.96);}
-/* Animated premium gradient title (mirrors bot UI) */
-.anim-grad{background:linear-gradient(90deg,#9a7d20,#D4AF37,#f0ce60,#D4AF37,#9a7d20,#D4AF37,#f0ce60,#D4AF37,#9a7d20);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradFlow 7s linear infinite;}
-@keyframes gradFlow{0%{background-position:0% center}100%{background-position:-200% center}}
 .logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 0 18px rgba(212,175,55,.4);flex-shrink:0;}
 .logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25),transparent 70%);background-size:200% 100%;animation:shimmerLine 3.5s linear infinite;}
 .logo-mark span{font-family:var(--ff-d);font-weight:700;font-size:1.1rem;color:#0D0D0D;position:relative;z-index:1;}
@@ -113,7 +102,6 @@ ul{list-style:none;}
 .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .burger.open span:nth-child(2){opacity:0;}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
 .nav-ava{width:40px;height:40px;border-radius:50%;background:var(--panel2);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:var(--blue);cursor:pointer;overflow:hidden;flex-shrink:0;box-shadow:0 0 14px rgba(212,175,55,.3);}
 
 /* ═══════════ DRAWER ═══════════ */
@@ -146,8 +134,6 @@ ul{list-style:none;}
 .metric-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(212,175,55,.05),transparent);pointer-events:none;}
 .metric-num{font-family:var(--ff-d);font-size:clamp(2.4rem,6vw,3.4rem);font-weight:700;line-height:1;color:var(--txt);margin-bottom:.5rem;letter-spacing:-.02em;}
 .metric-num .suffix{color:var(--blue);}
-.metric-num.counting{animation:numBlur .6s ease-out;}
-@keyframes numBlur{0%{filter:blur(5px);opacity:.4;transform:translateY(6px)}100%{filter:blur(0);opacity:1;transform:translateY(0)}}
 .metric-lbl{font-size:.82rem;font-weight:500;color:var(--txt2);letter-spacing:.02em;}
 
 
@@ -239,205 +225,13 @@ footer{border-top:1px solid var(--line);background:var(--void);padding:clamp(40p
 .cp-action{display:flex;flex-direction:column;gap:.7rem;}
 .cp-mgr{display:flex;align-items:center;gap:.9rem;padding:1rem 1.2rem;border-radius:var(--r-l);background:var(--panel2);border:1px solid var(--line2);transition:all .2s;}
 .cp-mgr:hover{border-color:var(--blue);box-shadow:0 0 24px rgba(212,175,55,.15);transform:translateY(-2px);}
-.cp-mgr-ava{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#0D0D0D;font-family:var(--ff-d);flex-shrink:0;}
+.cp-mgr-ava{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
 .cp-mgr-info{flex:1;min-width:0;}
 .cp-mgr-name{font-size:.95rem;font-weight:600;color:var(--txt);}
 .cp-mgr-role{font-size:.76rem;color:var(--txt3);}
 
-/* ─── ECOSYSTEM CARDS (neon) ─── */
-.eco-cards{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.6rem;}
-.eco-card{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.3rem;border-radius:var(--r-l);background:var(--panel2);border:1px solid var(--line2);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;}
-.eco-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .25s;}
-.eco-card-ic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--panel);border:1px solid var(--line2);transition:border-color .25s,box-shadow .25s;overflow:hidden;}
-.eco-card-ic img{width:100%;height:100%;object-fit:cover;border-radius:11px;}
-.eco-ic-blue{border-color:rgba(47,72,253,.4);box-shadow:0 0 14px rgba(47,72,253,.2);}
-.eco-ic-red{border-color:rgba(219,32,34,.4);box-shadow:0 0 14px rgba(219,32,34,.2);}
-.eco-card-body{flex:1;min-width:0;}
-.eco-card-name{font-family:var(--ff-d);font-size:1.05rem;font-weight:600;color:var(--txt);margin-bottom:.15rem;}
-.eco-card-sub{font-size:.76rem;color:var(--txt3);}
-.eco-card-arrow{font-size:1.3rem;color:var(--txt3);transition:transform .25s,color .25s;}
-.eco-card:hover{transform:translateY(-3px);}
-.eco-card:hover .eco-card-arrow{transform:translateX(4px);}
-/* AKU Media — Electric Blue */
-.eco-blue::before{background:linear-gradient(90deg,transparent,#2F48FD,transparent);}
-.eco-blue:hover{border-color:rgba(47,72,253,.6);box-shadow:0 0 30px rgba(47,72,253,.22),inset 0 0 20px rgba(47,72,253,.05);}
-.eco-blue:hover .eco-card-ic{border-color:rgba(47,72,253,.6);box-shadow:0 0 16px rgba(47,72,253,.4);}
-.eco-blue:hover .eco-card-name{color:#7e8eff;}
-.eco-blue:hover .eco-card-arrow{color:#2F48FD;}
-/* AKU Automation — Cyber-Red */
-.eco-red::before{background:linear-gradient(90deg,transparent,#DB2022,transparent);}
-.eco-red:hover{border-color:rgba(219,32,34,.6);box-shadow:0 0 30px rgba(219,32,34,.22),inset 0 0 20px rgba(219,32,34,.05);}
-.eco-red:hover .eco-card-ic{border-color:rgba(219,32,34,.6);box-shadow:0 0 16px rgba(219,32,34,.4);}
-.eco-red:hover .eco-card-name{color:#ff7a7c;}
-.eco-red:hover .eco-card-arrow{color:#DB2022;}
-
-/* ─── PINNED / TOP CARDS ─── */
-.job.pinned{border-color:rgba(212,175,55,.45)!important;animation:goldPulse 3s ease-in-out infinite;}
-.job.pinned::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.badge-top{border-color:rgba(212,175,55,.5);color:var(--gold-br);background:rgba(212,175,55,.12);}
-.badge-top .bolt{display:inline-block;animation:lightning 2.2s ease-in-out infinite;}
-.badge-max{border-color:rgba(124,58,237,.45);color:#c4b5fd;background:rgba(124,58,237,.1);}
-/* ─── SKELETON ─── */
-.sk-card{padding:1.4rem;border-radius:var(--r-l);background:var(--panel);border:1px solid var(--line);margin-bottom:0;}
-.sk{background:linear-gradient(90deg,var(--panel2) 25%,var(--line2) 50%,var(--panel2) 75%);background-size:200% 100%;animation:skShine 1.3s linear infinite;border-radius:6px;}
-.sk-row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;}
-/* ─── ONBOARDING ─── */
-.prog{display:flex;align-items:center;padding:1.2rem 1.4rem 0;}
-.pdot{width:26px;height:26px;border-radius:50%;background:var(--panel2);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--txt2);transition:all .3s;flex-shrink:0;}
-.pdot.active{background:var(--gold);border-color:var(--gold);color:#0D0D0D;}
-.pdot.done{background:rgba(212,175,55,.2);border-color:var(--gold);color:var(--gold);}
-.pline{flex:1;height:2px;background:var(--line2);transition:background .4s;min-width:20px;}
-.pline.done{background:var(--gold);}
-.mstep{padding:1.2rem 1.4rem 1.8rem;animation:fadeIn .25s ease;}
-.sh{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--txt);margin-bottom:.4rem;}
-.ss{font-size:.84rem;color:var(--txt2);margin-bottom:1.4rem;line-height:1.55;}
-.roles{display:grid;grid-template-columns:1fr;gap:.8rem;}
-.role{padding:1.4rem 1rem;border-radius:var(--r-l);text-align:center;background:var(--panel2);border:2px solid transparent;cursor:pointer;transition:all .22s;}
-.role:hover{border-color:rgba(212,175,55,.35);transform:translateY(-2px);}
-.role.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(212,175,55,.03));box-shadow:0 0 22px rgba(212,175,55,.15);}
-.role-ic{font-size:2rem;margin-bottom:.7rem;}
-.role-t{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:.3rem;}
-.role-d{font-size:.76rem;color:var(--txt2);line-height:1.5;}
-.fg{margin-bottom:1rem;}
-.fl{display:block;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);margin-bottom:.4rem;}
-.fi{width:100%;padding:.8rem .9rem;min-height:46px;border-radius:var(--r-m);background:var(--panel2);border:1px solid var(--line2);color:var(--txt);transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;}
-.fi:focus{border-color:rgba(212,175,55,.5);box-shadow:0 0 0 3px rgba(212,175,55,.08);}
-.fi::placeholder{color:var(--txt3);}
-textarea.fi{min-height:80px;resize:vertical;}
-.tagw{display:flex;flex-wrap:wrap;gap:.4rem;padding:.6rem .7rem;background:var(--panel2);border:1px solid var(--line2);border-radius:var(--r-m);min-height:46px;cursor:text;}
-.tagw:focus-within{border-color:rgba(212,175,55,.5);}
-.tag{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .6rem;border-radius:20px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:var(--gold);font-size:.74rem;}
-.tag-x{color:var(--gold-dim);cursor:pointer;font-size:.9rem;line-height:1;}
-.tag-x:hover{color:#ff6b6d;}
-.tag-i{border:none;background:none;color:var(--txt);font-size:.84rem;outline:none;flex:1;min-width:80px;}
-.snav{display:flex;gap:.6rem;margin-top:1.4rem;}
-.cz{position:relative;height:50px;overflow:hidden;}
-.cp{position:absolute;width:7px;height:7px;border-radius:2px;animation:confettiFall 3s ease-in both;}
-.suc-ic{font-size:3rem;text-align:center;margin-bottom:.8rem;}
-.suc-t{font-family:var(--ff-d);font-size:1.3rem;font-weight:700;color:var(--txt);text-align:center;margin-bottom:.5rem;}
-.suc-s{font-size:.86rem;color:var(--txt2);text-align:center;line-height:1.6;margin-bottom:1.4rem;}
-/* ─── TIERS ─── */
-.tier{padding:1rem;border-radius:var(--r-m);background:var(--panel2);border:2px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:.7rem;display:flex;gap:.8rem;align-items:flex-start;}
-.tier:hover{border-color:rgba(212,175,55,.3);}
-.tier.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,175,55,.1),transparent);}
-.tier-rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--line2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;}
-.tier.active .tier-rad{border-color:var(--gold);}
-.tier.active .tier-rad::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--gold);}
-.tier-b{flex:1;}
-.tier-n{font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:.2rem;display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;}
-.tier-p{font-size:.78rem;font-weight:600;color:var(--gold);}
-.tier-d{font-size:.74rem;color:var(--txt2);margin-top:.2rem;line-height:1.45;}
-/* ─── CHECKOUT ─── */
-.pay-m{display:flex;align-items:center;gap:.9rem;padding:1rem;border-radius:var(--r-m);background:var(--panel2);border:1px solid var(--line2);cursor:pointer;transition:all .2s;margin-bottom:.8rem;}
-.pay-m:hover{border-color:var(--gold);transform:translateY(-2px);}
-.pay-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
-.pay-ic.stars{background:linear-gradient(135deg,#ffb800,#ffd54a);}
-.pay-ic.crypto{background:linear-gradient(135deg,#26A17B,#1a8a6a);}
-.pay-ic.rub{background:linear-gradient(135deg,#8b3df0,#6f2bd0);}
-.pay-b{flex:1;}
-.pay-n{font-size:.88rem;font-weight:700;color:var(--txt);}
-.pay-d{font-size:.74rem;color:var(--txt2);}
-.pl{text-align:center;padding:2rem 0;}
-.pl-spin{width:54px;height:54px;margin:0 auto 1rem;border:3px solid rgba(212,175,55,.2);border-top-color:var(--gold);border-radius:50%;animation:payspin .8s linear infinite;}
-.qr{width:170px;height:170px;margin:0 auto 1rem;background:#fff;border-radius:14px;padding:10px;}
-.qr-g{width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);}
-.qr-c{background:#000;}.qr-c.off{background:#fff;}
-.caddr{display:flex;gap:.5rem;align-items:center;padding:.7rem .9rem;background:var(--panel2);border:1px solid var(--line2);border-radius:var(--r-m);margin-bottom:1rem;}
-.caddr-t{flex:1;font-size:.74rem;font-family:monospace;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.caddr-c{flex-shrink:0;padding:.4rem .8rem;border-radius:8px;background:var(--gold);color:#0D0D0D;font-size:.72rem;font-weight:700;}
-.ctimer{font-family:var(--ff-d);font-size:1.8rem;font-weight:700;color:var(--gold);text-align:center;margin-bottom:.3rem;}
-.ctl{font-size:.72rem;color:var(--txt2);text-align:center;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.2rem;}
-/* ─── APPLY LIMIT WIDGET ─── */
-.limit-w{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
-.limit-dots{display:flex;gap:.4rem;}
-.ldot{width:11px;height:11px;border-radius:50%;background:var(--panel2);border:1px solid var(--line2);transition:all .3s;}
-.ldot.on{background:var(--gold);border-color:var(--gold);box-shadow:0 0 7px rgba(212,175,55,.5);}
-.limit-txt{font-size:.74rem;color:var(--txt2);}
-
-/* ─── HERO CHANNEL CTA ─── */
-.channel-cta{display:inline-flex;align-items:center;gap:.7rem;margin:0 auto 1.8rem;padding:.95rem 2rem;border-radius:var(--r-l);background:linear-gradient(135deg,#13151c,#0b0d11);color:var(--txt);font-weight:600;font-size:1rem;position:relative;border:1px solid rgba(212,175,55,.4);box-shadow:0 8px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);animation:ctaPulse 2.6s ease-in-out infinite;transition:transform .25s,box-shadow .25s;animation-fill-mode:both;}
-.channel-cta:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 12px 40px rgba(212,175,55,.25),inset 0 1px 0 rgba(255,255,255,.08);}
-.channel-cta:active{transform:scale(1.01);}
-.cta-ic{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2AABEE,#229ED9);flex-shrink:0;box-shadow:0 0 14px rgba(42,171,238,.5);}
-@keyframes ctaPulse{0%,100%{border-color:rgba(212,175,55,.35);box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 0 0 rgba(212,175,55,.3)}50%{border-color:rgba(212,175,55,.75);box-shadow:0 8px 30px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.3)}}
-
-/* ─── TELEGRAM CHANNEL CARD ─── */
-.tg-channel-card{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;border-radius:var(--r-l);background:linear-gradient(135deg,#15140e,#0d0e12);border:1px solid rgba(212,175,55,.32);margin-top:1.6rem;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden;}
-.tg-channel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.tg-channel-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.65);box-shadow:0 12px 40px rgba(212,175,55,.18),inset 0 0 22px rgba(212,175,55,.04);}
-.tgc-ava{width:50px;height:50px;border-radius:14px;overflow:hidden;flex-shrink:0;border:1px solid rgba(212,175,55,.4);box-shadow:0 0 14px rgba(212,175,55,.25);}
-.tgc-ava img{width:100%;height:100%;object-fit:cover;}
-.tgc-body{flex:1;min-width:0;}
-.tgc-name{font-family:var(--ff-d);font-size:1.02rem;font-weight:600;color:var(--gold-br);margin-bottom:.15rem;}
-.tgc-sub{font-size:.76rem;color:var(--txt2);}
-.tgc-go{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2AABEE,#229ED9);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;transition:transform .25s,box-shadow .25s;}
-.tg-channel-card:hover .tgc-go{transform:scale(1.1);box-shadow:0 0 16px rgba(42,171,238,.5);}
-
-/* ─── FEED LOCK (guest teaser) ─── */
-.feed-lock{grid-column:1/-1;position:relative;margin-top:.5rem;border-radius:var(--r-l);overflow:hidden;border:1px solid var(--line);}
-.feed-lock-blur{display:grid;grid-template-columns:1fr;gap:1rem;padding:1.2rem;filter:blur(7px);opacity:.5;pointer-events:none;}
-.feed-lock-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding:1.5rem;background:linear-gradient(180deg,rgba(15,17,21,.4),rgba(15,17,21,.85));}
-.fl-ic{font-size:2.2rem;}
-.fl-t{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--gold-br);}
-.fl-s{font-size:.84rem;color:var(--txt2);max-width:22rem;margin-bottom:.6rem;}
-@media(min-width:768px){.feed-lock-blur{grid-template-columns:1fr 1fr;}}
-
-/* ─── COMPLIANCE CHECKBOX ─── */
-.ob-agree{display:flex;align-items:flex-start;gap:.6rem;margin-top:1.2rem;cursor:pointer;user-select:none;}
-.ob-agree input{position:absolute;opacity:0;width:0;height:0;}
-.ob-agree-box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line2);flex-shrink:0;margin-top:1px;transition:all .2s;display:flex;align-items:center;justify-content:center;background:var(--panel2);}
-.ob-agree input:checked + .ob-agree-box{background:var(--gold);border-color:var(--gold);}
-.ob-agree input:checked + .ob-agree-box::after{content:'✓';color:#0D0D0D;font-size:.85rem;font-weight:700;}
-.ob-agree-txt{font-size:.8rem;color:var(--txt2);line-height:1.5;}
-
-/* ─── TRUST BLOCK ─── */
-.trust-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;}
-.trust-card{padding:1.8rem 1.5rem;border-radius:var(--r-xl);background:var(--panel);border:1px solid var(--line);transition:border-color .25s,transform .25s;}
-.trust-card:hover{border-color:rgba(212,175,55,.4);transform:translateY(-4px);}
-.trust-ic{font-size:2rem;margin-bottom:1rem;}
-.trust-h{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--txt);margin-bottom:.6rem;}
-.trust-d{font-size:.88rem;color:var(--txt2);line-height:1.65;}
-.trust-stats{display:flex;gap:1.6rem;margin-top:.4rem;}
-.trust-stats>div{display:flex;flex-direction:column;}
-.ts-num{font-family:var(--ff-d);font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1;}
-.ts-lbl{font-size:.72rem;color:var(--txt3);margin-top:.3rem;}
-@media(min-width:768px){.trust-grid{grid-template-columns:repeat(3,1fr);}}
-
-/* ─── DONATION MODAL ─── */
-.dtabs{display:flex;gap:.5rem;margin-bottom:1.4rem;background:var(--panel2);padding:.3rem;border-radius:var(--r-m);}
-.dtab{flex:1;padding:.6rem;border-radius:10px;font-size:.82rem;font-weight:600;color:var(--txt2);transition:all .2s;}
-.dtab.active{background:var(--gold);color:#0D0D0D;}
-.dpane{animation:fadeIn .2s ease;}
-
-/* ─── DONATION QUICK AMOUNTS ─── */
-.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;}
-.dpane#dpaneCrypto .qa-grid{grid-template-columns:repeat(2,1fr);}
-.qa{padding:.7rem;border-radius:var(--r-m);background:var(--panel2);border:1.5px solid var(--line2);color:var(--txt);font-weight:600;font-size:.88rem;transition:all .18s;}
-.qa:hover{border-color:rgba(212,175,55,.4);}
-.qa.active{border-color:var(--gold);background:rgba(212,175,55,.1);color:var(--gold-br);}
-.dhint{font-size:.72rem;color:var(--txt3);margin-top:.4rem;}
-
-/* ─── SCREEN SYSTEM (Mini App) ─── */
-body.app-mode #nav{display:none;}
-.screen{display:none;}
-.screen.active{display:block;animation:screenIn .35s cubic-bezier(.4,0,.2,1);}
-@keyframes screenIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-/* welcome screen takes full height, centered */
-#screenWelcome.active{display:flex;flex-direction:column;min-height:100vh;min-height:100svh;}
-/* app screen: padding bottom for nav bar */
-body.app-mode{padding-bottom:calc(68px + var(--safe));}
-/* BOTTOM NAV */
-.botnav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:stretch;height:calc(64px + var(--safe));padding-bottom:var(--safe);background:rgba(13,16,24,.92);backdrop-filter:blur(18px) saturate(160%);border-top:1px solid var(--line);}
-body.app-mode .botnav{display:flex;}
-.botnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--txt3);font-size:.66rem;font-weight:600;transition:color .2s;position:relative;}
-.botnav-item .bn-ic{font-size:1.25rem;line-height:1;transition:transform .2s;}
-.botnav-item.active{color:var(--gold);}
-.botnav-item.active .bn-ic{transform:translateY(-2px) scale(1.1);}
-.botnav-item.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:2px;border-radius:2px;background:var(--gold);box-shadow:0 0 10px rgba(212,175,55,.6);}
-
 .foot-cols{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.4rem;}
 .foot-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
-.foot-logo-img{height:34px;width:auto;max-width:40px;object-fit:contain;border-radius:9px;box-shadow:0 0 12px rgba(212,175,55,.25);}
 .foot-about{font-size:.84rem;color:var(--txt2);line-height:1.7;max-width:18rem;}
 .fc-t{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt);margin-bottom:1rem;}
 .fc-l{display:flex;flex-direction:column;gap:.6rem;}
@@ -512,17 +306,16 @@ body.no-scroll{overflow:hidden;}
 <!-- NAVBAR -->
 <nav id="nav">
   <div class="nav-in">
-    <a class="logo" id="logoHome" href="#" aria-label="На главную">
-      <img class="logo-img" src="https://i.ibb.co/V9YgD9XN/AKU-Jobs-Hub.png" alt="AKU Jobs Hub"/>
-      <span class="logo-txt anim-grad">AKU Jobs Hub</span>
-    </a>
+    <button class="logo" id="logoHome" aria-label="На главную">
+      <div class="logo-mark"><span>A</span></div>
+      <span class="logo-txt">AKU<b>Jobs</b></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#jobs">Вакансии</a></li>
       <li><a href="#pricing">PRO-подписка</a></li>
       <li><a href="#contacts">Контакты</a></li>
     </ul>
     <div class="nav-act">
-      <button class="btn btn-ghost btn-sm desktop-login" id="navDonate" style="border-color:rgba(212,175,55,.4);color:var(--gold);">❤ Донат</button>
       <button class="btn btn-tg btn-sm desktop-login" id="navLogin">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
         Войти через Telegram
@@ -543,8 +336,7 @@ body.no-scroll{overflow:hidden;}
   </button>
 </div>
 
-<!-- ══════ SCREEN: WELCOME ══════ -->
-<div class="screen active" id="screenWelcome">
+<!-- HERO -->
 <header id="hero">
   <div class="hero-bg">
     <div class="hero-grid"></div>
@@ -552,12 +344,12 @@ body.no-scroll{overflow:hidden;}
     <div class="orb orb2"></div>
   </div>
   <div class="wrap hero-in">
-    <div class="hero-badge"><span class="dot"></span>Премиальная экосистема фриланса · Digital · IT · AI</div>
+    <div class="hero-badge"><span class="dot"></span>AKU Ecosystem · B2B Freelance Platform</div>
     <h1 class="hero-h1">Биржа фриланса<br/><span class="glow-blue">нового поколения</span></h1>
     <p class="hero-p">Премиальная платформа для заказчиков и специалистов в диджитал, AI и автоматизации. Высокобюджетные заказы, Telegram-авторизация, мгновенные сделки.</p>
     <div class="hero-cta">
-      <button class="btn btn-blue btn-lg" id="heroJobs">💼 Смотреть вакансии</button>
-      <button class="btn btn-ghost btn-lg" id="heroFind">🔍 Найти специалиста</button>
+      <button class="btn btn-blue btn-lg" id="heroFind">🔍 Найти специалиста</button>
+      <button class="btn btn-ghost btn-lg" id="heroJobs">💼 Смотреть вакансии</button>
     </div>
 
     <!-- METRICS -->
@@ -568,10 +360,7 @@ body.no-scroll{overflow:hidden;}
     </div>
   </div>
 </header>
-</div><!-- /#screenWelcome -->
 
-<!-- ══════ SCREEN: APP ══════ -->
-<div class="screen" id="screenApp">
 <!-- JOBS -->
 <section id="jobs" class="section">
   <div class="wrap">
@@ -598,8 +387,8 @@ body.no-scroll{overflow:hidden;}
           <div class="sc-title">⚡ AKU PRO</div>
           <div class="sc-desc">Откройте доступ ко всем премиум-заказам с высоким бюджетом. Безлимитные отклики и приоритет.</div>
           <div style="margin-bottom:1rem;">
-            <div class="price-usd" style="font-size:2rem;">$5.99<span class="per"> / мес</span></div>
-            <div class="price-stars">299 ★ / мес</div>
+            <div class="price-usd" style="font-size:2rem;">$9<span class="per"> / мес</span></div>
+            <div class="price-stars">450 ★ / мес</div>
           </div>
           <button class="btn btn-blue" style="width:100%;" id="sideProBtn">Оформить PRO</button>
         </div>
@@ -646,8 +435,8 @@ body.no-scroll{overflow:hidden;}
       <div class="price-c price-feat">
         <div class="price-tag">⚡ Рекомендуем</div>
         <div class="price-plan t-blue">AKU PRO</div>
-        <div class="price-usd">$5.99<span class="per"> / мес</span></div>
-        <div class="price-stars">299 ★ / мес</div>
+        <div class="price-usd">$9<span class="per"> / мес</span></div>
+        <div class="price-stars">450 ★ / мес</div>
         <hr class="price-hr"/>
         <div class="price-fs">
           <div class="pf"><span class="i">✓</span> Доступ ко всем премиум-заказам</div>
@@ -656,44 +445,13 @@ body.no-scroll{overflow:hidden;}
           <div class="pf"><span class="i">✓</span> Значок PRO в профиле</div>
           <div class="pf"><span class="i">✓</span> Ранний доступ к заказам</div>
         </div>
-        <button class="btn btn-blue" style="width:100%;" id="pricePro">Оформить за 299 ★ / мес</button>
+        <button class="btn btn-blue" style="width:100%;" id="pricePro">Оформить за $9 / мес</button>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<!-- TRUST / AUTHORITY -->
-<section id="trust" class="section section-dark">
-  <div class="wrap">
-    <div class="tc" style="margin-bottom:2.4rem;">
-      <div class="s-eyebrow" style="justify-content:center;">Почему AKU Jobs Hub</div>
-      <h2 class="s-title">Доверие, проверенное рынком</h2>
-      <p class="s-sub" style="margin:0 auto;">Мы — часть экосистемы AKU, которая закрывает реальные боли фриланс-рынка СНГ.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card">
-        <div class="trust-ic">🏆</div>
-        <div class="trust-h">Опыт на рынке</div>
-        <div class="trust-d">Экосистема AKU развивается с 2021 года: AKU Media, AKU Automation и теперь Jobs Hub — единая инфраструктура для бизнеса и специалистов.</div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-ic">🎯</div>
-        <div class="trust-h">Какую боль закрываем</div>
-        <div class="trust-d">Прямой контакт заказчика и исполнителя без посредников, жёсткая модерация против спама и «биржевого мусора», только живые B2B-заказы.</div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-ic">📊</div>
-        <div class="trust-h">Статистика доверия</div>
-        <div class="trust-stats">
-          <div><span class="ts-num" id="tsViews">0</span><span class="ts-lbl">просмотров сегодня</span></div>
-          <div><span class="ts-num" id="tsHire">0</span><span class="ts-lbl">% найма за неделю</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer id="contacts">
   <div class="wrap">
     <div class="contacts-panel">
@@ -705,8 +463,8 @@ body.no-scroll{overflow:hidden;}
         </div>
         <div class="cp-action">
           <a class="cp-mgr" href="https://t.me/akumediamgr" target="_blank" rel="noopener">
-            <div class="cp-mgr-ava">И</div>
-            <div class="cp-mgr-info"><div class="cp-mgr-name">Илья</div><div class="cp-mgr-role">Менеджер по работе с клиентами · @akumediamgr</div></div>
+            <div class="cp-mgr-ava">👤</div>
+            <div class="cp-mgr-info"><div class="cp-mgr-name">@akumediamgr</div><div class="cp-mgr-role">Менеджер по работе с клиентами</div></div>
             <div class="eco-arrow">→</div>
           </a>
           <a class="btn btn-blue" href="https://t.me/akumediamgr" target="_blank" rel="noopener" style="width:100%;">
@@ -715,60 +473,22 @@ body.no-scroll{overflow:hidden;}
           </a>
         </div>
       </div>
-
-      <!-- TELEGRAM CHANNEL CARD -->
-      <a class="tg-channel-card" href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">
-        <div class="tgc-ava"><img src="https://i.ibb.co/V9YgD9XN/AKU-Jobs-Hub.png" alt="AKU Jobs Hub"/></div>
-        <div class="tgc-body">
-          <div class="tgc-name">Telegram-канал проекта</div>
-          <div class="tgc-sub">@AKUJobsHub · вакансии и новости</div>
-        </div>
-        <div class="tgc-go"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg></div>
-      </a>
-
-      <!-- ECOSYSTEM CARDS -->
-      <div class="eco-cards">
-        <a class="eco-card eco-blue" href="https://akumedia.github.io/AKU-Media/" target="_blank" rel="noopener">
-          <div class="eco-card-ic eco-ic-blue"><img src="https://i.ibb.co/Z6byL8h5/AKU-Media.png" alt="AKU Media"/></div>
-          <div class="eco-card-body">
-            <div class="eco-card-name">AKU Media</div>
-            <div class="eco-card-sub">Видеопроизводство · Reels · TikTok</div>
-          </div>
-          <div class="eco-card-arrow">→</div>
-        </a>
-        <a class="eco-card eco-red" href="https://akuautomation.github.io/AKUAutomation/" target="_blank" rel="noopener">
-          <div class="eco-card-ic eco-ic-red"><img src="https://i.ibb.co/C5fG1z9y/aku-automation.png" alt="AKU Automation"/></div>
-          <div class="eco-card-body">
-            <div class="eco-card-name">AKU Automation</div>
-            <div class="eco-card-sub">AI-ассистенты · Telegram-боты</div>
-          </div>
-          <div class="eco-card-arrow">→</div>
-        </a>
-      </div>
     </div>
 
     <div class="foot-cols">
       <div>
-        <div class="foot-brand"><img class="foot-logo-img" src="https://i.ibb.co/V9YgD9XN/AKU-Jobs-Hub.png" alt="AKU Jobs Hub"/><span class="logo-txt anim-grad" style="font-size:1.05rem;">AKU Jobs Hub</span></div>
+        <div class="foot-brand"><div class="logo-mark" style="width:32px;height:32px;"><span style="font-size:.95rem;">A</span></div><span class="logo-txt" style="font-size:1rem;">AKU<b>Jobs</b></span></div>
         <p class="foot-about">Биржа фриланса нового поколения в экосистеме AKU. B2B-платформа для премиальных заказов.</p>
       </div>
       <div><div class="fc-t">Платформа</div><ul class="fc-l"><li><a href="#jobs">Вакансии</a></li><li><a href="#pricing">PRO-подписка</a></li><li><a href="#contacts">Контакты</a></li></ul></div>
       <div><div class="fc-t">Telegram</div><ul class="fc-l"><li><a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">Бот</a></li><li><a href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">Канал</a></li><li><a href="https://t.me/akumediamgr" target="_blank" rel="noopener">Менеджер</a></li></ul></div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 AKU Jobs. Все права защищены.</span>
+      <span>© 2025 AKU Jobs. Все права защищены.</span>
       <span>Powered by AKU Ecosystem ⚡</span>
     </div>
   </div>
 </footer>
-</div><!-- /#screenApp -->
-
-<!-- BOTTOM NAV (Mini App) -->
-<nav class="botnav" id="botnav">
-  <button class="botnav-item active" data-tab="feed"><span class="bn-ic">📋</span><span>Лента</span></button>
-  <button class="botnav-item" data-tab="post"><span class="bn-ic">➕</span><span>Разместить</span></button>
-  <button class="botnav-item" data-tab="profile"><span class="bn-ic">👤</span><span>Профиль</span></button>
-</nav>
 
 <!-- MODAL: PRO / PAYWALL -->
 <div class="ov" id="proModal" role="dialog" aria-modal="true">
@@ -778,11 +498,14 @@ body.no-scroll{overflow:hidden;}
       <div class="modal-prem-ic">🔒</div>
       <p style="text-align:center;color:var(--txt2);font-size:.92rem;line-height:1.6;">Этот заказ доступен только для PRO-подписчиков. Откройте доступ ко всем премиум-заказам платформы.</p>
       <div class="modal-prem-price">
-        <div class="price-usd">$5.99<span class="per"> / мес</span></div>
-        <div class="price-stars">299 ★ / мес</div>
+        <div class="price-usd">$9<span class="per"> / мес</span></div>
+        <div class="price-stars">450 ★ / мес</div>
       </div>
-      <button class="btn btn-blue btn-lg" style="width:100%;margin-bottom:.6rem;" id="proPayTg">Купить Premium — 299 ★</button>
-      <button class="btn btn-ghost" style="width:100%;border:none;color:var(--txt3);" id="proLater">Позже</button>
+      <button class="btn btn-tg btn-lg" style="width:100%;margin-bottom:.7rem;" id="proPayTg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+        Оформить через Telegram
+      </button>
+      <button class="btn btn-ghost" style="width:100%;" id="proLater">Позже</button>
     </div>
   </div>
 </div>
@@ -804,162 +527,6 @@ body.no-scroll{overflow:hidden;}
         Войти через Telegram
       </button>
       <div style="text-align:center;font-size:.72rem;color:var(--txt3);margin-top:.8rem;">Демо-режим: клик имитирует вход</div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: ONBOARDING -->
-<div class="ov" id="obModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle" id="obTitle">Регистрация</span><button class="mclose" id="obClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="prog">
-      <div class="pdot active" id="obd1">1</div><div class="pline" id="obl1"></div>
-      <div class="pdot" id="obd2">2</div><div class="pline" id="obl2"></div>
-      <div class="pdot" id="obd3">3</div>
-    </div>
-    <div class="mstep" id="obs1">
-      <div class="sh">Кто вы на платформе?</div>
-      <div class="ss">Выберите роль — изменить можно в профиле</div>
-      <div class="roles">
-        <div class="role" data-role="freelancer" id="roleFr"><div class="role-ic">⚡</div><div class="role-t">Я Исполнитель</div><div class="role-d">Ищу заказы и проекты</div></div>
-        <div class="role" data-role="client" id="roleCl"><div class="role-ic">💼</div><div class="role-t">Я Заказчик</div><div class="role-d">Ищу специалистов</div></div>
-      </div>
-      <label class="ob-agree" id="obAgreeLbl">
-        <input type="checkbox" id="obAgree"/>
-        <span class="ob-agree-box"></span>
-        <span class="ob-agree-txt">Я принимаю условия пользовательского соглашения и даю согласие на авторизацию через мой Telegram-аккаунт</span>
-      </label>
-      <button class="btn btn-blue" style="width:100%;margin-top:1rem;" id="obNext1" disabled>Продолжить →</button>
-    </div>
-    <div class="mstep" id="obs2" style="display:none;">
-      <div class="sh" id="obs2h">Заполните профиль</div>
-      <div class="ss">Чем больше информации — тем выше шанс найти нужное</div>
-      <div class="fg"><label class="fl">Email</label><input type="email" class="fi" id="obEmail" placeholder="your@email.com"/></div>
-      <div id="obFr">
-        <div class="fg"><label class="fl">Навыки (Enter после каждого)</label><div class="tagw" id="obTagw" tabindex="0"><input type="text" class="tag-i" id="obTagi" placeholder="Figma, React..."/></div></div>
-        <div class="fg"><label class="fl">Ставка ($/час)</label><input type="number" class="fi" id="obRate" placeholder="30"/></div>
-      </div>
-      <div id="obCl" style="display:none;">
-        <div class="fg"><label class="fl">Студия / агентство</label><input type="text" class="fi" id="obCo" placeholder="AKU Studio"/></div>
-        <div class="fg"><label class="fl">Описание проектов</label><textarea class="fi" id="obCoDesc" placeholder="Какие задачи планируете решать?"></textarea></div>
-      </div>
-      <div class="snav"><button class="btn btn-ghost" id="obBack2">← Назад</button><button class="btn btn-blue" style="flex:1;" id="obNext2">Завершить →</button></div>
-    </div>
-    <div class="mstep" id="obs3" style="display:none;">
-      <div class="cz" id="obConf"></div>
-      <div class="suc-ic">🎉</div>
-      <div class="suc-t" id="obSucT">Регистрация завершена!</div>
-      <div class="suc-s" id="obSucS">Добро пожаловать в AKU Jobs.</div>
-      <button class="btn btn-blue" style="width:100%;" id="obFinish">Начать работу</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: POST JOB -->
-<div class="ov" id="postModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle">Разместить вакансию</span><button class="mclose" id="postClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <div class="fg"><label class="fl">Заголовок</label><input type="text" class="fi" id="pjTitle" placeholder="UI/UX дизайнер для приложения"/></div>
-      <div class="fg"><label class="fl">Категория</label>
-        <select class="fi" id="pjCat"><option>🎨 Дизайн</option><option>💻 Разработка</option><option>📣 Маркетинг</option><option>🤖 AI / Автоматизация</option></select>
-      </div>
-      <div class="fg"><label class="fl">Бюджет</label><input type="text" class="fi" id="pjBudget" placeholder="50 000 ₽"/></div>
-      <div class="fl">Тариф размещения</div>
-      <div class="tier active" data-tier="basic" id="tBasic"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">Базовый</div><div class="tier-p">Бесплатно</div><div class="tier-d">Обычное размещение на 7 дней</div></div></div>
-      <div class="tier" data-tier="top" id="tTop"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">TOP / Pinned <span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span></div><div class="tier-p">499 ★ · $9.99</div><div class="tier-d">Закреп вверху, золотая рамка, свечение и молния</div></div></div>
-      <div class="tier" data-tier="max" id="tMax"><div class="tier-rad"></div><div class="tier-b"><div class="tier-n">AKU Максимум <span class="badge badge-max">MAX</span></div><div class="tier-p">499 ★ · $9.99</div><div class="tier-d">Всё из TOP + авто-рассылка в Telegram-канал</div></div></div>
-      <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="pjSubmit">Опубликовать</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: PAYMENT METHOD -->
-<div class="ov" id="payModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle" id="payTitle">Выбор способа платежа</span><button class="mclose" id="payClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <div class="ss" id="paySub" style="margin-bottom:1.2rem;">Выберите удобный способ оплаты</div>
-      <div class="pay-m" id="payStars"><div class="pay-ic stars">⭐</div><div class="pay-b"><div class="pay-n">Telegram Stars</div><div class="pay-d" id="payStarsD">Оплата звёздами</div></div><div style="color:var(--txt3);">→</div></div>
-      <div class="pay-m" id="payCrypto"><div class="pay-ic crypto">₮</div><div class="pay-b"><div class="pay-n">CryptoPay (USDT / TON)</div><div class="pay-d" id="payCryptoD">Оплата криптовалютой</div></div><div style="color:var(--txt3);">→</div></div>
-      <div class="pay-m" id="payRub"><div class="pay-ic rub">₽</div><div class="pay-b"><div class="pay-n">Банковская карта (₽)</div><div class="pay-d" id="payRubD">Оплата картой через YooMoney</div></div><div style="color:var(--txt3);">→</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: STARS LOADER -->
-<div class="ov" id="starsModal" role="dialog" aria-modal="true">
-  <div class="mbox" style="max-width:400px;">
-    <div class="mhead"><span class="mtitle">Telegram Stars</span><button class="mclose" id="starsClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody"><div class="pl" id="starsBody"></div></div>
-  </div>
-</div>
-
-<!-- MODAL: CRYPTO -->
-<div class="ov" id="cryptoModal" role="dialog" aria-modal="true">
-  <div class="mbox" style="max-width:400px;">
-    <div class="mhead"><span class="mtitle">Оплата криптой</span><button class="mclose" id="cryptoClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <div class="badge badge-cat" style="display:block;width:fit-content;margin:0 auto 1rem;">🔵 Сеть TON · USDT</div>
-      <div class="qr"><div class="qr-g" id="qrG"></div></div>
-      <div class="caddr"><div class="caddr-t" id="cAddr">UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ</div><button class="caddr-c" id="cCopy">Копир.</button></div>
-      <div class="ctimer" id="cTimer">15:00</div>
-      <div class="ctl">До истечения счёта</div>
-      <a class="btn btn-tg" style="width:100%;margin-bottom:.6rem;" href="https://t.me/send?start=IVDt34fEvcmP" target="_blank" rel="noopener">Оплатить через CryptoBot</a>
-      <button class="btn btn-blue" style="width:100%;" id="cPaid">Я оплатил(а)</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: DONATION (3 tabs) -->
-<div class="ov" id="donationModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle">❤ Поддержать проект</span><button class="mclose" id="donationClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <div class="ss" style="margin-bottom:1.2rem;">Ваша поддержка помогает развивать платформу и держать её чистой от спама.</div>
-      <div class="dtabs">
-        <button class="dtab active" data-dtab="stars">Stars (★)</button>
-        <button class="dtab" data-dtab="crypto">Крипта</button>
-        <button class="dtab" data-dtab="card">Карта (₽)</button>
-      </div>
-
-      <!-- Tab 1: Telegram Stars -->
-      <div class="dpane" id="dpaneStars">
-        <div class="fl">Выберите сумму</div>
-        <div class="qa-grid" id="dStarQuick">
-          <button class="qa" data-stars="50">50 ★</button>
-          <button class="qa active" data-stars="100">100 ★</button>
-          <button class="qa" data-stars="500">500 ★</button>
-        </div>
-        <div class="fl" style="margin-top:1rem;">Или своя сумма (★)</div>
-        <input type="number" class="fi" placeholder="100" id="dStarAmt" value="100" min="1"/>
-        <button class="btn btn-tg" style="width:100%;margin-top:1.2rem;" id="dStarPay">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-          Задонатить через Telegram
-        </button>
-      </div>
-
-      <!-- Tab 2: Crypto -->
-      <div class="dpane" id="dpaneCrypto" style="display:none;">
-        <div class="fl">Актив</div>
-        <div class="qa-grid" id="dAssetSel">
-          <button class="qa active" data-asset="TON">TON</button>
-          <button class="qa" data-asset="USDT">USDT (TRC-20)</button>
-        </div>
-        <div class="fl" style="margin-top:1rem;">Кошелёк <span id="dAssetLbl">TON</span></div>
-        <div class="caddr"><div class="caddr-t" id="dAddr">UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ</div><button class="caddr-c" id="dCopy">Копир.</button></div>
-        <div class="fl" style="margin-top:1rem;">Сумма</div>
-        <input type="number" class="fi" placeholder="10" id="dCryptoAmt"/>
-        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCryptoBot">Оплатить через CryptoBot</button>
-      </div>
-
-      <!-- Tab 3: Ruble Card -->
-      <div class="dpane" id="dpaneCard" style="display:none;">
-        <div class="fl">Сумма (₽, минимум 100)</div>
-        <input type="number" class="fi" placeholder="500" id="dCardAmt" min="100" value="500"/>
-        <div class="dhint" id="dCardHint">Минимальная сумма доната — 100 ₽</div>
-        <button class="btn btn-blue" style="width:100%;margin-top:1.2rem;" id="dCardPay">Перейти к оплате</button>
-      </div>
     </div>
   </div>
 </div>
@@ -986,14 +553,12 @@ const demoJobs = [
 ];
 
 /* ─── STATE ─── */
-const S = { jobs:[], filtered:[], filter:'all', user:null, isPro:false, viewed:new Set(), applies:5, maxApplies:5, role:null, tags:[], tier:'basic', payCtx:null, cryptoT:null };
+const S = { jobs:[], filtered:[], filter:'all', user:null, isPro:false, viewed:new Set() };
 
 /* persist viewed + user */
 try{ const v=localStorage.getItem('aku_viewed'); if(v)S.viewed=new Set(JSON.parse(v)); }catch(e){}
 try{ const u=localStorage.getItem('aku_user'); if(u)S.user=JSON.parse(u); }catch(e){}
 try{ S.isPro=localStorage.getItem('aku_pro')==='1'; }catch(e){}
-try{ const a=localStorage.getItem('aku_applies'); if(a!==null)S.applies=Math.max(0,Math.min(5,+a)); }catch(e){}
-function saveApplies(){ try{ localStorage.setItem('aku_applies',String(S.applies)); }catch(e){} }
 
 function saveViewed(){ try{ localStorage.setItem('aku_viewed',JSON.stringify([...S.viewed])); }catch(e){} }
 
@@ -1005,19 +570,8 @@ let _tt; function toast(m,t=''){ const el=$('toast'); el.textContent=m; el.class
 function animateMetrics(){
   document.querySelectorAll('.metric-num').forEach(el=>{
     const target=+el.dataset.target, sfx=el.dataset.suffix||'';
-    // Плавный count-up ~2.8 сек через requestAnimationFrame с ease-out
-    const DURATION=2800;
-    el.classList.add('counting'); // motion-blur/fade пока идёт счёт
-    const t0=performance.now();
-    function frame(now){
-      const p=Math.min((now-t0)/DURATION,1);
-      const eased=1-Math.pow(1-p,3); // easeOutCubic — замедление к концу
-      const v=Math.round(eased*target);
-      el.innerHTML=v+(p>=1?'<span class="suffix">'+sfx+'</span>':'');
-      if(p<1){ requestAnimationFrame(frame); }
-      else { el.classList.remove('counting'); }
-    }
-    requestAnimationFrame(frame);
+    let v=0; const step=Math.max(1,Math.ceil(target/50));
+    const t=setInterval(()=>{ v=Math.min(v+step,target); el.innerHTML=v+(v>=target?'<span class="suffix">'+sfx+'</span>':''); if(v>=target)clearInterval(t); },26);
   });
 }
 
@@ -1030,8 +584,7 @@ function initNav(){
 }
 
 /* ─── LOGO = HOME / REFRESH ─── */
-$('logoHome')?.addEventListener('click',(e)=>{
-  e.preventDefault();
+$('logoHome')?.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:'smooth'});
   // лёгкий "refresh" контента
   applyFilter('all');
@@ -1051,47 +604,20 @@ function applyFilter(f){
 
 function renderJobs(){
   const list=$('jobsList');
-  // Гость видит только 2-3 премиальных "вкусных" заказа + locked-тизер
-  const guest = !S.user;
-  let items = S.filtered.slice();
-  if(guest){
-    // показываем самые дорогие/премиальные первыми, лимит 3
-    items = items.slice().sort((a,b)=>(b.premium?1:0)-(a.premium?1:0)).slice(0,3);
-  }
-  if(!items.length){ list.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--txt3);">📭 Заказов в этой категории пока нет</div>'; return; }
+  if(!S.filtered.length){ list.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--txt3);">📭 Заказов в этой категории пока нет</div>'; return; }
   list.innerHTML='';
-  items.forEach((j,i)=>{
+  S.filtered.forEach((j,i)=>{
     const card=document.createElement('article');
-    card.className='job'+(j.premium?' premium':'')+((j.tier==='top'||j.tier==='max')?' pinned':'')+(S.viewed.has(j.id)?' viewed':'');
+    card.className='job'+(j.premium?' premium':'')+(S.viewed.has(j.id)?' viewed':'');
     card.dataset.id=j.id;
     card.style.animationDelay=(i*45)+'ms';
     card.innerHTML=cardInner(j);
     list.appendChild(card);
   });
-  // Блюр-тизер для неавторизованных
-  if(guest){
-    const tease=document.createElement('div');
-    tease.className='feed-lock';
-    tease.innerHTML='<div class="feed-lock-blur">'+
-        '<article class="job premium" style="pointer-events:none;"><div class="j-badges"><span class="badge badge-prem">⭐ Premium</span><span class="badge badge-cat">💻 Разработка</span></div><div class="j-title">Senior-разработчик · долгосрочный проект</div><div class="j-co">@aku_client</div><div class="j-price">$5 000 / мес</div></article>'+
-        '<article class="job premium" style="pointer-events:none;"><div class="j-badges"><span class="badge badge-prem">⭐ Premium</span><span class="badge badge-cat">🤖 AI</span></div><div class="j-title">AI-архитектор · Enterprise</div><div class="j-co">@neurallab</div><div class="j-price">$8 000 / мес</div></article>'+
-      '</div>'+
-      '<div class="feed-lock-cta">'+
-        '<div class="fl-ic">🔒</div>'+
-        '<div class="fl-t">Открыто ещё '+(S.jobs.length-items.length)+'+ вакансий</div>'+
-        '<div class="fl-s">Войдите, чтобы открыть всю ленту заказов и откликаться</div>'+
-        '<button class="btn btn-tg" id="feedLockBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg> Войти через Telegram, чтобы открыть все вакансии</button>'+
-      '</div>';
-    list.appendChild(tease);
-    $('feedLockBtn')?.addEventListener('click',openLogin);
-  }
 }
 
 function cardInner(j){
-  let tierBadge='';
-  if(j.tier==='top') tierBadge='<span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span>';
-  else if(j.tier==='max') tierBadge='<span class="badge badge-top"><span class="bolt">⚡</span> ТОП</span><span class="badge badge-max">MAX</span>';
-  const premBadge=(j.premium?'<span class="badge badge-prem">⭐ Premium</span>':'')+tierBadge;
+  const premBadge=j.premium?'<span class="badge badge-prem">⭐ Premium</span>':'';
   let action;
   if(j.premium && !S.isPro){
     action=`
@@ -1099,8 +625,8 @@ function cardInner(j){
         <div class="lock-ic">🔒</div>
         <div class="lock-txt"><b>Доступно только для PRO-подписчиков.</b> Откройте доступ ко всем премиум-заказам.</div>
         <div class="lock-price">
-          <div class="lock-price-usd">299 ★ <span style="font-size:.9rem;color:var(--txt3);font-weight:500;">/ мес</span></div>
-          <div class="lock-price-stars">≈ $5.99 / мес</div>
+          <div class="lock-price-usd">$9 <span style="font-size:.9rem;color:var(--txt3);font-weight:500;">/ мес</span></div>
+          <div class="lock-price-stars">450 ★ / мес</div>
         </div>
         <button class="btn btn-blue btn-sm jUnlock" style="width:100%;">Открыть доступ</button>
       </div>`;
@@ -1134,7 +660,12 @@ $('jobsList')?.addEventListener('click',e=>{
   const id=card.dataset.id, job=S.jobs.find(j=>j.id===id);
 
   if(e.target.closest('.jUnlock')){ openPro(); return; }
-  if(e.target.closest('.jApply')){ markViewed(id); applyJob(); return; }
+  if(e.target.closest('.jApply')){
+    markViewed(id);
+    if(!S.user){ openLogin(); return; }
+    toast('✅ Отклик отправлен!','blue');
+    return;
+  }
   // simple view → mark viewed
   markViewed(id);
 });
@@ -1160,9 +691,7 @@ window.onTelegramAuth=function(user){
   try{ localStorage.setItem('aku_user',JSON.stringify(S.user)); }catch(e){}
   close('loginModal');
   refreshAuthUI();
-  applyFilter(S.filter||'all'); // разблокируем полную ленту
-  toast('✅ Вход выполнен — лента открыта!','blue');
-  setTimeout(openOnboard,400);
+  toast('✅ Вход выполнен через Telegram','blue');
 };
 function simLogin(){ window.onTelegramAuth({ id:99000000+Math.floor(Math.random()*9999), first_name:'Demo', username:'demo_user', photo_url:null }); }
 
@@ -1173,7 +702,6 @@ function refreshAuthUI(){
     const ava=S.user.photo?`<img src="${esc(S.user.photo)}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`:initial;
     act.innerHTML=`<div class="nav-ava" id="navAva" title="${esc(S.user.name)}">${ava}</div><button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>`;
     initNav();
-    $('navAva')?.addEventListener('click',openOnboard);
   }
 }
 
@@ -1188,8 +716,7 @@ function buyPro(){
     toast('👑 PRO активирован! Премиум-заказы открыты.','blue');
   },1400);
 }
-$('proPayTg')?.addEventListener('click',()=>{ close('proModal'); S.payCtx={kind:'pro',plan:'monthly'}; openPay('Premium-подписка','299 ★ / $5.99'); });
-
+$('proPayTg')?.addEventListener('click',buyPro);
 $('pricePro')?.addEventListener('click',openPro);
 $('sideProBtn')?.addEventListener('click',openPro);
 $('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом плане','blue'));
@@ -1200,235 +727,21 @@ $('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом
 }));
 
 /* ─── CTA ─── */
-/* ─── SCREEN SWITCHING (Mini App) ─── */
-let _trustDone=false;
-function showApp(tab){
-  document.body.classList.add('app-mode');
-  $('screenWelcome').classList.remove('active');
-  $('screenApp').classList.add('active');
-  window.scrollTo({top:0,behavior:'auto'});
-  if(!_trustDone && typeof animateTrust==='function'){ _trustDone=true; setTimeout(animateTrust,400); }
-  if(tab) switchTab(tab);
-}
-function showWelcome(){
-  document.body.classList.remove('app-mode');
-  $('screenApp').classList.remove('active');
-  $('screenWelcome').classList.add('active');
-  window.scrollTo({top:0,behavior:'auto'});
-}
-function switchTab(tab){
-  document.querySelectorAll('.botnav-item').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  if(tab==='feed'){ $('jobs')?.scrollIntoView({behavior:'smooth'}); }
-  else if(tab==='post'){ openPost(); }
-  else if(tab==='profile'){ if(S.user){ openOnboard(); } else { openLogin(); } }
-}
-document.querySelectorAll('.botnav-item').forEach(b=>b.addEventListener('click',()=>{
-  const tab=b.dataset.tab;
-  // визуально активной всегда оставляем "Лента" если открыли модалку
-  if(tab==='feed'){ document.querySelectorAll('.botnav-item').forEach(x=>x.classList.toggle('active',x===b)); $('jobs')?.scrollIntoView({behavior:'smooth'}); }
-  else switchTab(tab);
-}));
-
-// Hero CTA → входим в приложение (лента)
-$('heroJobs')?.addEventListener('click',()=>showApp('feed'));
-$('heroFind')?.addEventListener('click',()=>{ showApp('feed'); if(!S.user) setTimeout(openLogin,300); });
-$('postBtn')?.addEventListener('click',openPost);
-
-
-/* ─── SKELETON (1.2s) ─── */
-function showSkeletons(n=6){
-  const list=$('jobsList'); list.innerHTML='';
-  for(let i=0;i<n;i++){ const d=document.createElement('div'); d.className='sk-card';
-    d.innerHTML='<div class="sk" style="width:64px;height:14px;margin-bottom:10px;"></div><div class="sk" style="width:85%;height:15px;margin-bottom:8px;"></div><div class="sk" style="width:55%;height:11px;margin-bottom:12px;"></div><div class="sk" style="width:100%;height:11px;margin-bottom:4px;"></div><div class="sk" style="width:70%;height:11px;"></div><div class="sk-row"><div class="sk" style="width:80px;height:14px;border-radius:5px;"></div><div class="sk" style="width:96px;height:32px;border-radius:8px;"></div></div>';
-    list.appendChild(d);
-  }
-}
-
-/* ─── APPLY LIMIT (5 dots) ─── */
-function applyJob(){
-  if(!S.user){ openLogin(); return; }
-  if(S.isPro){ toast('✅ Отклик отправлен (PRO · безлимит)','blue'); return; }
-  if(S.applies<=0){ open('proModal'); return; }
-  S.applies--; saveApplies();
-  toast('✅ Отклик отправлен! Осталось: '+S.applies,'blue');
-}
-
-/* ─── ONBOARDING ─── */
-function openOnboard(){ S.role=null; S.tags=[]; obStep(1); $('obNext1').disabled=true; const a=$('obAgree'); if(a)a.checked=false; document.querySelectorAll('.role').forEach(r=>r.classList.remove('active')); open('obModal'); }
-function obStep(n){
-  [1,2,3].forEach(i=>{ const el=$('obs'+i); if(el)el.style.display=i===n?'block':'none'; });
-  $('obTitle').textContent={1:'Ваша роль',2:'Профиль',3:'Готово!'}[n];
-  for(let i=1;i<=3;i++){ const d=$('obd'+i); d.classList.remove('active','done'); if(i<n)d.classList.add('done'); else if(i===n)d.classList.add('active'); }
-  for(let i=1;i<=2;i++){ $('obl'+i).classList.toggle('done',i<n); }
-}
-$('roleFr')?.addEventListener('click',()=>selRole('freelancer','roleFr'));
-$('roleCl')?.addEventListener('click',()=>selRole('client','roleCl'));
-function obCheckGate(){ const ok=S.role && $('obAgree')?.checked; $('obNext1').disabled=!ok; }
-function selRole(r,id){ S.role=r; document.querySelectorAll('.role').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); obCheckGate(); }
-$('obAgree')?.addEventListener('change',obCheckGate);
-$('obNext1')?.addEventListener('click',()=>{ if(!S.role)return; const fr=$('obFr'),cl=$('obCl'); if(S.role==='freelancer'){fr.style.display='block';cl.style.display='none';$('obs2h').textContent='Профиль исполнителя';}else{fr.style.display='none';cl.style.display='block';$('obs2h').textContent='Профиль заказчика';} obStep(2); });
-$('obBack2')?.addEventListener('click',()=>obStep(1));
-$('obNext2')?.addEventListener('click',()=>{ if(S.user)S.user.role=S.role; $('obSucT').textContent=S.role==='client'?'Профиль заказчика создан!':'Профиль исполнителя создан!'; $('obSucS').textContent=S.role==='client'?'Начните находить лучших специалистов.':'Теперь вы можете откликаться на заказы.'; confetti('obConf'); obStep(3); });
-$('obFinish')?.addEventListener('click',()=>{ close('obModal'); showApp('feed'); });
-$('obClose')?.addEventListener('click',()=>close('obModal'));
-/* skill tags */
-const obTagi=$('obTagi'),obTagw=$('obTagw');
-function renderTags(){ if(!obTagw)return; obTagw.querySelectorAll('.tag').forEach(t=>t.remove()); S.tags.forEach((t,i)=>{ const p=document.createElement('span'); p.className='tag'; p.innerHTML=esc(t)+'<button class="tag-x" data-i="'+i+'" type="button">×</button>'; obTagw.insertBefore(p,obTagi); }); }
-obTagi?.addEventListener('keydown',e=>{ const v=obTagi.value.trim(); if((e.key==='Enter'||e.key===',')&&v){ e.preventDefault(); if(!S.tags.includes(v)&&S.tags.length<15){S.tags.push(v);renderTags();} obTagi.value=''; } if(e.key==='Backspace'&&!obTagi.value&&S.tags.length){S.tags.pop();renderTags();} });
-obTagw?.addEventListener('click',e=>{ const b=e.target.closest('.tag-x'); if(b){S.tags.splice(+b.dataset.i,1);renderTags();} obTagi?.focus(); });
-
-/* ─── CONFETTI ─── */
-function confetti(zid){ const z=$(zid); if(!z)return; z.innerHTML=''; const cols=['#D4AF37','#f0ce60','#22c55e','#2F48FD','#DB2022','#fff']; for(let i=0;i<24;i++){ const p=document.createElement('div'); p.className='cp'; p.style.cssText='left:'+(Math.random()*100)+'%;top:'+(Math.random()*30)+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-delay:'+(Math.random()*.8).toFixed(2)+'s;animation-duration:'+(2+Math.random()*1.5).toFixed(2)+'s;transform:rotate('+Math.floor(Math.random()*360)+'deg)'; z.appendChild(p); } }
-
-/* ─── POST JOB ─── */
-function openPost(){ if(!S.user){ toast('⚠️ Сначала войдите','red'); openLogin(); return; } S.tier='basic'; selTier('basic','tBasic'); open('postModal'); }
-document.querySelectorAll('.tier').forEach(t=>t.addEventListener('click',()=>selTier(t.dataset.tier,t.id)));
-function selTier(t,id){ S.tier=t; document.querySelectorAll('.tier').forEach(x=>x.classList.remove('active')); $(id).classList.add('active'); }
-$('postClose')?.addEventListener('click',()=>close('postModal'));
-$('pjSubmit')?.addEventListener('click',()=>{
-  const title=$('pjTitle').value.trim(); if(!title){ toast('⚠️ Введите заголовок','red'); return; }
-  const job={ id:'u'+Date.now(), cat:$('pjCat').value, catKey:catKeyOf($('pjCat').value), co:S.user.username?'@'+S.user.username:'@you', title, desc:'Новый заказ от '+(S.user.name||'клиента')+'.', price:$('pjBudget').value.trim()||'Договорная', premium:false, tier:S.tier };
-  if(S.tier==='basic'){ publishJob(job); close('postModal'); }
-  else { close('postModal'); S.payCtx={kind:'job',job,tier:S.tier}; openPay(S.tier==='top'?'TOP-размещение':'AKU Максимум','499 ★ / $9.99'); }
-});
-function catKeyOf(c){ return {'🎨 Дизайн':'design','💻 Разработка':'dev','📣 Маркетинг':'marketing','🤖 AI / Автоматизация':'ai'}[c]||'all'; }
-function publishJob(job){
-  demoJobs.unshift(job); S.jobs=demoJobs.slice(); applyFilter('all');
-  $('jobs').scrollIntoView({behavior:'smooth'});
-  ['pjTitle','pjBudget'].forEach(id=>$(id).value='');
-  toast(job.tier==='max'?'🚀 Опубликовано в ТОП + рассылка в канал!':job.tier==='top'?'⚡ Опубликовано в ТОП!':'🎉 Вакансия опубликована!','blue');
-}
-
-/* ─── CHECKOUT ─── */
-function openPay(title,price){ $('payTitle').textContent='Оплата: '+title; $('paySub').textContent='Сумма: '+price+' · выберите провайдера'; $('payStarsD').textContent=price.split('/')[0].trim()+' звёздами'; $('payCryptoD').textContent=(price.split('/')[1]||'USDT').trim()+' криптой'; open('payModal'); }
-$('payClose')?.addEventListener('click',()=>close('payModal'));
-$('payStars')?.addEventListener('click',()=>{ close('payModal'); payStarsManager(); });
-$('payCrypto')?.addEventListener('click',()=>{ close('payModal'); payCrypto(); });
-$('payRub')?.addEventListener('click',()=>{ close('payModal'); payRub(); });
-function payRub(){
-  const ctx=S.payCtx||{}; const sum = ctx.kind==='pro' ? (ctx.plan==='trial'?99:990) : (ctx.tier==='max'?1490:490);
-  // Реальная ссылка ЮMoney
-  window.open(YOOMONEY_URL,'_blank');
-  toast('₽ Переходим к оплате '+sum+' ₽ через ЮMoney...','blue');
-  setTimeout(()=>finalizePay(),1400);
-}
-function payStarsManager(){
-  // Счёт на Stars выставляет менеджер Илья в ЛС
-  open('starsModal');
-  $('starsBody').innerHTML='<div style="font-size:2.8rem;">⭐</div>'+
-    '<div style="margin-top:.9rem;color:var(--txt);font-weight:600;">Оплата через Telegram Stars</div>'+
-    '<div style="margin-top:.5rem;color:var(--txt2);font-size:.86rem;line-height:1.5;">Менеджер <b style="color:var(--gold-br);">Илья</b> выставит счёт на <b>299 ★</b> прямо в личных сообщениях Telegram.</div>'+
-    '<a class="btn btn-tg" style="margin-top:1.2rem;width:100%;" href="'+MANAGER_URL+'" target="_blank" rel="noopener">'+
-      '<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>'+
-      'Написать Илье (@akumediamgr)</a>';
-}
-function payStars(){
-  open('starsModal');
-  $('starsBody').innerHTML='<div style="font-size:2.6rem;">⭐</div><div style="margin-top:.8rem;color:var(--txt2);">Открываем Telegram Pay...</div>';
-  setTimeout(()=>{ $('starsBody').innerHTML='<div class="pl-spin"></div><div style="color:var(--txt2);">Обработка платежа...</div>'; },1100);
-  setTimeout(()=>{ $('starsBody').innerHTML='<div style="font-size:2.8rem;">✅</div><div style="margin-top:.8rem;color:#7ee0a3;font-weight:600;">Успешно оплачено!</div>'; setTimeout(()=>{ close('starsModal'); finalizePay(); },1300); },2300);
-}
-function payCrypto(){ buildQR(); open('cryptoModal'); startTimer(15*60); }
-function buildQR(){ const g=$('qrG'); g.innerHTML=''; for(let r=0;r<11;r++)for(let c=0;c<11;c++){ const cell=document.createElement('div'); const f=(r<3&&c<3)||(r<3&&c>7)||(r>7&&c<3); const on=f?(r===0||r===2||c===0||c===2||(r===1&&c===1)):((r*7+c*3+((r*c)%5))%2===0); cell.className='qr-c'+(on?'':' off'); g.appendChild(cell); } }
-function startTimer(sec){ clearInterval(S.cryptoT); const el=$('cTimer'); el.style.color='var(--gold)'; (function tick(){ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; })(); S.cryptoT=setInterval(()=>{ const m=Math.floor(sec/60),s=sec%60; el.textContent=m+':'+String(s).padStart(2,'0'); if(sec<=0){ clearInterval(S.cryptoT); el.textContent='Истёк'; el.style.color='#ff6b6d'; } sec--; },1000); }
-$('cCopy')?.addEventListener('click',()=>{ const a=$('cAddr').textContent; navigator.clipboard?.writeText(a).then(()=>{ const b=$('cCopy'); b.textContent='✓'; setTimeout(()=>b.textContent='Копир.',1500); toast('📋 Адрес TON скопирован','blue'); }).catch(()=>toast('📋 '+a)); });
-$('cPaid')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); toast('⏳ Проверяем поступление...'); setTimeout(()=>finalizePay(),1200); });
-$('cryptoClose')?.addEventListener('click',()=>{ clearInterval(S.cryptoT); close('cryptoModal'); });
-$('starsClose')?.addEventListener('click',()=>close('starsModal'));
-function finalizePay(){
-  const ctx=S.payCtx; if(!ctx)return;
-  if(ctx.kind==='pro'){ S.isPro=true; S.applies=S.maxApplies; saveApplies(); try{localStorage.setItem('aku_pro','1');}catch(e){} renderJobs(); refreshAuthUI(); toast('👑 PRO активирован!','blue'); }
-  else if(ctx.kind==='job'){ publishJob(ctx.job); }
-  S.payCtx=null;
-}
-
-
-/* ─── DONATION MODAL (3 tabs: Stars / Crypto / Card) ─── */
-const WALLETS={TON:'UQDnZCrLcqVKjKDzTBMTXVCo0LD0DqIHYlPh53NR5mcc_kLJ',USDT:'TN79X3tJr36kzFM9Q37rJNQ8KMsnuPhmUu'};
-const CRYPTOBOT_URL='https://t.me/send?start=IVDt34fEvcmP';
-const YOOMONEY_URL='https://yoomoney.ru/to/4100118055761665';
-const MANAGER_URL='https://t.me/akumediamgr';
-function openDonation(){ open('donationModal'); }
-$('navDonate')?.addEventListener('click',openDonation);
-$('donationClose')?.addEventListener('click',()=>close('donationModal'));
-// tab switch
-document.querySelectorAll('#donationModal .dtab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('#donationModal .dtab').forEach(x=>x.classList.remove('active'));
-  t.classList.add('active');
-  const w=t.dataset.dtab;
-  $('dpaneStars').style.display  = w==='stars'?'block':'none';
-  $('dpaneCrypto').style.display = w==='crypto'?'block':'none';
-  $('dpaneCard').style.display   = w==='card'?'block':'none';
-}));
-// Tab 1: Stars quick-select
-document.querySelectorAll('#dStarQuick .qa').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('#dStarQuick .qa').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  $('dStarAmt').value=b.dataset.stars;
-}));
-$('dStarAmt')?.addEventListener('input',()=>document.querySelectorAll('#dStarQuick .qa').forEach(x=>x.classList.remove('active')));
-$('dStarPay')?.addEventListener('click',()=>{
-  const amt=parseInt($('dStarAmt').value,10)||100;
-  close('donationModal');
-  toast('⭐ Менеджер Илья выставит счёт на '+amt+' ★ в личных сообщениях','blue');
-  window.open(MANAGER_URL,'_blank');
-});
-// Tab 2: Crypto asset picker + copy + CryptoBot
-let dAsset='TON';
-document.querySelectorAll('#dAssetSel .qa').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('#dAssetSel .qa').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  dAsset=b.dataset.asset;
-  $('dAssetLbl').textContent=b.textContent;
-  $('dAddr').textContent=WALLETS[dAsset];
-}));
-$('dCopy')?.addEventListener('click',()=>{ const a=$('dAddr').textContent; navigator.clipboard?.writeText(a).then(()=>{ const btn=$('dCopy'); btn.textContent='✓ Скопировано'; setTimeout(()=>btn.textContent='Копир.',1500); toast('📋 Адрес '+dAsset+' скопирован','blue'); }).catch(()=>toast('📋 '+a)); });
-$('dCryptoBot')?.addEventListener('click',()=>{
-  // Реальный счёт CryptoBot
-  window.open(CRYPTOBOT_URL,'_blank');
-  close('donationModal');
-  toast('₮ Открываем счёт CryptoBot для оплаты...','blue');
-});
-// Tab 3: Ruble Card → YooMoney redirect
-$('dCardAmt')?.addEventListener('input',()=>{
-  const v=parseInt($('dCardAmt').value,10)||0;
-  $('dCardHint').textContent = v<100 ? '⚠️ Минимум 100 ₽' : 'Перейдёте на защищённую страницу оплаты YooMoney';
-  $('dCardHint').style.color = v<100 ? '#ff6b6d' : 'var(--txt3)';
-});
-$('dCardPay')?.addEventListener('click',()=>{
-  const amt=parseInt($('dCardAmt').value,10)||0;
-  if(amt<100){ toast('⚠️ Минимальная сумма — 100 ₽','red'); $('dCardAmt').focus(); return; }
-  // Реальная ссылка ЮMoney
-  window.open(YOOMONEY_URL,'_blank');
-  close('donationModal');
-  toast('₽ Переходим к оплате '+amt+' ₽ через ЮMoney...','blue');
-});
-
-
-/* ─── TRUST STATS COUNTER ─── */
-function animateTrust(){
-  [['tsViews',1240,''],['tsHire',82,'%']].forEach(([id,target,sfx])=>{
-    const el=$(id); if(!el)return;
-    const DUR=2600,t0=performance.now();
-    function fr(now){ const p=Math.min((now-t0)/DUR,1); const e=1-Math.pow(1-p,3); el.textContent=Math.round(e*target)+(p>=1?sfx:''); if(p<1)requestAnimationFrame(fr); }
-    requestAnimationFrame(fr);
-  });
-}
+$('heroFind')?.addEventListener('click',()=>{ if(S.user)$('jobs').scrollIntoView({behavior:'smooth'}); else openLogin(); });
+$('heroJobs')?.addEventListener('click',()=>$('jobs').scrollIntoView({behavior:'smooth'}));
+$('postBtn')?.addEventListener('click',()=>{ window.open('https://t.me/akumediamgr','_blank'); });
 
 /* ─── INIT ─── */
 document.addEventListener('DOMContentLoaded',()=>{
-  // Логотипы загружаются напрямую с CDN (см. <img src=...>)
   initNav();
   refreshAuthUI();
-  showSkeletons();
-  setTimeout(()=>{ S.jobs=demoJobs.slice(); applyFilter('all'); }, 1200);
+  S.jobs=demoJobs.slice();
+  applyFilter('all');
   // metrics on view
   if('IntersectionObserver' in window){
     const obs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateMetrics(); o.disconnect(); } }); },{threshold:.3});
     const m=document.querySelector('.metrics'); if(m)obs.observe(m); else animateMetrics();
-    const tobs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateTrust(); o.disconnect(); } }); },{threshold:.3});
-    const tw=document.querySelector('.trust-stats'); if(tw)tobs.observe(tw);
-  } else { animateMetrics(); animateTrust(); }
+  } else animateMetrics();
 });
 </script>
 </body>
