@@ -3,746 +3,592 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<meta name="description" content="AKU Jobs — биржа фриланса нового поколения в экосистеме AKU. Премиум-заказы, Telegram-авторизация."/>
-<meta name="theme-color" content="#0D0D0D"/>
-<title>AKU Jobs — Биржа фриланса нового поколения</title>
+<meta name="theme-color" content="#0A0A0B"/>
+<title>AKU Jobs — Экосистема автоматизации и фриланса будущего</title>
+<meta name="description" content="AKU Jobs Hub — интеллектуальный хаб в Telegram: премиальные заказчики, AI-архитекторы, топ-дизайнеры и разработчики. Запусти бота за 1 клик."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* ═══════════ TOKENS ═══════════ */
 :root{
-  --black:#0D0D0D; --void:#0b0b0b; --panel:#1A1A1A; --panel2:#222222;
-  --line:rgba(192,192,192,.10); --line2:rgba(192,192,192,.22);
-  --blue:#D4AF37; --blue-glow:rgba(212,175,55,.5);
-  --red:#D4AF37; --red-glow:rgba(212,175,55,.45);
-  --txt:#E8E8E8; --txt2:#888888; --txt3:#5a5a5a;
-  --gold:#D4AF37; --gold-br:#f0ce60; --gold-dim:#9a7d20;
+  --black:#0A0A0B; --anthracite:#0F0F11; --card:#18181C; --card2:#1E1E22;
+  --line:#2C2C32; --line-hi:rgba(255,87,51,.45);
+  --gold:#FF5733; --gold-br:#ff7a5c; --gold-dim:#E64A19; --gold-glow:rgba(255,87,51,.45);
+  --txt:#FFFFFF; --txt2:#8E8E93; --txt3:#5E5E64;
   --ff-d:'Space Grotesk',system-ui,sans-serif;
   --ff-b:'Inter',system-ui,sans-serif;
-  --max:1280px; --nav:64px; --safe:env(safe-area-inset-bottom,0px);
-  --r-s:8px; --r-m:14px; --r-l:20px; --r-xl:28px;
+  --maxw:1180px; --nav-h:68px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{overflow-x:hidden;max-width:100%;}
-html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
-body{background:var(--black);color:var(--txt);font-family:var(--ff-b);line-height:1.6;-webkit-font-smoothing:antialiased;min-width:320px;position:relative;}
-a{color:inherit;text-decoration:none;}
-button{cursor:pointer;font-family:inherit;border:none;background:none;}
-img{display:block;max-width:100%;}
-input,textarea{font-family:inherit;font-size:16px;}
-ul{list-style:none;}
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-track{background:var(--void);}
-::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px;}
-::-webkit-scrollbar-thumb:hover{background:var(--blue);}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--txt);font-family:var(--ff-b);line-height:1.6;
+  -webkit-font-smoothing:antialiased;min-width:320px;position:relative;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit;}
+img{max-width:100%;display:block;}
+::selection{background:rgba(255,87,51,.25);color:#fff;}
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:#2a2a2e;border-radius:5px;}
 
-/* ═══════════ ANIMATIONS ═══════════ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes gridFloat{0%{background-position:0 0}100%{background-position:54px 54px}}
-@keyframes neonPulse{0%,100%{box-shadow:0 0 0 1px var(--blue-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--blue),0 0 36px rgba(212,175,55,.4)}}
-@keyframes redPulse{0%,100%{box-shadow:0 0 0 1px var(--red-glow),0 0 18px rgba(212,175,55,.18)}50%{box-shadow:0 0 0 1px var(--red),0 0 36px rgba(212,175,55,.4)}}
-@keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.1)}}
-@keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,.5)}50%{box-shadow:0 0 0 7px rgba(212,175,55,0)}}
-@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
-@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-@keyframes shimmerLine{0%{background-position:-200% 0}100%{background-position:200% 0}}
+/* ── ATMOSPHERE: светящиеся сферы ── */
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none;will-change:transform;}
+.orb-1{width:540px;height:540px;background:radial-gradient(circle,rgba(255,87,51,.30),transparent 70%);top:-160px;right:-120px;animation:drift1 22s ease-in-out infinite;}
+.orb-2{width:460px;height:460px;background:radial-gradient(circle,rgba(255,87,51,.16),transparent 70%);bottom:-140px;left:-120px;animation:drift2 26s ease-in-out infinite;}
+.orb-3{width:380px;height:380px;background:radial-gradient(circle,rgba(230,74,25,.18),transparent 70%);top:42%;left:46%;animation:drift3 30s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,60px) scale(1.12)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,-50px) scale(1.08)}}
+@keyframes drift3{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-40%,-58%) scale(1.15)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-/* ═══════════ TYPE UTILS ═══════════ */
-.t-blue{color:var(--blue);}
-.t-red{color:var(--red);}
-.t-grad{background:linear-gradient(120deg,#c9a227,#D4AF37 50%,#f0ce60);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+
+/* ── HELPERS ── */
+.t-grad{background:linear-gradient(118deg,#fff,#ff7a5c 45%,#FF5733 80%,#E64A19);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .mono{font-family:var(--ff-d);}
-.tc{text-align:center;}
+.eyebrow{font-family:var(--ff-d);font-size:12px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:.6;}
+.s-title{font-family:var(--ff-d);font-size:clamp(1.8rem,4.4vw,3.1rem);font-weight:700;
+  line-height:1.1;letter-spacing:-.015em;margin-bottom:16px;}
+.s-sub{font-size:clamp(.98rem,1.6vw,1.12rem);color:var(--txt2);max-width:620px;}
 
-/* ═══════════ LAYOUT ═══════════ */
-.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,32px);}
-.section{padding:clamp(48px,8vw,96px) 0;}
-.s-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
-.s-eyebrow::before{content:'';width:22px;height:1px;background:var(--blue);}
-.s-title{font-family:var(--ff-d);font-size:clamp(1.7rem,4.5vw,3rem);font-weight:700;line-height:1.12;color:var(--txt);margin-bottom:14px;letter-spacing:-.01em;}
-.s-sub{font-size:clamp(.92rem,2vw,1.05rem);color:var(--txt2);max-width:36rem;line-height:1.7;}
-.s-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
-
-/* ═══════════ BUTTONS ═══════════ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;min-height:46px;border-radius:var(--r-m);font-size:.9rem;font-weight:600;letter-spacing:.01em;transition:all .22s cubic-bezier(.4,0,.2,1);white-space:nowrap;position:relative;overflow:hidden;}
-.btn-blue{background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);color:#0D0D0D;font-weight:700;box-shadow:0 4px 20px rgba(212,175,55,.32);}
-.btn-blue:hover{filter:brightness(1.08);box-shadow:0 6px 30px rgba(212,175,55,.5);transform:translateY(-2px);}
-.btn-blue:active{transform:scale(.98);}
-.btn-red{background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);color:#0D0D0D;font-weight:700;box-shadow:0 4px 20px rgba(212,175,55,.32);}
-.btn-red:hover{filter:brightness(1.08);box-shadow:0 6px 30px rgba(212,175,55,.5);transform:translateY(-2px);}
-.btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--txt);backdrop-filter:blur(8px);}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.06);}
-.btn-tg{background:linear-gradient(135deg,#2AABEE,#229ED9);color:#fff;box-shadow:0 4px 18px rgba(42,171,238,.32);}
-.btn-tg:hover{filter:brightness(1.08);box-shadow:0 6px 28px rgba(42,171,238,.5);transform:translateY(-2px);}
-.btn-tg:active{transform:scale(.98);}
-.btn-lg{padding:.95rem 2.1rem;font-size:.98rem;min-height:54px;border-radius:var(--r-l);}
-.btn-sm{padding:.5rem 1rem;font-size:.8rem;min-height:38px;border-radius:var(--r-s);}
-.btn-locked{background:var(--panel2);border:1px solid var(--line2);color:var(--txt3);cursor:not-allowed;}
-.btn svg{flex-shrink:0;}
-
-/* ═══════════ NAVBAR ═══════════ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav);background:rgba(5,6,10,.78);backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid var(--line);transition:background .3s,box-shadow .3s;}
-#nav.scrolled{background:rgba(5,6,10,.95);box-shadow:0 4px 30px rgba(0,0,0,.6);}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,32px);gap:.5rem;}
-.logo{display:flex;align-items:center;gap:.6rem;flex-shrink:0;cursor:pointer;background:none;border:none;padding:0;}
-.logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 0 18px rgba(212,175,55,.4);flex-shrink:0;}
-.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25),transparent 70%);background-size:200% 100%;animation:shimmerLine 3.5s linear infinite;}
-.logo-mark span{font-family:var(--ff-d);font-weight:700;font-size:1.1rem;color:#0D0D0D;position:relative;z-index:1;}
-.logo-txt{font-family:var(--ff-d);font-size:1.05rem;font-weight:700;letter-spacing:.01em;white-space:nowrap;}
-.logo-txt b{color:var(--blue);}
-.nav-links{display:flex;align-items:center;gap:1.8rem;}
-.nav-links a{font-size:.85rem;font-weight:500;color:var(--txt2);transition:color .2s;white-space:nowrap;}
-.nav-links a:hover{color:var(--blue);}
-.nav-act{display:flex;align-items:center;gap:.6rem;flex-shrink:0;}
-.burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;align-items:center;justify-content:center;border:1px solid var(--line2);border-radius:10px;}
-.burger span{display:block;width:20px;height:2px;background:var(--txt);border-radius:2px;transition:all .3s;}
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
+  display:flex;align-items:center;transition:background .3s,border-color .3s,backdrop-filter .3s;
+  border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(10,10,11,.78);backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);border-bottom-color:var(--line);}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%;
+  display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:11px;font-family:var(--ff-d);font-weight:700;font-size:18px;letter-spacing:-.01em;}
+.logo-mark{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#1c1c20,#101012);border:1px solid var(--line-hi);
+  font-weight:700;color:var(--gold);box-shadow:0 0 18px rgba(255,87,51,.18),inset 0 1px 0 rgba(255,255,255,.05);}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:14px;color:var(--txt2);font-weight:500;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--gold);transition:width .25s;}
+.nav-links a:hover{color:var(--txt);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:8px;padding:10px 22px;border-radius:100px;font-weight:600;font-size:14px;
+  background:linear-gradient(135deg,#E64A19,#FF5733,#ff7a5c);color:#fff;
+  box-shadow:0 4px 20px rgba(255,87,51,.3);transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 26px rgba(255,87,51,.45);}
+.burger{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,.02);}
+.burger span{width:18px;height:2px;background:var(--txt);border-radius:2px;transition:.28s;}
 .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .burger.open span:nth-child(2){opacity:0;}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-ava{width:40px;height:40px;border-radius:50%;background:var(--panel2);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:var(--blue);cursor:pointer;overflow:hidden;flex-shrink:0;box-shadow:0 0 14px rgba(212,175,55,.3);}
 
-/* ═══════════ DRAWER ═══════════ */
-.drawer{position:fixed;top:var(--nav);left:0;right:0;z-index:99;background:rgba(8,10,18,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);padding:1rem clamp(16px,4vw,32px) 1.4rem;display:flex;flex-direction:column;gap:.4rem;transform:translateY(-130%);transition:transform .32s cubic-bezier(.4,0,.2,1);}
-.drawer.open{transform:translateY(0);}
-.drawer a{padding:.85rem 1rem;border-radius:var(--r-m);font-size:.95rem;font-weight:500;color:var(--txt);transition:background .2s;}
-.drawer a:hover{background:rgba(212,175,55,.08);color:var(--blue);}
-.drawer .btn{margin-top:.6rem;width:100%;}
+/* mobile menu */
+.mmenu{position:fixed;inset:var(--nav-h) 0 0;z-index:99;background:rgba(10,10,11,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;padding:34px 24px;gap:6px;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.mmenu.open{transform:translateX(0);}
+.mmenu a{font-family:var(--ff-d);font-size:22px;font-weight:600;color:var(--txt);padding:16px 0;
+  border-bottom:1px solid var(--line);transition:color .2s,padding-left .2s;}
+.mmenu a:hover{color:var(--gold);padding-left:8px;}
+.mmenu .nav-cta{margin-top:24px;justify-content:center;padding:16px;font-size:16px;}
 
-/* ═══════════ HERO ═══════════ */
-#hero{position:relative;padding:calc(var(--nav) + clamp(40px,8vw,80px)) 0 clamp(40px,7vw,72px);overflow:hidden;}
-.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
-.hero-grid{position:absolute;inset:0;opacity:.4;background-image:linear-gradient(rgba(212,175,55,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.08) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000,transparent 75%);}
-.orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
-.orb1{width:380px;height:380px;top:-100px;right:-60px;background:radial-gradient(circle,rgba(212,175,55,.28),transparent 70%);animation:orbDrift 12s ease-in-out infinite;}
-.orb2{width:300px;height:300px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 70%);animation:orbDrift 15s ease-in-out infinite reverse;}
-.hero-in{position:relative;z-index:1;text-align:center;}
-.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:30px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7e8eff;margin-bottom:1.6rem;animation:fadeUp .6s ease both;}
-.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:dotPulse 2s infinite;}
-.hero-h1{font-family:var(--ff-d);font-size:clamp(2.1rem,7vw,4.6rem);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--txt);margin-bottom:1.2rem;animation:fadeUp .65s .08s ease both;}
-.hero-h1 .glow-blue{color:var(--gold);text-shadow:0 0 30px rgba(212,175,55,.5);}
-.hero-p{font-size:clamp(.95rem,2.2vw,1.15rem);color:var(--txt2);max-width:38rem;margin:0 auto 2.2rem;line-height:1.7;animation:fadeUp .65s .16s ease both;}
-.hero-cta{display:flex;align-items:center;justify-content:center;gap:.8rem;flex-wrap:wrap;animation:fadeUp .65s .24s ease both;}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:15px 30px;border-radius:100px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,border-color .2s;white-space:nowrap;}
+.btn-gold{background:linear-gradient(135deg,#E64A19,#FF5733,#ff7a5c);color:#fff;
+  box-shadow:0 6px 28px rgba(255,87,51,.34);position:relative;overflow:hidden;}
+.btn-gold::after{content:'';position:absolute;top:0;left:-130%;width:55%;height:100%;
+  background:linear-gradient(110deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-18deg);animation:sheen 4.5s ease-in-out infinite;}
+@keyframes sheen{0%,55%{left:-130%}80%,100%{left:160%}}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(255,87,51,.5);}
+.btn-ghost{border:1px solid var(--line-hi);color:var(--txt);background:rgba(255,255,255,.02);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
 
-/* ═══════════ METRICS / COUNTERS ═══════════ */
-.metrics{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:clamp(2.5rem,6vw,4rem);animation:fadeUp .65s .36s ease both;}
-.metric{position:relative;padding:1.8rem 1.4rem;border-radius:var(--r-xl);background:linear-gradient(160deg,var(--panel),var(--void));border:1px solid var(--line);overflow:hidden;transition:border-color .25s,transform .25s;}
-.metric:hover{border-color:rgba(212,175,55,.45);transform:translateY(-4px);}
-.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.6;}
-.metric-scan{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(212,175,55,.05),transparent);pointer-events:none;}
-.metric-num{font-family:var(--ff-d);font-size:clamp(2.4rem,6vw,3.4rem);font-weight:700;line-height:1;color:var(--txt);margin-bottom:.5rem;letter-spacing:-.02em;}
-.metric-num .suffix{color:var(--blue);}
-.metric-lbl{font-size:.82rem;font-weight:500;color:var(--txt2);letter-spacing:.02em;}
+/* ── HERO ── */
+header.hero{position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:calc(var(--nav-h) + 40px) 0 70px;}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:100px;
+  border:1px solid var(--line-hi);background:rgba(255,87,51,.06);font-size:12.5px;color:var(--txt2);
+  font-weight:500;margin-bottom:28px;}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);
+  animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:var(--ff-d);font-size:clamp(2.4rem,7vw,5.2rem);font-weight:700;
+  line-height:1.04;letter-spacing:-.025em;margin-bottom:26px;max-width:13ch;}
+.hero-sub{font-size:clamp(1rem,1.9vw,1.22rem);color:var(--txt2);max-width:600px;margin-bottom:38px;line-height:1.65;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px;}
 
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:680px;}
+.metric{padding:22px 20px;border-radius:16px;background:rgba(255,255,255,.02);
+  border:1px solid var(--line);backdrop-filter:blur(8px);position:relative;overflow:hidden;}
+.metric::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+.metric-val{font-family:var(--ff-d);font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:700;
+  color:var(--gold);line-height:1;margin-bottom:7px;letter-spacing:-.02em;}
+.metric-lbl{font-size:12.5px;color:var(--txt2);line-height:1.4;}
 
+/* ── SECTION SHELL ── */
+section{padding:clamp(70px,10vw,120px) 0;position:relative;}
+.s-head{margin-bottom:52px;max-width:720px;}
 
+/* ── BENTO MANIFESTO ── */
+.bento{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.bento-card{position:relative;padding:30px;border-radius:20px;background:var(--card);
+  border:1px solid var(--line);overflow:hidden;transition:border-color .3s,transform .3s;
+  backdrop-filter:blur(6px);}
+.bento-card::before{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity .35s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,87,51,.13),transparent 42%);}
+.bento-card:hover{border-color:var(--line-hi);transform:translateY(-4px);}
+.bento-card:hover::before{opacity:1;}
+.bento-num{font-family:var(--ff-d);font-size:13px;font-weight:600;color:var(--gold-dim);margin-bottom:auto;}
+.bento-ico{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:25px;margin-bottom:20px;background:linear-gradient(135deg,#1d1d21,#101012);
+  border:1px solid var(--line-hi);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 0 20px rgba(255,87,51,.1);}
+.bento-card h3{font-family:var(--ff-d);font-size:1.28rem;font-weight:700;margin-bottom:11px;letter-spacing:-.01em;position:relative;}
+.bento-card p{font-size:14.5px;color:var(--txt2);line-height:1.62;position:relative;}
+.bento-card.span2{grid-column:span 2;}
 
-/* ═══════════ JOBS ═══════════ */
-.jobs-layout{display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:start;}
-.filters{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.7rem;margin-bottom:1.4rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.filters::-webkit-scrollbar{display:none;}
-.chip{flex-shrink:0;padding:.5rem 1.1rem;min-height:40px;border-radius:30px;font-size:.82rem;font-weight:600;border:1px solid var(--line2);background:var(--panel);color:var(--txt2);cursor:pointer;transition:all .18s;white-space:nowrap;}
-.chip.active{border-color:var(--blue);background:rgba(212,175,55,.1);color:var(--blue);}
-.chip:hover:not(.active){border-color:var(--blue);color:var(--txt);}
+/* ── TIMELINE ── */
+.tl{position:relative;max-width:860px;margin:0 auto;}
+.tl::before{content:'';position:absolute;left:27px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent);opacity:.5;}
+.tl-step{position:relative;padding:0 0 44px 76px;}
+.tl-step:last-child{padding-bottom:0;}
+.tl-dot{position:absolute;left:16px;top:2px;width:24px;height:24px;border-radius:50%;
+  background:var(--black);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 6px rgba(255,87,51,.08),0 0 22px rgba(255,87,51,.4);z-index:2;}
+.tl-dot span{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.tl-k{font-family:var(--ff-d);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:9px;display:block;}
+.tl-step h3{font-family:var(--ff-d);font-size:1.45rem;font-weight:700;margin-bottom:9px;letter-spacing:-.01em;}
+.tl-step p{font-size:15px;color:var(--txt2);max-width:560px;line-height:1.62;}
 
-.jobs-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
-.job{position:relative;padding:1.4rem;border-radius:var(--r-l);background:var(--panel);border:1px solid var(--line);transition:border-color .22s,transform .22s,box-shadow .22s,opacity .3s;cursor:pointer;overflow:hidden;animation:fadeUp .35s ease both;}
-.job:hover{border-color:var(--line2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5);}
-.job.viewed{opacity:.65;}
-.job.premium{border-color:rgba(212,175,55,.4);background:linear-gradient(160deg,var(--panel),rgba(212,175,55,.05));}
-.job.premium:hover{border-color:rgba(212,175,55,.7);box-shadow:0 12px 44px rgba(212,175,55,.15);}
-.job.premium::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+/* ── ECOSYSTEM ── */
+.eco-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.eco-card{position:relative;padding:34px;border-radius:22px;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);transition:transform .3s,border-color .3s;}
+.eco-card:hover{transform:translateY(-5px);border-color:var(--line-hi);}
+.eco-card::after{content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:radial-gradient(380px circle at 100% 0,rgba(255,87,51,.12),transparent 60%);}
+.eco-tag{font-family:var(--ff-d);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-dim);margin-bottom:16px;display:block;position:relative;}
+.eco-card h3{font-family:var(--ff-d);font-size:1.7rem;font-weight:700;margin-bottom:13px;letter-spacing:-.015em;position:relative;}
+.eco-card p{font-size:14.5px;color:var(--txt2);line-height:1.62;margin-bottom:24px;position:relative;}
+.eco-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--gold);
+  position:relative;transition:gap .25s;}
+.eco-card:hover .eco-link{gap:13px;}
 
-.job-viewed-badge{position:absolute;top:1rem;right:1rem;display:none;align-items:center;gap:.3rem;padding:.25rem .6rem;border-radius:20px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35);font-size:.68rem;font-weight:600;color:#8a98ff;z-index:2;}
-.job.viewed .job-viewed-badge{display:inline-flex;animation:fadeIn .3s ease;}
-.job-viewed-badge svg{width:11px;height:11px;}
+/* ── PRICING ── */
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:880px;margin:0 auto;}
+.price-card{position:relative;padding:38px 32px;border-radius:22px;background:var(--card);
+  border:1px solid var(--line);transition:transform .3s,border-color .3s;}
+.price-card:hover{transform:translateY(-4px);}
+.price-card.pro{border-color:var(--line-hi);background:linear-gradient(165deg,#1f140f,#18181C 65%);
+  box-shadow:0 0 0 1px rgba(255,87,51,.15),0 24px 60px rgba(0,0,0,.5);}
+.price-flag{position:absolute;top:-12px;right:28px;padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(135deg,#E64A19,#ff7a5c);color:#fff;
+  box-shadow:0 4px 16px rgba(255,87,51,.4);}
+.price-name{font-family:var(--ff-d);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--txt2);margin-bottom:14px;}
+.price-amt{font-family:var(--ff-d);font-size:3.1rem;font-weight:700;line-height:1;margin-bottom:6px;letter-spacing:-.02em;}
+.price-amt small{font-size:1rem;color:var(--txt3);font-weight:500;}
+.price-desc{font-size:13.5px;color:var(--txt2);margin-bottom:26px;min-height:40px;}
+.price-feat{list-style:none;margin-bottom:30px;display:flex;flex-direction:column;gap:13px;}
+.price-feat li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:var(--txt);}
+.price-feat .ic{flex-shrink:0;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;margin-top:2px;}
+.price-feat .yes{background:rgba(255,87,51,.14);color:var(--gold);border:1px solid var(--line-hi);}
+.price-feat .no{background:rgba(255,255,255,.03);color:var(--txt3);border:1px solid var(--line);}
+.price-feat .muted{color:var(--txt3);}
+.price-btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border-radius:100px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.price-btn.ghost{border:1px solid var(--line-hi);color:var(--txt);}
+.price-btn.ghost:hover{border-color:var(--gold);color:var(--gold);}
+.price-btn.gold{background:linear-gradient(135deg,#E64A19,#FF5733,#ff7a5c);color:#fff;box-shadow:0 6px 24px rgba(255,87,51,.34);}
+.price-btn.gold:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(255,87,51,.5);}
 
-.job-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem;padding-right:5.5rem;}
-.badge{display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .6rem;border-radius:20px;font-size:.68rem;font-weight:600;border:1px solid var(--line2);color:var(--txt2);background:rgba(255,255,255,.03);letter-spacing:.02em;}
-.badge-cat{border-color:rgba(212,175,55,.3);color:#8a98ff;background:rgba(212,175,55,.07);}
-.badge-rem{border-color:rgba(34,197,94,.25);color:#7ee0a3;background:rgba(34,197,94,.06);}
-.badge-prem{border-color:rgba(212,175,55,.45);color:var(--gold-br);background:rgba(212,175,55,.1);}
-.job-title{font-family:var(--ff-d);font-size:1.02rem;font-weight:600;color:var(--txt);line-height:1.32;margin-bottom:.35rem;}
-.job-co{font-size:.78rem;color:var(--txt3);margin-bottom:.7rem;}
-.job-desc{font-size:.84rem;color:var(--txt2);line-height:1.55;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.job-foot{display:flex;align-items:center;justify-content:space-between;gap:.7rem;flex-wrap:wrap;}
-.job-price{font-family:var(--ff-d);font-size:1.05rem;font-weight:700;color:var(--blue);}
-.job.premium .job-price{color:var(--gold-br);}
-.job-time{font-size:.7rem;color:var(--txt3);margin-top:.15rem;}
+/* ── CTA STRIP ── */
+.cta-strip{text-align:center;padding:clamp(54px,8vw,90px) 36px;border-radius:28px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,#1f140f,#101012 70%);border:1px solid var(--line-hi);}
+.cta-strip::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;background:radial-gradient(circle,rgba(255,87,51,.18),transparent 60%);pointer-events:none;}
+.cta-strip h2{font-family:var(--ff-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;line-height:1.1;margin-bottom:18px;position:relative;letter-spacing:-.02em;}
+.cta-strip p{color:var(--txt2);max-width:520px;margin:0 auto 32px;position:relative;font-size:1.05rem;}
 
-/* Premium lock overlay */
-.lock-box{margin-top:.5rem;padding:1rem;border-radius:var(--r-m);background:rgba(212,175,55,.05);border:1px dashed rgba(212,175,55,.4);text-align:center;}
-.lock-ic{font-size:1.3rem;margin-bottom:.4rem;}
-.lock-txt{font-size:.78rem;color:var(--txt2);line-height:1.5;margin-bottom:.8rem;}
-.lock-txt b{color:var(--gold-br);font-weight:600;}
-.lock-price{margin-bottom:.8rem;}
-.lock-price-usd{font-family:var(--ff-d);font-size:1.6rem;font-weight:700;color:var(--txt);line-height:1;}
-.lock-price-stars{font-size:.82rem;color:var(--gold);font-weight:600;margin-top:.25rem;}
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--line);padding:60px 0 36px;position:relative;z-index:2;}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:36px;margin-bottom:44px;}
+.foot-brand{max-width:320px;}
+.foot-brand .logo{margin-bottom:16px;}
+.foot-brand p{font-size:14px;color:var(--txt2);line-height:1.6;}
+.foot-cols{display:flex;flex-wrap:wrap;gap:54px;}
+.foot-col h4{font-family:var(--ff-d);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--txt3);margin-bottom:16px;}
+.foot-col a{display:block;font-size:14px;color:var(--txt2);padding:5px 0;transition:color .2s;}
+.foot-col a:hover{color:var(--gold);}
+.foot-contact{padding:22px 24px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:40px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;}
+.foot-contact .fc-t{font-family:var(--ff-d);font-weight:600;margin-bottom:4px;}
+.foot-contact .fc-s{font-size:13px;color:var(--txt2);}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;
+  padding-top:28px;border-top:1px solid var(--line);}
+.foot-bottom p{font-size:13px;color:var(--txt3);}
+.foot-bottom .mono{color:var(--gold-dim);}
 
-/* ═══════════ SIDEBAR ═══════════ */
-.side{display:flex;flex-direction:column;gap:1rem;}
-.side-card{padding:1.4rem;border-radius:var(--r-l);background:var(--panel);border:1px solid var(--line);}
-.side-card.neon{border-color:rgba(212,175,55,.3);animation:neonPulse 3.5s ease-in-out infinite;}
-.sc-title{font-family:var(--ff-d);font-size:1rem;font-weight:600;color:var(--txt);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;}
-.sc-desc{font-size:.8rem;color:var(--txt2);line-height:1.55;margin-bottom:1rem;}
-.eco-btn{display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;border-radius:var(--r-m);background:var(--panel2);border:1px solid var(--line2);margin-bottom:.6rem;transition:all .2s;}
-.eco-btn:hover{border-color:var(--blue);background:rgba(212,175,55,.06);transform:translateX(3px);}
-.eco-btn:last-child{margin-bottom:0;}
-.eco-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,#2AABEE,#229ED9);}
-.eco-ic svg{width:20px;height:20px;}
-.eco-body{flex:1;min-width:0;}
-.eco-name{font-size:.85rem;font-weight:600;color:var(--txt);}
-.eco-sub{font-size:.72rem;color:var(--txt3);}
-.eco-arrow{color:var(--txt3);font-size:1.1rem;}
+/* ── SCROLL REVEAL ── */
+.scroll-reveal{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+.scroll-reveal.in{opacity:1;transform:translateY(0);}
+.scroll-reveal[data-delay="1"]{transition-delay:.08s;}
+.scroll-reveal[data-delay="2"]{transition-delay:.16s;}
+.scroll-reveal[data-delay="3"]{transition-delay:.24s;}
 
-/* ═══════════ PRICING ═══════════ */
-.pricing-grid{display:grid;grid-template-columns:1fr;gap:1.4rem;max-width:760px;margin:0 auto;}
-.price-c{position:relative;padding:2rem 1.6rem;border-radius:var(--r-xl);background:var(--panel);border:1px solid var(--line);transition:transform .22s;}
-.price-c:hover{transform:translateY(-4px);}
-.price-feat{background:linear-gradient(160deg,rgba(212,175,55,.08),var(--panel));border-color:rgba(212,175,55,.4);box-shadow:0 0 40px rgba(212,175,55,.12);}
-.price-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:.25rem .9rem;border-radius:20px;background:var(--blue);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
-.price-plan{font-family:var(--ff-d);font-size:1.1rem;font-weight:600;color:var(--txt);margin-bottom:.7rem;}
-.price-usd{font-family:var(--ff-d);font-size:2.6rem;font-weight:700;line-height:1;color:var(--txt);}
-.price-usd .per{font-size:1rem;color:var(--txt3);font-weight:500;}
-.price-stars{font-size:.92rem;color:var(--blue);font-weight:600;margin-top:.4rem;}
-.price-hr{border:none;border-top:1px solid var(--line);margin:1.4rem 0;}
-.price-fs{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.6rem;text-align:left;}
-.pf{font-size:.85rem;color:var(--txt);display:flex;gap:.5rem;align-items:flex-start;}
-.pf .i{color:var(--blue);flex-shrink:0;}
-.pf-no{color:var(--txt3);}
-.pf-no .i{color:var(--txt3);}
-
-/* ═══════════ FOOTER / CONTACTS ═══════════ */
-footer{border-top:1px solid var(--line);background:var(--void);padding:clamp(40px,7vw,72px) 0 calc(2rem + var(--safe));}
-.contacts-panel{padding:clamp(1.6rem,4vw,2.8rem);border-radius:var(--r-xl);background:linear-gradient(160deg,var(--panel),var(--void));border:1px solid var(--line);position:relative;overflow:hidden;margin-bottom:3rem;}
-.contacts-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#9a7d20,var(--gold),#9a7d20);}
-.cp-grid{display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:center;}
-.cp-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:.7rem;}
-.cp-title{font-family:var(--ff-d);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;color:var(--txt);margin-bottom:.7rem;line-height:1.2;}
-.cp-desc{font-size:.92rem;color:var(--txt2);line-height:1.7;}
-.cp-action{display:flex;flex-direction:column;gap:.7rem;}
-.cp-mgr{display:flex;align-items:center;gap:.9rem;padding:1rem 1.2rem;border-radius:var(--r-l);background:var(--panel2);border:1px solid var(--line2);transition:all .2s;}
-.cp-mgr:hover{border-color:var(--blue);box-shadow:0 0 24px rgba(212,175,55,.15);transform:translateY(-2px);}
-.cp-mgr-ava{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c9a227,#D4AF37,#e8c84a);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
-.cp-mgr-info{flex:1;min-width:0;}
-.cp-mgr-name{font-size:.95rem;font-weight:600;color:var(--txt);}
-.cp-mgr-role{font-size:.76rem;color:var(--txt3);}
-
-.foot-cols{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:2.4rem;}
-.foot-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
-.foot-about{font-size:.84rem;color:var(--txt2);line-height:1.7;max-width:18rem;}
-.fc-t{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt);margin-bottom:1rem;}
-.fc-l{display:flex;flex-direction:column;gap:.6rem;}
-.fc-l a{font-size:.84rem;color:var(--txt2);transition:color .18s;}
-.fc-l a:hover{color:var(--blue);}
-.foot-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;padding-top:1.6rem;border-top:1px solid var(--line);font-size:.76rem;color:var(--txt3);}
-
-/* ═══════════ MODAL ═══════════ */
-.ov{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;pointer-events:none;transition:opacity .24s;}
-.ov.open{opacity:1;pointer-events:all;}
-.mbox{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:0 -10px 60px rgba(0,0,0,.7);width:100%;max-width:480px;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding-bottom:var(--safe);}
-.ov.open .mbox{transform:translateY(0);}
-.mhead{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.4rem 0;}
-.mtitle{font-family:var(--ff-d);font-size:1.15rem;font-weight:600;color:var(--txt);}
-.mclose{width:34px;height:34px;border-radius:9px;background:var(--panel2);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--txt2);transition:all .18s;flex-shrink:0;}
-.mclose:hover{background:var(--line2);color:var(--txt);}
-.mbody{padding:1.2rem 1.4rem 1.8rem;}
-.mbody .price-usd{text-align:center;}
-.modal-prem-ic{font-size:2.6rem;text-align:center;margin-bottom:.8rem;}
-.modal-prem-price{text-align:center;margin:1.2rem 0;padding:1.2rem;border-radius:var(--r-l);background:var(--panel2);border:1px solid var(--line2);}
-
-/* ═══════════ TOAST ═══════════ */
-#toast{position:fixed;bottom:calc(1.5rem + var(--safe));left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line2);color:var(--txt);padding:.7rem 1.3rem;border-radius:12px;font-size:.82rem;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.55);opacity:0;pointer-events:none;z-index:300;max-width:90vw;text-align:center;transition:opacity .22s;}
-#toast.visible{opacity:1;animation:toastIn .22s ease both;}
-#toast.blue{border-color:var(--blue);}
-#toast.red{border-color:var(--red);}
-
-body.no-scroll{overflow:hidden;}
-
-/* ═══════════ RESPONSIVE ═══════════ */
-@media(min-width:560px){
-  .metrics{grid-template-columns:repeat(3,1fr);}
-  .hero-cta .btn{width:auto;}
-  .ov{align-items:center;padding:1.2rem;}
-  .mbox{border-radius:var(--r-xl);transform:scale(.96) translateY(10px);}
-  .ov.open .mbox{transform:scale(1) translateY(0);}
-}
-@media(min-width:768px){
-  .burger{display:none!important;}
-  .drawer{display:none!important;}
-  .jobs-grid{grid-template-columns:repeat(2,1fr);}
-  .pricing-grid{grid-template-columns:1fr 1fr;}
-  .cp-grid{grid-template-columns:1.3fr 1fr;}
-  .foot-cols{grid-template-columns:2fr 1fr 1fr;}
-}
-@media(max-width:767px){
+/* ── RESPONSIVE ── */
+@media(max-width:880px){
   .nav-links{display:none;}
   .burger{display:flex;}
-  .nav-act .desktop-login{display:none;}
+  .bento,.eco-grid,.price-grid{grid-template-columns:1fr;}
+  .bento-card.span2{grid-column:span 1;}
+  .metrics{grid-template-columns:1fr;max-width:340px;}
+  .metric{display:flex;align-items:baseline;gap:14px;padding:18px 20px;}
+  .metric-val{margin-bottom:0;}
 }
-@media(min-width:1024px){
-  .jobs-layout{grid-template-columns:1fr 320px;}
-  .jobs-grid{grid-template-columns:repeat(2,1fr);}
+@media(max-width:520px){
+  .wrap{padding:0 18px;}
+  .nav-in{padding:0 18px;}
+  .hero-cta{flex-direction:column;align-items:stretch;}
+  .hero-cta .btn{width:100%;}
+  .tl-step{padding-left:62px;}
+  .tl::before{left:21px;}
+  .tl-dot{left:10px;}
 }
-@media(min-width:1600px){
-  :root{--max:1480px;}
-  html{font-size:17px;}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important;}
+  .scroll-reveal{opacity:1;transform:none;}
 }
-@media(min-width:2400px){
-  :root{--max:1760px;}
-  html{font-size:19px;}
-}
-@media(max-width:360px){
-  .logo-txt{font-size:.92rem;}
-  .hero-h1{font-size:1.9rem;}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="grain"></div>
+
+<!-- ════ NAVBAR ════ -->
 <nav id="nav">
   <div class="nav-in">
-    <button class="logo" id="logoHome" aria-label="На главную">
-      <div class="logo-mark"><span>A</span></div>
-      <span class="logo-txt">AKU<b>Jobs</b></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="#jobs">Вакансии</a></li>
-      <li><a href="#pricing">PRO-подписка</a></li>
-      <li><a href="#contacts">Контакты</a></li>
-    </ul>
-    <div class="nav-act">
-      <button class="btn btn-tg btn-sm desktop-login" id="navLogin">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-        Войти через Telegram
-      </button>
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a href="#top" class="logo">
+      <span class="logo-mark">A</span>
+      <span>AKU&nbsp;Jobs</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">О проекте</a>
+      <a href="#how">Как это работает</a>
+      <a href="#pricing">Возможности PRO</a>
+      <a href="#ecosystem">Экосистема</a>
+      <a href="#contacts">Контакты</a>
     </div>
+    <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener" class="nav-cta" style="display:none;" id="navCta">Запустить бота ⚡</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<!-- DRAWER -->
-<div class="drawer" id="drawer">
-  <a href="#jobs">Вакансии</a>
-  <a href="#pricing">PRO-подписка</a>
+<div class="mmenu" id="mmenu">
+  <a href="#about">О проекте</a>
+  <a href="#how">Как это работает</a>
+  <a href="#pricing">Возможности PRO</a>
+  <a href="#ecosystem">Экосистема</a>
   <a href="#contacts">Контакты</a>
-  <button class="btn btn-tg" id="drawerLogin">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-    Войти через Telegram
-  </button>
+  <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener" class="nav-cta">Запустить бота ⚡</a>
 </div>
 
-<!-- HERO -->
-<header id="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-  </div>
-  <div class="wrap hero-in">
-    <div class="hero-badge"><span class="dot"></span>AKU Ecosystem · B2B Freelance Platform</div>
-    <h1 class="hero-h1">Биржа фриланса<br/><span class="glow-blue">нового поколения</span></h1>
-    <p class="hero-p">Премиальная платформа для заказчиков и специалистов в диджитал, AI и автоматизации. Высокобюджетные заказы, Telegram-авторизация, мгновенные сделки.</p>
-    <div class="hero-cta">
-      <button class="btn btn-blue btn-lg" id="heroFind">🔍 Найти специалиста</button>
-      <button class="btn btn-ghost btn-lg" id="heroJobs">💼 Смотреть вакансии</button>
+<!-- ════ HERO ════ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-badge scroll-reveal"><span class="dot"></span>Часть экосистемы AKU · Работает в Telegram</div>
+    <h1 class="scroll-reveal" data-delay="1">Экосистема автоматизации и <span class="t-grad">фриланса будущего</span></h1>
+    <p class="hero-sub scroll-reveal" data-delay="2">AKU Jobs Hub — интеллектуальный хаб внутри Telegram, который соединяет премиальных заказчиков с AI-архитекторами, топ-дизайнерами и разработчиками. Без громоздких сайтов и посредников.</p>
+    <div class="hero-cta scroll-reveal" data-delay="3">
+      <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener" class="btn btn-gold">Открыть в Telegram ⚡</a>
+      <a href="#about" class="btn btn-ghost">Узнать больше ↓</a>
     </div>
-
-    <!-- METRICS -->
-    <div class="metrics">
-      <div class="metric"><div class="metric-scan"></div><div class="metric-num" data-target="50" data-suffix="+">0</div><div class="metric-lbl">Активные вакансии</div></div>
-      <div class="metric"><div class="metric-scan"></div><div class="metric-num" data-target="67" data-suffix="+">0</div><div class="metric-lbl">Специалистов в базе</div></div>
-      <div class="metric"><div class="metric-scan"></div><div class="metric-num" data-target="228" data-suffix="">0</div><div class="metric-lbl">Успешных сделок</div></div>
+    <div class="metrics scroll-reveal" data-delay="3">
+      <div class="metric"><div class="metric-val" data-count="50000" data-prefix="" data-suffix="+ ₽">0</div><div class="metric-lbl">Средний чек сделки</div></div>
+      <div class="metric"><div class="metric-val" data-count="2500" data-suffix="+">0</div><div class="metric-lbl">Специалистов в базе</div></div>
+      <div class="metric"><div class="metric-val" data-count="100" data-suffix="%">0</div><div class="metric-lbl">Автоматизация процессов</div></div>
     </div>
   </div>
 </header>
 
-<!-- JOBS -->
-<section id="jobs" class="section">
+<!-- ════ ABOUT / MANIFESTO ════ -->
+<section id="about">
   <div class="wrap">
-    <div class="s-head">
-      <div>
-        <div class="s-eyebrow">Лента заказов</div>
-        <h2 class="s-title">Актуальные вакансии</h2>
+    <div class="s-head scroll-reveal">
+      <span class="eyebrow">Кто мы такие</span>
+      <h2 class="s-title">Почему <span class="t-grad">AKU</span></h2>
+      <p class="s-sub">Мы убрали всё лишнее между задачей и результатом. Остался один интеллектуальный хаб, где работа идёт со скоростью сообщения.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-card scroll-reveal" data-tilt>
+        <div class="bento-ico">⚡</div>
+        <h3>0% хаоса. 100% Telegram</h3>
+        <p>Вся работа, уведомления и генерация откликов происходят в одном месте — в мессенджере, который всегда под рукой. Никаких громоздких сайтов и вкладок.</p>
       </div>
-      <button class="btn btn-ghost" id="postBtn">+ Разместить заказ</button>
-    </div>
-    <div class="filters" id="filters">
-      <button class="chip active" data-f="all">Все</button>
-      <button class="chip" data-f="design">🎨 Дизайн</button>
-      <button class="chip" data-f="dev">💻 Разработка</button>
-      <button class="chip" data-f="marketing">📣 Маркетинг</button>
-      <button class="chip" data-f="ai">🤖 AI</button>
-      <button class="chip" data-f="premium">⭐ Premium</button>
-    </div>
-
-    <div class="jobs-layout">
-      <div class="jobs-grid" id="jobsList"></div>
-      <aside class="side">
-        <div class="side-card neon">
-          <div class="sc-title">⚡ AKU PRO</div>
-          <div class="sc-desc">Откройте доступ ко всем премиум-заказам с высоким бюджетом. Безлимитные отклики и приоритет.</div>
-          <div style="margin-bottom:1rem;">
-            <div class="price-usd" style="font-size:2rem;">$9<span class="per"> / мес</span></div>
-            <div class="price-stars">450 ★ / мес</div>
-          </div>
-          <button class="btn btn-blue" style="width:100%;" id="sideProBtn">Оформить PRO</button>
-        </div>
-        <div class="side-card">
-          <div class="sc-title">🔗 Экосистема</div>
-          <div class="sc-desc">Быстрый доступ к инструментам AKU прямо в Telegram.</div>
-          <a class="eco-btn" href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">
-            <div class="eco-ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg></div>
-            <div class="eco-body"><div class="eco-name">Telegram-бот</div><div class="eco-sub">@AKUJobsHub_bot</div></div>
-            <div class="eco-arrow">→</div>
-          </a>
-          <a class="eco-btn" href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">
-            <div class="eco-ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg></div>
-            <div class="eco-body"><div class="eco-name">Telegram-канал</div><div class="eco-sub">@AKUJobsHub</div></div>
-            <div class="eco-arrow">→</div>
-          </a>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="section">
-  <div class="wrap tc">
-    <div class="s-eyebrow" style="justify-content:center;">Подписка</div>
-    <h2 class="s-title">Откройте все возможности</h2>
-    <p class="s-sub" style="margin:0 auto 3rem;">Базовый доступ бесплатно. PRO снимает все лимиты и открывает премиум-заказы.</p>
-    <div class="pricing-grid">
-      <div class="price-c">
-        <div class="price-plan">Базовый</div>
-        <div class="price-usd">$0<span class="per"> / мес</span></div>
-        <div class="price-stars" style="color:var(--txt3);">бесплатно навсегда</div>
-        <hr class="price-hr"/>
-        <div class="price-fs">
-          <div class="pf"><span class="i">✓</span> Просмотр обычных вакансий</div>
-          <div class="pf"><span class="i">✓</span> 3 отклика в день</div>
-          <div class="pf"><span class="i">✓</span> Базовый профиль</div>
-          <div class="pf pf-no"><span class="i">✕</span> Премиум-заказы</div>
-          <div class="pf pf-no"><span class="i">✕</span> Безлимитные отклики</div>
-        </div>
-        <button class="btn btn-ghost" style="width:100%;" id="priceFree">Текущий план</button>
+      <div class="bento-card scroll-reveal" data-delay="1" data-tilt>
+        <div class="bento-ico">🧠</div>
+        <h3>Умный AI-отбор</h3>
+        <p>Нейросети экосистемы AKU Automation фильтруют спам и калибруют вакансии, оставляя в ленте только премиальные, проверенные проекты.</p>
       </div>
-      <div class="price-c price-feat">
-        <div class="price-tag">⚡ Рекомендуем</div>
-        <div class="price-plan t-blue">AKU PRO</div>
-        <div class="price-usd">$9<span class="per"> / мес</span></div>
-        <div class="price-stars">450 ★ / мес</div>
-        <hr class="price-hr"/>
-        <div class="price-fs">
-          <div class="pf"><span class="i">✓</span> Доступ ко всем премиум-заказам</div>
-          <div class="pf"><span class="i">✓</span> Безлимитные отклики</div>
-          <div class="pf"><span class="i">✓</span> Приоритет в поиске</div>
-          <div class="pf"><span class="i">✓</span> Значок PRO в профиле</div>
-          <div class="pf"><span class="i">✓</span> Ранний доступ к заказам</div>
-        </div>
-        <button class="btn btn-blue" style="width:100%;" id="pricePro">Оформить за $9 / мес</button>
+      <div class="bento-card scroll-reveal" data-delay="2" data-tilt>
+        <div class="bento-ico">🤝</div>
+        <h3>Мгновенные сделки</h3>
+        <p>Прямой контакт между заказчиком и исполнителем — без посредников, очередей модерации и скрытых комиссий классических бирж.</p>
+      </div>
+      <div class="bento-card scroll-reveal" data-delay="3" data-tilt>
+        <div class="bento-ico">👑</div>
+        <h3>PRO-статус</h3>
+        <p>Приоритетный доступ к высокобюджетным контрактам в диджитал, автоматизации и AI-интеграциях — раньше, чем их увидят остальные.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ════ HOW IT WORKS ════ -->
+<section id="how">
+  <div class="wrap">
+    <div class="s-head scroll-reveal">
+      <span class="eyebrow">Как это работает</span>
+      <h2 class="s-title">Три шага до <span class="t-grad">первой сделки</span></h2>
+      <p class="s-sub">От запуска бота до отклика проходит меньше минуты. Паролей и анкет не будет.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-step scroll-reveal">
+        <div class="tl-dot"><span></span></div>
+        <span class="tl-k">Шаг 01 · Запуск</span>
+        <h3>Откройте бота за один клик</h3>
+        <p>Переходите в @AKUJobsHub_bot прямо из Telegram. Без регистрации, паролей и подтверждений по почте — вход занимает секунду.</p>
+      </div>
+      <div class="tl-step scroll-reveal" data-delay="1">
+        <div class="tl-dot"><span></span></div>
+        <span class="tl-k">Шаг 02 · Настройка</span>
+        <h3>Выберите роль и направления</h3>
+        <p>Заказчик или специалист — переключайтесь в один тап. Настройте фильтр направлений: AI, дизайн, разработка, маркетинг, видео.</p>
+      </div>
+      <div class="tl-step scroll-reveal" data-delay="2">
+        <div class="tl-dot"><span></span></div>
+        <span class="tl-k">Шаг 03 · Действие</span>
+        <h3>Публикуйте задачи или откликайтесь</h3>
+        <p>Размещайте проекты или мгновенно откликайтесь на лучшие предложения рынка. Умная защита от спама бережёт ваше время.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ECOSYSTEM ════ -->
+<section id="ecosystem">
+  <div class="wrap">
+    <div class="s-head scroll-reveal">
+      <span class="eyebrow">Экосистема AKU</span>
+      <h2 class="s-title">Jobs Hub — часть <span class="t-grad">единого организма</span></h2>
+      <p class="s-sub">За биржей стоит экосистема студий. Каждая ветка усиливает остальные — от AI-инфраструктуры до продвижения.</p>
+    </div>
+    <div class="eco-grid">
+      <div class="eco-card scroll-reveal" data-tilt>
+        <span class="eco-tag">Ветка · Технологии</span>
+        <h3>AKU Automation</h3>
+        <p>Разработка кастомных AI-CRM систем, ИИ-кураторов и умных ботов для автоматизации бизнеса. Та же нейро-инфраструктура, что фильтрует вакансии в Jobs Hub.</p>
+        <a href="https://akuautomation.github.io/AKUAutomation/" target="_blank" rel="noopener" class="eco-link">Перейти к Automation →</a>
+      </div>
+      <div class="eco-card scroll-reveal" data-delay="1" data-tilt>
+        <span class="eco-tag">Ветка · Контент</span>
+        <h3>AKU Media</h3>
+        <p>Продюсирование контента, SMM-стратегии и развитие персональных брендов в digital-пространстве. Превращаем экспертизу специалистов в репутацию.</p>
+        <a href="https://akumedia.github.io/" target="_blank" rel="noopener" class="eco-link">Перейти к Media →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRICING ════ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="s-head scroll-reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <span class="eyebrow" style="justify-content:center;">Возможности PRO</span>
+      <h2 class="s-title">Доступ к <span class="t-grad">высшей лиге</span></h2>
+      <p class="s-sub" style="margin:0 auto;">Базовый доступ — бесплатно навсегда. PRO открывает безлимит и приоритет в высокобюджетных контрактах.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card scroll-reveal">
+        <div class="price-name">Базовый</div>
+        <div class="price-amt">0 <small>₽ / навсегда</small></div>
+        <p class="price-desc">Чтобы начать находить проекты и заявить о себе.</p>
+        <ul class="price-feat">
+          <li><span class="ic yes">✓</span> Лента проверенных вакансий</li>
+          <li><span class="ic yes">✓</span> До 25 откликов в сутки</li>
+          <li><span class="ic yes">✓</span> Базовые фильтры направлений</li>
+          <li><span class="ic no muted">✕</span> <span class="muted">Premium-вакансии со ⭐</span></li>
+          <li><span class="ic no muted">✕</span> <span class="muted">Приоритет в ленте</span></li>
+        </ul>
+        <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener" class="price-btn ghost">Начать в боте</a>
+      </div>
+      <div class="price-card pro scroll-reveal" data-delay="1">
+        <span class="price-flag">Рекомендуем</span>
+        <div class="price-name">AKU PRO</div>
+        <div class="price-amt">$9 <small>/ месяц</small></div>
+        <p class="price-desc">Для тех, кто работает с премиальными контрактами.</p>
+        <ul class="price-feat">
+          <li><span class="ic yes">✓</span> Безлимитные отклики</li>
+          <li><span class="ic yes">✓</span> Доступ к Premium-вакансиям ⭐</li>
+          <li><span class="ic yes">✓</span> Приоритет и выделение в ленте</li>
+          <li><span class="ic yes">✓</span> Закрытые B2B-контракты</li>
+          <li><span class="ic yes">✓</span> Поддержка менеджера</li>
+        </ul>
+        <a href="https://t.me/AKUJobsHub_bot?start=pro" target="_blank" rel="noopener" class="price-btn gold">Получить PRO в боте 👑</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA STRIP ════ -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-strip scroll-reveal">
+      <h2>Войдите в экосистему <span class="t-grad">будущего</span></h2>
+      <p>Премиальные проекты, умный AI-отбор и прямые сделки — всё уже ждёт вас в Telegram.</p>
+      <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener" class="btn btn-gold" style="position:relative;">Запустить бота ⚡</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
 <footer id="contacts">
   <div class="wrap">
-    <div class="contacts-panel">
-      <div class="cp-grid">
-        <div>
-          <div class="cp-eyebrow">Контакты · Поддержка и продажи</div>
-          <div class="cp-title">Корпоративным клиентам</div>
-          <div class="cp-desc">Хотите разместить enterprise-заказ вручную или обсудить особые условия размещения? Свяжитесь напрямую с нашим менеджером — поможем закрыть задачу под ключ.</div>
-        </div>
-        <div class="cp-action">
-          <a class="cp-mgr" href="https://t.me/akumediamgr" target="_blank" rel="noopener">
-            <div class="cp-mgr-ava">👤</div>
-            <div class="cp-mgr-info"><div class="cp-mgr-name">@akumediamgr</div><div class="cp-mgr-role">Менеджер по работе с клиентами</div></div>
-            <div class="eco-arrow">→</div>
-          </a>
-          <a class="btn btn-blue" href="https://t.me/akumediamgr" target="_blank" rel="noopener" style="width:100%;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-            Написать менеджеру
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="foot-cols">
+    <div class="foot-contact scroll-reveal">
       <div>
-        <div class="foot-brand"><div class="logo-mark" style="width:32px;height:32px;"><span style="font-size:.95rem;">A</span></div><span class="logo-txt" style="font-size:1rem;">AKU<b>Jobs</b></span></div>
-        <p class="foot-about">Биржа фриланса нового поколения в экосистеме AKU. B2B-платформа для премиальных заказов.</p>
+        <div class="fc-t">Enterprise-размещение и сотрудничество</div>
+        <div class="fc-s">Прямая связь с менеджером для ручного размещения крупных заказов.</div>
       </div>
-      <div><div class="fc-t">Платформа</div><ul class="fc-l"><li><a href="#jobs">Вакансии</a></li><li><a href="#pricing">PRO-подписка</a></li><li><a href="#contacts">Контакты</a></li></ul></div>
-      <div><div class="fc-t">Telegram</div><ul class="fc-l"><li><a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">Бот</a></li><li><a href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">Канал</a></li><li><a href="https://t.me/akumediamgr" target="_blank" rel="noopener">Менеджер</a></li></ul></div>
+      <a href="https://t.me/akumediamgr" target="_blank" rel="noopener" class="btn btn-ghost">Написать @akumediamgr</a>
+    </div>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><span class="logo-mark">A</span><span>AKU&nbsp;Jobs</span></a>
+        <p>Интеллектуальный хаб фриланса и автоматизации внутри Telegram. Часть экосистемы AKU.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Навигация</h4>
+          <a href="#about">О проекте</a>
+          <a href="#how">Как это работает</a>
+          <a href="#pricing">Возможности PRO</a>
+          <a href="#ecosystem">Экосистема</a>
+        </div>
+        <div class="foot-col">
+          <h4>Экосистема</h4>
+          <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">Jobs Hub Bot</a>
+          <a href="https://akuautomation.github.io/AKUAutomation/" target="_blank" rel="noopener">AKU Automation</a>
+          <a href="https://akumedia.github.io/" target="_blank" rel="noopener">AKU Media</a>
+          <a href="https://t.me/AKUJobsHub" target="_blank" rel="noopener">Telegram-канал</a>
+        </div>
+        <div class="foot-col">
+          <h4>Контакты</h4>
+          <a href="https://t.me/akumediamgr" target="_blank" rel="noopener">@akumediamgr</a>
+          <a href="https://t.me/AKUJobsHub_bot" target="_blank" rel="noopener">Запустить бота</a>
+        </div>
+      </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2025 AKU Jobs. Все права защищены.</span>
-      <span>Powered by AKU Ecosystem ⚡</span>
+      <p>© 2026 AKU Jobs. Все права защищены. <span class="mono">Powered by AKU Ecosystem ⚡</span></p>
+      <p class="mono">v2.0 · Landing</p>
     </div>
   </div>
 </footer>
 
-<!-- MODAL: PRO / PAYWALL -->
-<div class="ov" id="proModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle t-blue">⚡ AKU PRO</span><button class="mclose" id="proClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <div class="modal-prem-ic">🔒</div>
-      <p style="text-align:center;color:var(--txt2);font-size:.92rem;line-height:1.6;">Этот заказ доступен только для PRO-подписчиков. Откройте доступ ко всем премиум-заказам платформы.</p>
-      <div class="modal-prem-price">
-        <div class="price-usd">$9<span class="per"> / мес</span></div>
-        <div class="price-stars">450 ★ / мес</div>
-      </div>
-      <button class="btn btn-tg btn-lg" style="width:100%;margin-bottom:.7rem;" id="proPayTg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-        Оформить через Telegram
-      </button>
-      <button class="btn btn-ghost" style="width:100%;" id="proLater">Позже</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: LOGIN -->
-<div class="ov" id="loginModal" role="dialog" aria-modal="true">
-  <div class="mbox">
-    <div class="mhead"><span class="mtitle">Вход в AKU Jobs</span><button class="mclose" id="loginClose" aria-label="Закрыть"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/></svg></button></div>
-    <div class="mbody">
-      <p style="text-align:center;color:var(--txt2);font-size:.92rem;line-height:1.6;margin-bottom:1.4rem;">Войдите через Telegram в один клик. Мы получим только имя, юзернейм и аватар.</p>
-      <!--
-        ОФИЦИАЛЬНЫЙ TELEGRAM LOGIN WIDGET (раскомментировать на проде):
-        <scr"+"ipt async src="https://telegram.org/js/telegram-widget.js?22"
-          data-telegram-login="AKUJobsHub_bot" data-size="large" data-radius="12"
-          data-onauth="onTelegramAuth(user)" data-request-access="write"></scr"+"ipt>
-      -->
-      <button class="btn btn-tg btn-lg" style="width:100%;" id="loginTg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-        Войти через Telegram
-      </button>
-      <div style="text-align:center;font-size:.72rem;color:var(--txt3);margin-top:.8rem;">Демо-режим: клик имитирует вход</div>
-    </div>
-  </div>
-</div>
-
-<div id="toast" role="status" aria-live="polite"></div>
-
 <script>
-'use strict';
-/* ════════════════════════════════════════════════
-   AKU JOBS — cyber edition · vanilla ES6+
-════════════════════════════════════════════════ */
-const $ = id => document.getElementById(id);
+(function(){
+  'use strict';
 
-/* ─── DEMO JOBS ─── */
-const demoJobs = [
-  { id:'j1', cat:'🎨 Дизайн', catKey:'design', co:'@techflow', title:'UI/UX дизайнер для финтех-приложения', desc:'Проектирование интерфейса мобильного банка: онбординг, дашборд, платежи. Опыт с Figma обязателен.', price:'45 000 ₽', premium:false },
-  { id:'j2', cat:'💻 Разработка', catKey:'dev', co:'@neurallab', title:'Senior Python-разработчик (AI/ML)', desc:'Разработка AI-ассистента на GPT-4o и LangChain. Высокий бюджет, долгосрочный проект.', price:'$4 500 / мес', premium:true },
-  { id:'j3', cat:'💻 Разработка', catKey:'dev', co:'@startupxy', title:'Frontend-разработчик React/Next.js', desc:'SaaS-платформа: лендинг и личный кабинет. Стек React 18, Next.js 14, TypeScript, Tailwind.', price:'80 000 ₽', premium:false },
-  { id:'j4', cat:'🤖 AI / Автоматизация', catKey:'ai', co:'@aku_automation', title:'Архитектор AI-автоматизации (Enterprise)', desc:'Построение системы автоматизации бизнес-процессов уровня enterprise. Премиальный долгосрочный контракт.', price:'$8 000 / мес', premium:true },
-  { id:'j5', cat:'📣 Маркетинг', catKey:'marketing', co:'@growthhack', title:'Performance-маркетолог Telegram Ads', desc:'Ведение рекламных кампаний в Telegram Ads и VK. Бюджет до 500к/мес, аналитика и оптимизация.', price:'60 000 ₽', premium:false },
-  { id:'j6', cat:'🎨 Дизайн', catKey:'design', co:'@luxe_brand', title:'Арт-директор премиум-бренда', desc:'Полное руководство визуальным стилем люксового бренда. Эксклюзивный высокобюджетный проект.', price:'$6 000 / мес', premium:true },
-  { id:'j7', cat:'🤖 AI / Автоматизация', catKey:'ai', co:'@aku_automation', title:'Разработчик Telegram-ботов (aiogram)', desc:'Создание бота с интеграцией оплаты Stars, Supabase и AI-ассистентом на aiogram 3.x.', price:'50 000 ₽', premium:false },
-  { id:'j8', cat:'📣 Маркетинг', catKey:'marketing', co:'@glamour', title:'SMM-стратег beauty-сегмента', desc:'Разработка и ведение контент-стратегии для beauty-бренда. Reels, сторис, продакшн.', price:'35 000 ₽', premium:false },
-];
+  // ── Navbar scroll state + show CTA ──
+  const nav = document.getElementById('nav');
+  const navCta = document.getElementById('navCta');
+  function onScroll(){
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 20);
+    if (navCta) navCta.style.display = y > 380 ? 'inline-flex' : 'none';
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
 
-/* ─── STATE ─── */
-const S = { jobs:[], filtered:[], filter:'all', user:null, isPro:false, viewed:new Set() };
-
-/* persist viewed + user */
-try{ const v=localStorage.getItem('aku_viewed'); if(v)S.viewed=new Set(JSON.parse(v)); }catch(e){}
-try{ const u=localStorage.getItem('aku_user'); if(u)S.user=JSON.parse(u); }catch(e){}
-try{ S.isPro=localStorage.getItem('aku_pro')==='1'; }catch(e){}
-
-function saveViewed(){ try{ localStorage.setItem('aku_viewed',JSON.stringify([...S.viewed])); }catch(e){} }
-
-/* ─── UTILS ─── */
-function esc(s){ if(!s)return''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-let _tt; function toast(m,t=''){ const el=$('toast'); el.textContent=m; el.className='visible '+t; clearTimeout(_tt); _tt=setTimeout(()=>el.className='',2800); }
-
-/* ─── METRICS COUNTER ─── */
-function animateMetrics(){
-  document.querySelectorAll('.metric-num').forEach(el=>{
-    const target=+el.dataset.target, sfx=el.dataset.suffix||'';
-    let v=0; const step=Math.max(1,Math.ceil(target/50));
-    const t=setInterval(()=>{ v=Math.min(v+step,target); el.innerHTML=v+(v>=target?'<span class="suffix">'+sfx+'</span>':''); if(v>=target)clearInterval(t); },26);
+  // ── Burger / mobile menu ──
+  const burger = document.getElementById('burger');
+  const mmenu = document.getElementById('mmenu');
+  function closeMenu(){ burger.classList.remove('open'); mmenu.classList.remove('open'); document.body.style.overflow=''; }
+  burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    mmenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
   });
-}
+  mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-/* ─── NAVBAR / DRAWER ─── */
-function initNav(){
-  const nav=$('nav'),b=$('burger'),d=$('drawer');
-  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>30),{passive:true});
-  b?.addEventListener('click',()=>{ const o=d.classList.toggle('open'); b.classList.toggle('open',o); b.setAttribute('aria-expanded',o?'true':'false'); });
-  d?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ d.classList.remove('open'); b.classList.remove('open'); }));
-}
+  // ── Scroll reveal (IntersectionObserver) ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold:.14, rootMargin:'0px 0px -8% 0px' });
+  document.querySelectorAll('.scroll-reveal').forEach(el => io.observe(el));
 
-/* ─── LOGO = HOME / REFRESH ─── */
-$('logoHome')?.addEventListener('click',()=>{
-  window.scrollTo({top:0,behavior:'smooth'});
-  // лёгкий "refresh" контента
-  applyFilter('all');
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.f==='all'));
-  toast('🏠 Главная обновлена','blue');
-});
+  // ── Animated counters ──
+  function animateCount(el){
+    const target = parseFloat(el.dataset.count);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      const val = Math.floor(eased * target);
+      el.textContent = prefix + val.toLocaleString('ru-RU') + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = prefix + target.toLocaleString('ru-RU') + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  const counters = document.querySelectorAll('[data-count]');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); }
+    });
+  }, { threshold:.5 });
+  counters.forEach(c => cio.observe(c));
 
-/* ─── JOBS RENDER ─── */
-function applyFilter(f){
-  S.filter=f;
-  if(f==='all') S.filtered=S.jobs.slice();
-  else if(f==='premium') S.filtered=S.jobs.filter(j=>j.premium);
-  else S.filtered=S.jobs.filter(j=>j.catKey===f);
-  renderJobs();
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.f===f));
-}
-
-function renderJobs(){
-  const list=$('jobsList');
-  if(!S.filtered.length){ list.innerHTML='<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--txt3);">📭 Заказов в этой категории пока нет</div>'; return; }
-  list.innerHTML='';
-  S.filtered.forEach((j,i)=>{
-    const card=document.createElement('article');
-    card.className='job'+(j.premium?' premium':'')+(S.viewed.has(j.id)?' viewed':'');
-    card.dataset.id=j.id;
-    card.style.animationDelay=(i*45)+'ms';
-    card.innerHTML=cardInner(j);
-    list.appendChild(card);
+  // ── Bento / eco cursor-tracking glow ──
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('pointermove', (ev) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((ev.clientX - r.left) / r.width * 100) + '%');
+      card.style.setProperty('--my', ((ev.clientY - r.top) / r.height * 100) + '%');
+    });
   });
-}
 
-function cardInner(j){
-  const premBadge=j.premium?'<span class="badge badge-prem">⭐ Premium</span>':'';
-  let action;
-  if(j.premium && !S.isPro){
-    action=`
-      <div class="lock-box">
-        <div class="lock-ic">🔒</div>
-        <div class="lock-txt"><b>Доступно только для PRO-подписчиков.</b> Откройте доступ ко всем премиум-заказам.</div>
-        <div class="lock-price">
-          <div class="lock-price-usd">$9 <span style="font-size:.9rem;color:var(--txt3);font-weight:500;">/ мес</span></div>
-          <div class="lock-price-stars">450 ★ / мес</div>
-        </div>
-        <button class="btn btn-blue btn-sm jUnlock" style="width:100%;">Открыть доступ</button>
-      </div>`;
-  } else {
-    action=`<button class="btn btn-blue btn-sm jApply">Откликнуться</button>`;
-  }
-  return `
-    <div class="job-viewed-badge"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7 6,11 12,3"/></svg> Просмотрено</div>
-    <div class="job-badges">${premBadge}<span class="badge badge-cat">${esc(j.cat)}</span><span class="badge badge-rem">Remote</span></div>
-    <h3 class="job-title">${esc(j.title)}</h3>
-    <div class="job-co">${esc(j.co)}</div>
-    <p class="job-desc">${esc(j.desc)}</p>
-    <div class="job-foot">
-      <div><div class="job-price">${esc(j.price)}</div></div>
-      ${j.premium && !S.isPro ? '' : action}
-    </div>
-    ${j.premium && !S.isPro ? action : ''}`;
-}
+  // ── Subtle parallax on orbs ──
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const o1 = document.querySelector('.orb-1');
+      const o2 = document.querySelector('.orb-2');
+      if (o1) o1.style.transform = `translateY(${y * 0.06}px)`;
+      if (o2) o2.style.transform = `translateY(${y * -0.04}px)`;
+      ticking = false;
+    });
+  }, { passive:true });
 
-/* mark viewed */
-function markViewed(id){
-  if(S.viewed.has(id))return;
-  S.viewed.add(id); saveViewed();
-  const card=document.querySelector(`.job[data-id="${id}"]`);
-  if(card)card.classList.add('viewed');
-}
-
-/* job interactions (delegation) */
-$('jobsList')?.addEventListener('click',e=>{
-  const card=e.target.closest('.job'); if(!card)return;
-  const id=card.dataset.id, job=S.jobs.find(j=>j.id===id);
-
-  if(e.target.closest('.jUnlock')){ openPro(); return; }
-  if(e.target.closest('.jApply')){
-    markViewed(id);
-    if(!S.user){ openLogin(); return; }
-    toast('✅ Отклик отправлен!','blue');
-    return;
-  }
-  // simple view → mark viewed
-  markViewed(id);
-});
-
-/* ─── FILTERS ─── */
-$('filters')?.addEventListener('click',e=>{ const c=e.target.closest('.chip'); if(c)applyFilter(c.dataset.f); });
-
-/* ─── MODALS ─── */
-function open(id){ $(id)?.classList.add('open'); document.body.classList.add('no-scroll'); }
-function close(id){ $(id)?.classList.remove('open'); document.body.classList.remove('no-scroll'); }
-document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o)close(o.id); }));
-document.addEventListener('keydown',e=>{ if(e.key==='Escape')document.querySelectorAll('.ov.open').forEach(m=>close(m.id)); });
-
-function openPro(){ open('proModal'); }
-function openLogin(){ open('loginModal'); }
-$('proClose')?.addEventListener('click',()=>close('proModal'));
-$('proLater')?.addEventListener('click',()=>close('proModal'));
-$('loginClose')?.addEventListener('click',()=>close('loginModal'));
-
-/* ─── TELEGRAM AUTH ─── */
-window.onTelegramAuth=function(user){
-  S.user={ id:user.id, name:user.first_name||'Пользователь', username:user.username||'', photo:user.photo_url||null };
-  try{ localStorage.setItem('aku_user',JSON.stringify(S.user)); }catch(e){}
-  close('loginModal');
-  refreshAuthUI();
-  toast('✅ Вход выполнен через Telegram','blue');
-};
-function simLogin(){ window.onTelegramAuth({ id:99000000+Math.floor(Math.random()*9999), first_name:'Demo', username:'demo_user', photo_url:null }); }
-
-function refreshAuthUI(){
-  const act=$('navAct');
-  if(S.user){
-    const initial=(S.user.name||'?').slice(0,1).toUpperCase();
-    const ava=S.user.photo?`<img src="${esc(S.user.photo)}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`:initial;
-    act.innerHTML=`<div class="nav-ava" id="navAva" title="${esc(S.user.name)}">${ava}</div><button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>`;
-    initNav();
-  }
-}
-
-/* ─── PRO PURCHASE (Telegram Stars / sim) ─── */
-function buyPro(){
-  close('proModal');
-  toast('⏳ Открываем оплату Telegram Stars...');
-  // STRUCTURE: на проде → Telegram.WebApp.openInvoice(invoiceLink, cb)
-  setTimeout(()=>{
-    S.isPro=true; try{ localStorage.setItem('aku_pro','1'); }catch(e){}
-    renderJobs();
-    toast('👑 PRO активирован! Премиум-заказы открыты.','blue');
-  },1400);
-}
-$('proPayTg')?.addEventListener('click',buyPro);
-$('pricePro')?.addEventListener('click',openPro);
-$('sideProBtn')?.addEventListener('click',openPro);
-$('priceFree')?.addEventListener('click',()=>toast('✅ Вы на базовом плане','blue'));
-
-/* ─── LOGIN BUTTONS ─── */
-[['navLogin'],['drawerLogin'],['loginTg']].forEach(([id])=>$(id)?.addEventListener('click',()=>{
-  if(id==='loginTg'){ simLogin(); } else { openLogin(); }
-}));
-
-/* ─── CTA ─── */
-$('heroFind')?.addEventListener('click',()=>{ if(S.user)$('jobs').scrollIntoView({behavior:'smooth'}); else openLogin(); });
-$('heroJobs')?.addEventListener('click',()=>$('jobs').scrollIntoView({behavior:'smooth'}));
-$('postBtn')?.addEventListener('click',()=>{ window.open('https://t.me/akumediamgr','_blank'); });
-
-/* ─── INIT ─── */
-document.addEventListener('DOMContentLoaded',()=>{
-  initNav();
-  refreshAuthUI();
-  S.jobs=demoJobs.slice();
-  applyFilter('all');
-  // metrics on view
-  if('IntersectionObserver' in window){
-    const obs=new IntersectionObserver((en,o)=>{ en.forEach(e=>{ if(e.isIntersecting){ animateMetrics(); o.disconnect(); } }); },{threshold:.3});
-    const m=document.querySelector('.metrics'); if(m)obs.observe(m); else animateMetrics();
-  } else animateMetrics();
-});
+})();
 </script>
 </body>
 </html>
